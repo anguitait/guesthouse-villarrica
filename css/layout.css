@@ -29,6 +29,58 @@
   color: var(--text-inverse);
 }
 
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4,
+.section--dark h5,
+.section--dark h6 {
+  color: var(--text-inverse);
+}
+
+.section--dark p,
+.section--dark .lead {
+  color: var(--color-neutral-200);
+}
+
+.section--dark .feature-item__content h4 {
+  color: var(--text-inverse);
+}
+
+.section--dark .feature-item__content p {
+  color: var(--color-neutral-200);
+}
+
+.section--dark strong {
+  color: var(--text-inverse);
+}
+
+.section--dark .feature-item__icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section--dark .overline {
+  color: var(--color-accent-light);
+}
+
+.section--dark .pricing-card {
+  background: var(--surface-elevated);
+}
+
+.section--dark .pricing-card h3,
+.section--dark .pricing-card__title {
+  color: var(--text-primary);
+}
+
+.section--dark .pricing-card p,
+.section--dark .pricing-card__period {
+  color: var(--text-muted);
+}
+
+.section--dark .pricing-card__features li {
+  color: var(--text-secondary);
+}
+
 .section--cream {
   background: var(--color-neutral-100);
 }

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Matrimonios en Villarrica a orillas del Rio Tolten con vista al volcan. Celebra tu boda en un entorno natural unico. Capacidad 100+ invitados.">
+  <meta name="description" content="Matrimonios en Villarrica a orillas del Río Toltén con vista al volcán. Celebra tu boda en un entorno natural único. Capacidad 100+ invitados.">
   <meta name="keywords" content="matrimonios villarrica, bodas villarrica, eventos villarrica, matrimonios orillas rio, bodas con vista volcan, venue matrimonios araucania">
 
-  <title>Matrimonios en Villarrica | Tu Boda a Orillas del Rio Tolten</title>
+  <title>Matrimonios en Villarrica | Tu Boda a Orillas del Río Toltén</title>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💒</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,11 +20,11 @@
     "@context": "https://schema.org",
     "@type": "EventVenue",
     "name": "GuestHouse Villarrica - Matrimonios",
-    "description": "Venue para matrimonios a orillas del Rio Tolten con vista al Volcan Villarrica",
+    "description": "Venue para matrimonios a orillas del Río Toltén con vista al Volcán Villarrica",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Villarrica",
-      "addressRegion": "Araucania",
+      "addressRegion": "Araucanía",
       "addressCountry": "CL"
     },
     "maximumAttendeeCapacity": 150
@@ -36,6 +36,10 @@
     .hero--matrimonios {
       min-height: 100vh;
       text-align: center;
+    }
+
+    .hero--matrimonios .hero__background img {
+      object-position: center 70%;
     }
 
     .hero--matrimonios .hero__content {
@@ -106,7 +110,13 @@
       padding: var(--space-8);
       border: 1px solid var(--color-neutral-200);
       text-align: center;
+      display: flex;
+      flex-direction: column;
       transition: transform var(--duration-slow) var(--ease-out), box-shadow var(--duration-slow) var(--ease-out);
+    }
+
+    .package-card .btn {
+      margin-top: auto;
     }
 
     .package-card:hover {
@@ -238,11 +248,11 @@
         GuestHouse <span>Villarrica</span>
       </a>
       <nav class="nav">
-        <a href="alojamiento.html" class="nav__link">Alojamiento</a>
-        <a href="experiencias.html" class="nav__link">Experiencias</a>
-        <a href="matrimonios.html" class="nav__link nav__link--active">Matrimonios</a>
-        <a href="cowork.html" class="nav__link">CoWork & Cafe</a>
-        <a href="nosotros.html" class="nav__link">Nosotros</a>
+        <a href="alojamiento.html" class="nav__link" data-i18n="nav.accommodation">Alojamiento</a>
+        <a href="experiencias.html" class="nav__link" data-i18n="nav.experiences">Experiencias</a>
+        <a href="matrimonios.html" class="nav__link nav__link--active" data-i18n="nav.weddings">Matrimonios</a>
+        <a href="cowork.html" class="nav__link" data-i18n="nav.cowork">CoWork & Café</a>
+        <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
       </nav>
       <div class="header__actions">
         <button class="lang-switch" aria-label="Cambiar idioma">EN</button>
@@ -256,11 +266,11 @@
 
   <!-- Mobile Navigation -->
   <nav class="mobile-nav">
-    <a href="alojamiento.html" class="mobile-nav__link">Alojamiento</a>
-    <a href="experiencias.html" class="mobile-nav__link">Experiencias</a>
-    <a href="matrimonios.html" class="mobile-nav__link">Matrimonios</a>
-    <a href="cowork.html" class="mobile-nav__link">CoWork & Cafe</a>
-    <a href="nosotros.html" class="mobile-nav__link">Nosotros</a>
+    <a href="alojamiento.html" class="mobile-nav__link" data-i18n="nav.accommodation">Alojamiento</a>
+    <a href="experiencias.html" class="mobile-nav__link" data-i18n="nav.experiences">Experiencias</a>
+    <a href="matrimonios.html" class="mobile-nav__link" data-i18n="nav.weddings">Matrimonios</a>
+    <a href="cowork.html" class="mobile-nav__link" data-i18n="nav.cowork">CoWork & Café</a>
+    <a href="nosotros.html" class="mobile-nav__link" data-i18n="nav.about">Nosotros</a>
     <div class="mobile-nav__cta">
       <a href="#cotizar" class="btn btn-primary btn-full">Cotizar</a>
     </div>
@@ -277,9 +287,9 @@
       <div class="hero__overlay"></div>
       <div class="hero__content">
         <span class="hero__overline">Matrimonios en Villarrica</span>
-        <h1 class="hero__title">Tu boda a orillas del Rio Tolten</h1>
+        <h1 class="hero__title">Tu boda a orillas del Río Toltén</h1>
         <p class="hero__subtitle">
-          Celebra el dia mas importante de tu vida en un entorno natural unico, con vista al Volcan Villarrica y el sonido del rio como testigo.
+          Celebra el día más importante de tu vida en un entorno natural único, con vista al Volcán Villarrica y el sonido del río como testigo.
         </p>
         <div class="hero__actions" style="justify-content: center;">
           <a href="#cotizar" class="btn btn-primary btn-lg">Agendar Visita</a>
@@ -293,9 +303,9 @@
       <div class="container">
         <div class="section__header section__header--center scroll-reveal">
           <span class="overline">El Espacio</span>
-          <h2>Un escenario natural para tu gran dia</h2>
+          <h2>Un escenario natural para tu gran día</h2>
           <p class="lead">
-            Una hectarea de terreno con jardines, bosque nativo, piscina y vista panoramica al volcan. Capacidad para mas de 100 invitados.
+            Una hectárea de terreno con jardines, bosque nativo, piscina y vista panoramica al volcan. Capacidad para más de 100 invitados.
           </p>
         </div>
 
@@ -322,19 +332,19 @@
         <div class="stats mt-12 scroll-reveal">
           <div class="stat">
             <div class="stat__number">1</div>
-            <div class="stat__label">Hectarea</div>
+            <div class="stat__label">Hectárea</div>
           </div>
           <div class="stat">
             <div class="stat__number">150</div>
             <div class="stat__label">Invitados max</div>
           </div>
           <div class="stat">
-            <div class="stat__number">6</div>
+            <div class="stat__number">7</div>
             <div class="stat__label">Habitaciones</div>
           </div>
           <div class="stat">
             <div class="stat__number">360°</div>
-            <div class="stat__label">Vista Volcan</div>
+            <div class="stat__label">Vista Volcán</div>
           </div>
         </div>
       </div>
@@ -346,19 +356,19 @@
         <div class="section__header section__header--center scroll-reveal">
           <span class="overline">Paquetes</span>
           <h2>Elige tu experiencia</h2>
-          <p class="lead">Tres opciones disenadas para diferentes estilos y tamanos de celebracion.</p>
+          <p class="lead">Tres opciones diseñadas para diferentes estilos y tamaños de celebración.</p>
         </div>
 
         <div class="packages-grid scroll-reveal">
-          <!-- Paquete Intimo -->
+          <!-- Paquete Íntimo -->
           <div class="package-card">
-            <h3 class="package-card__title">Intimo</h3>
+            <h3 class="package-card__title">Íntimo</h3>
             <p class="package-card__capacity">Hasta 50 invitados</p>
             <div class="package-card__price">$2.500.000</div>
             <ul class="package-card__features">
               <li>Uso exclusivo del terreno (8 hrs)</li>
               <li>Ceremonia en jardin o bosque</li>
-              <li>Mobiliario basico incluido</li>
+              <li>Mobiliario básico incluido</li>
               <li>Estacionamiento</li>
               <li>Coordinador del espacio</li>
               <li>2 habitaciones para novios</li>
@@ -366,20 +376,20 @@
             <a href="#cotizar" class="btn btn-outline btn-full">Cotizar</a>
           </div>
 
-          <!-- Paquete Clasico -->
+          <!-- Paquete Clásico -->
           <div class="package-card package-card--featured">
-            <span class="package-card__badge">Mas elegido</span>
-            <h3 class="package-card__title">Clasico</h3>
+            <span class="package-card__badge">Más elegido</span>
+            <h3 class="package-card__title">Clásico</h3>
             <p class="package-card__capacity">Hasta 100 invitados</p>
             <div class="package-card__price">$4.500.000</div>
             <ul class="package-card__features">
-              <li>Todo lo del paquete Intimo +</li>
+              <li>Todo lo del paquete Íntimo +</li>
               <li>Uso por 12 horas</li>
               <li>Carpa transparente incluida</li>
-              <li>Iluminacion decorativa</li>
+              <li>Iluminación decorativa</li>
               <li>4 habitaciones para familia</li>
               <li>Desayuno dia siguiente</li>
-              <li>Coordinacion con proveedores</li>
+              <li>Coordinación con proveedores</li>
             </ul>
             <a href="#cotizar" class="btn btn-primary btn-full">Cotizar</a>
           </div>
@@ -390,11 +400,11 @@
             <p class="package-card__capacity">Hasta 150 invitados</p>
             <div class="package-card__price">$7.000.000</div>
             <ul class="package-card__features">
-              <li>Todo lo del paquete Clasico +</li>
+              <li>Todo lo del paquete Clásico +</li>
               <li>Uso exclusivo 24 horas</li>
-              <li>Todas las habitaciones (6)</li>
+              <li>Todas las habitaciones (7)</li>
               <li>Catering Km 0 incluido</li>
-              <li>Barra de tragos basica</li>
+              <li>Barra de tragos básica</li>
               <li>Wedding planner incluido</li>
               <li>Sesion de fotos previa</li>
             </ul>
@@ -403,7 +413,7 @@
         </div>
 
         <p class="text-center mt-8" style="color: var(--text-muted); font-size: var(--text-sm);">
-          * Todos los paquetes son personalizables. Catering, decoracion y entretenimiento adicional se cotizan aparte.
+          * Todos los paquetes son personalizables. Catering, decoración y entretenimiento adicional se cotizan aparte.
         </p>
       </div>
     </section>
@@ -433,7 +443,7 @@
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
               </svg>
             </div>
-            <h4 class="service-item__title">Coordinacion</h4>
+            <h4 class="service-item__title">Coordinación</h4>
             <p class="service-item__text">Te ayudamos a planificar cada detalle</p>
           </div>
 
@@ -444,7 +454,7 @@
               </svg>
             </div>
             <h4 class="service-item__title">Alojamiento</h4>
-            <p class="service-item__text">6 habitaciones para novios y familia</p>
+            <p class="service-item__text">7 habitaciones para novios y familia</p>
           </div>
 
           <div class="service-item">
@@ -454,7 +464,7 @@
               </svg>
             </div>
             <h4 class="service-item__title">Proveedores</h4>
-            <p class="service-item__text">Red de DJ, fotografos y floristas aliados</p>
+            <p class="service-item__text">Red de DJ, fotógrafos y floristas aliados</p>
           </div>
         </div>
       </div>
@@ -471,7 +481,7 @@
         <div class="grid grid--2 scroll-reveal">
           <div class="testimonial" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
             <p class="testimonial__quote" style="color: var(--text-inverse);">
-              "Nuestros invitados todavia nos preguntan por el lugar. La vista del volcan al atardecer fue magica. El equipo nos ayudo en cada detalle y pudimos disfrutar sin estres."
+              "Nuestros invitados todavia nos preguntan por el lugar. La vista del volcán al atardecer fue mágica. El equipo nos ayudo en cada detalle y pudimos disfrutar sin estrés."
             </p>
             <div class="testimonial__author">
               <img src="https://i.pravatar.cc/100?img=20" alt="Paula & Andres">
@@ -484,7 +494,7 @@
 
           <div class="testimonial" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
             <p class="testimonial__quote" style="color: var(--text-inverse);">
-              "Queriamos algo diferente, no un salon tipico. GuestHouse fue perfecto: intimo, natural y con toda la logistica resuelta. La comida Km 0 fue un exito."
+              "Queriamos algo diferente, no un salon típico. GuestHouse fue perfecto: íntimo, natural y con toda la logística resuelta. La comida Km 0 fue un éxito."
             </p>
             <div class="testimonial__author">
               <img src="https://i.pravatar.cc/100?img=25" alt="Camila & Diego">
@@ -498,7 +508,7 @@
       </div>
     </section>
 
-    <!-- Formulario de Cotizacion -->
+    <!-- Formulario de Cotización -->
     <section class="section" id="cotizar">
       <div class="container">
         <div class="grid grid--asymmetric">
@@ -506,7 +516,7 @@
             <span class="overline">Agenda tu Visita</span>
             <h2>Queremos conocer tu historia</h2>
             <p class="lead">
-              Cada matrimonio es unico. Cuentanos sobre tu celebracion ideal y agendamos una visita para que conozcas el espacio.
+              Cada matrimonio es único. Cuéntanos sobre tu celebración ideal y agendamos una visita para que conozcas el espacio.
             </p>
 
             <div class="mt-8">
@@ -517,7 +527,7 @@
                   </svg>
                 </div>
                 <div class="feature-item__content">
-                  <h4>Llamanos</h4>
+                  <h4>Llámanos</h4>
                   <p>+56 9 XXXX XXXX</p>
                 </div>
               </div>
@@ -529,7 +539,7 @@
                   </svg>
                 </div>
                 <div class="feature-item__content">
-                  <h4>Escribenos</h4>
+                  <h4>Escríbenos</h4>
                   <p>matrimonios@guesthousevillarrica.cl</p>
                 </div>
               </div>
@@ -556,8 +566,8 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="telefono">Telefono</label>
-                <input type="tel" id="telefono" class="form-input">
+                <label class="form-label" for="teléfono">Teléfono</label>
+                <input type="tel" id="teléfono" class="form-input">
               </div>
 
               <div class="form-group">
@@ -566,19 +576,19 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="invitados">Numero de invitados</label>
+                <label class="form-label" for="invitados">Número de invitados</label>
                 <select id="invitados" class="form-input">
                   <option value="">Seleccionar...</option>
                   <option value="30-50">30 - 50</option>
                   <option value="50-80">50 - 80</option>
                   <option value="80-100">80 - 100</option>
                   <option value="100-150">100 - 150</option>
-                  <option value="150+">Mas de 150</option>
+                  <option value="150+">Más de 150</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="mensaje">Cuentanos sobre tu celebracion ideal</label>
+                <label class="form-label" for="mensaje">Cuéntanos sobre tu celebración ideal</label>
                 <textarea id="mensaje" class="form-textarea" rows="4"></textarea>
               </div>
 
@@ -597,14 +607,14 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">GuestHouse <span>Villarrica</span></div>
-          <p class="footer__description">El lugar perfecto para celebrar tu matrimonio en la Araucania.</p>
+          <p class="footer__description">El lugar perfecto para celebrar tu matrimonio en la Araucanía.</p>
         </div>
         <div>
           <h4 class="footer__title">Explorar</h4>
           <ul class="footer__links">
             <li><a href="alojamiento.html">Alojamiento</a></li>
             <li><a href="experiencias.html">Experiencias</a></li>
-            <li><a href="cowork.html">CoWork & Cafe</a></li>
+            <li><a href="cowork.html">CoWork & Café</a></li>
           </ul>
         </div>
         <div>
