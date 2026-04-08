@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Matrimonios en Villarrica a orillas del Rio Tolten con vista al volcan. Celebra tu boda en un entorno natural unico. Capacidad 100+ invitados.">
+  <meta name="keywords" content="matrimonios villarrica, bodas villarrica, eventos villarrica, matrimonios orillas rio, bodas con vista volcan, venue matrimonios araucania">
+
+  <title>Matrimonios en Villarrica | Tu Boda a Orillas del Rio Tolten</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- Schema.org for Event Venue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "GuestHouse Villarrica - Matrimonios",
+    "description": "Venue para matrimonios a orillas del Rio Tolten con vista al Volcan Villarrica",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Villarrica",
+      "addressRegion": "Araucania",
+      "addressCountry": "CL"
+    },
+    "maximumAttendeeCapacity": 150
+  }
+  </script>
+
+  <style>
+    /* Page-specific styles for Matrimonios landing */
+    .hero--matrimonios {
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .hero--matrimonios .hero__content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero--matrimonios .hero__title {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-weight-light);
+      font-style: italic;
+    }
+
+    @media (min-width: 768px) {
+      .hero--matrimonios .hero__title {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+      }
+    }
+
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .gallery-masonry {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 250px);
+      }
+
+      .gallery-masonry__item:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    }
+
+    .gallery-masonry__item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .gallery-masonry__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--duration-slower) var(--ease-out);
+    }
+
+    .gallery-masonry__item:hover img {
+      transform: scale(1.05);
+    }
+
+    .packages-grid {
+      display: grid;
+      gap: var(--space-8);
+    }
+
+    @media (min-width: 768px) {
+      .packages-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .package-card {
+      background: var(--surface-elevated);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      border: 1px solid var(--color-neutral-200);
+      text-align: center;
+      transition: transform var(--duration-slow) var(--ease-out), box-shadow var(--duration-slow) var(--ease-out);
+    }
+
+    .package-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .package-card--featured {
+      border-color: var(--color-accent);
+      position: relative;
+    }
+
+    .package-card__badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-accent);
+      color: white;
+      padding: var(--space-1) var(--space-4);
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      border-radius: var(--radius-full);
+    }
+
+    .package-card__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-2);
+    }
+
+    .package-card__capacity {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .package-card__price {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: var(--color-accent);
+      margin-bottom: var(--space-6);
+    }
+
+    .package-card__features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: var(--space-8);
+      text-align: left;
+    }
+
+    .package-card__features li {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-neutral-100);
+      font-size: var(--text-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .package-card__features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: var(--space-6);
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .service-item {
+      text-align: center;
+      padding: var(--space-6);
+      background: var(--surface-secondary);
+      border-radius: var(--radius-lg);
+    }
+
+    .service-item__icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--space-4);
+      color: var(--color-accent);
+    }
+
+    .service-item__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+    }
+
+    .service-item__text {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+
+    .contact-form-matrimonios {
+      background: var(--surface-elevated);
+      padding: var(--space-8);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (min-width: 768px) {
+      .contact-form-matrimonios {
+        padding: var(--space-12);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="../index.html" class="header__logo">
+        GuestHouse <span>Villarrica</span>
+      </a>
+      <nav class="nav">
+        <a href="alojamiento.html" class="nav__link">Alojamiento</a>
+        <a href="experiencias.html" class="nav__link">Experiencias</a>
+        <a href="matrimonios.html" class="nav__link nav__link--active">Matrimonios</a>
+        <a href="cowork.html" class="nav__link">CoWork & Cafe</a>
+        <a href="nosotros.html" class="nav__link">Nosotros</a>
+      </nav>
+      <div class="header__actions">
+        <button class="lang-switch" aria-label="Cambiar idioma">EN</button>
+        <a href="#cotizar" class="btn btn-primary btn-sm header__cta">Cotizar</a>
+        <button class="menu-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <a href="alojamiento.html" class="mobile-nav__link">Alojamiento</a>
+    <a href="experiencias.html" class="mobile-nav__link">Experiencias</a>
+    <a href="matrimonios.html" class="mobile-nav__link">Matrimonios</a>
+    <a href="cowork.html" class="mobile-nav__link">CoWork & Cafe</a>
+    <a href="nosotros.html" class="mobile-nav__link">Nosotros</a>
+    <div class="mobile-nav__cta">
+      <a href="#cotizar" class="btn btn-primary btn-full">Cotizar</a>
+    </div>
+  </nav>
+  <div class="overlay"></div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero hero--matrimonios">
+      <div class="hero__background">
+        <img src="../images/matrimonios/novios-bosque.jpg" alt="Matrimonio en GuestHouse Villarrica">
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <span class="hero__overline">Matrimonios en Villarrica</span>
+        <h1 class="hero__title">Tu boda a orillas del Rio Tolten</h1>
+        <p class="hero__subtitle">
+          Celebra el dia mas importante de tu vida en un entorno natural unico, con vista al Volcan Villarrica y el sonido del rio como testigo.
+        </p>
+        <div class="hero__actions" style="justify-content: center;">
+          <a href="#cotizar" class="btn btn-primary btn-lg">Agendar Visita</a>
+          <a href="#espacio" class="btn btn-outline-light btn-lg">Ver el Espacio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- El Espacio -->
+    <section class="section" id="espacio">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">El Espacio</span>
+          <h2>Un escenario natural para tu gran dia</h2>
+          <p class="lead">
+            Una hectarea de terreno con jardines, bosque nativo, piscina y vista panoramica al volcan. Capacidad para mas de 100 invitados.
+          </p>
+        </div>
+
+        <!-- Gallery Masonry -->
+        <div class="gallery-masonry scroll-reveal">
+          <div class="gallery-masonry__item">
+            <img src="../images/matrimonios/invitados-jardin.jpg" alt="Evento en jardin GuestHouse">
+          </div>
+          <div class="gallery-masonry__item">
+            <img src="../images/lugar/piscina-jardin.jpg" alt="Piscina y jardin">
+          </div>
+          <div class="gallery-masonry__item">
+            <img src="../images/matrimonios/novia-carreta.jpg" alt="Novia en carreta">
+          </div>
+          <div class="gallery-masonry__item">
+            <img src="../images/matrimonios/novios-carreta.jpg" alt="Novios en carreta">
+          </div>
+          <div class="gallery-masonry__item">
+            <img src="../images/lugar/piscina-casa.jpg" alt="Vista piscina y casa">
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats mt-12 scroll-reveal">
+          <div class="stat">
+            <div class="stat__number">1</div>
+            <div class="stat__label">Hectarea</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">150</div>
+            <div class="stat__label">Invitados max</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">6</div>
+            <div class="stat__label">Habitaciones</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">360°</div>
+            <div class="stat__label">Vista Volcan</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paquetes -->
+    <section class="section section--cream" id="paquetes">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Paquetes</span>
+          <h2>Elige tu experiencia</h2>
+          <p class="lead">Tres opciones disenadas para diferentes estilos y tamanos de celebracion.</p>
+        </div>
+
+        <div class="packages-grid scroll-reveal">
+          <!-- Paquete Intimo -->
+          <div class="package-card">
+            <h3 class="package-card__title">Intimo</h3>
+            <p class="package-card__capacity">Hasta 50 invitados</p>
+            <div class="package-card__price">$2.500.000</div>
+            <ul class="package-card__features">
+              <li>Uso exclusivo del terreno (8 hrs)</li>
+              <li>Ceremonia en jardin o bosque</li>
+              <li>Mobiliario basico incluido</li>
+              <li>Estacionamiento</li>
+              <li>Coordinador del espacio</li>
+              <li>2 habitaciones para novios</li>
+            </ul>
+            <a href="#cotizar" class="btn btn-outline btn-full">Cotizar</a>
+          </div>
+
+          <!-- Paquete Clasico -->
+          <div class="package-card package-card--featured">
+            <span class="package-card__badge">Mas elegido</span>
+            <h3 class="package-card__title">Clasico</h3>
+            <p class="package-card__capacity">Hasta 100 invitados</p>
+            <div class="package-card__price">$4.500.000</div>
+            <ul class="package-card__features">
+              <li>Todo lo del paquete Intimo +</li>
+              <li>Uso por 12 horas</li>
+              <li>Carpa transparente incluida</li>
+              <li>Iluminacion decorativa</li>
+              <li>4 habitaciones para familia</li>
+              <li>Desayuno dia siguiente</li>
+              <li>Coordinacion con proveedores</li>
+            </ul>
+            <a href="#cotizar" class="btn btn-primary btn-full">Cotizar</a>
+          </div>
+
+          <!-- Paquete Premium -->
+          <div class="package-card">
+            <h3 class="package-card__title">Premium</h3>
+            <p class="package-card__capacity">Hasta 150 invitados</p>
+            <div class="package-card__price">$7.000.000</div>
+            <ul class="package-card__features">
+              <li>Todo lo del paquete Clasico +</li>
+              <li>Uso exclusivo 24 horas</li>
+              <li>Todas las habitaciones (6)</li>
+              <li>Catering Km 0 incluido</li>
+              <li>Barra de tragos basica</li>
+              <li>Wedding planner incluido</li>
+              <li>Sesion de fotos previa</li>
+            </ul>
+            <a href="#cotizar" class="btn btn-outline btn-full">Cotizar</a>
+          </div>
+        </div>
+
+        <p class="text-center mt-8" style="color: var(--text-muted); font-size: var(--text-sm);">
+          * Todos los paquetes son personalizables. Catering, decoracion y entretenimiento adicional se cotizan aparte.
+        </p>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Servicios</span>
+          <h2>Todo lo que necesitas</h2>
+        </div>
+
+        <div class="services-grid scroll-reveal">
+          <div class="service-item">
+            <div class="service-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+              </svg>
+            </div>
+            <h4 class="service-item__title">Catering Km 0</h4>
+            <p class="service-item__text">Cocina con productos de nuestra huerta e invernadero</p>
+          </div>
+
+          <div class="service-item">
+            <div class="service-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h4 class="service-item__title">Coordinacion</h4>
+            <p class="service-item__text">Te ayudamos a planificar cada detalle</p>
+          </div>
+
+          <div class="service-item">
+            <div class="service-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>
+              </svg>
+            </div>
+            <h4 class="service-item__title">Alojamiento</h4>
+            <p class="service-item__text">6 habitaciones para novios y familia</p>
+          </div>
+
+          <div class="service-item">
+            <div class="service-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16 10,8"/>
+              </svg>
+            </div>
+            <h4 class="service-item__title">Proveedores</h4>
+            <p class="service-item__text">Red de DJ, fotografos y floristas aliados</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Historias de Amor</span>
+          <h2>Parejas que eligieron celebrar aqui</h2>
+        </div>
+
+        <div class="grid grid--2 scroll-reveal">
+          <div class="testimonial" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
+            <p class="testimonial__quote" style="color: var(--text-inverse);">
+              "Nuestros invitados todavia nos preguntan por el lugar. La vista del volcan al atardecer fue magica. El equipo nos ayudo en cada detalle y pudimos disfrutar sin estres."
+            </p>
+            <div class="testimonial__author">
+              <img src="https://i.pravatar.cc/100?img=20" alt="Paula & Andres">
+              <div>
+                <div class="testimonial__name" style="color: var(--text-inverse);">Paula & Andres</div>
+                <div class="testimonial__source" style="color: var(--color-neutral-300);">Marzo 2025</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
+            <p class="testimonial__quote" style="color: var(--text-inverse);">
+              "Queriamos algo diferente, no un salon tipico. GuestHouse fue perfecto: intimo, natural y con toda la logistica resuelta. La comida Km 0 fue un exito."
+            </p>
+            <div class="testimonial__author">
+              <img src="https://i.pravatar.cc/100?img=25" alt="Camila & Diego">
+              <div>
+                <div class="testimonial__name" style="color: var(--text-inverse);">Camila & Diego</div>
+                <div class="testimonial__source" style="color: var(--color-neutral-300);">Enero 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de Cotizacion -->
+    <section class="section" id="cotizar">
+      <div class="container">
+        <div class="grid grid--asymmetric">
+          <div class="scroll-reveal">
+            <span class="overline">Agenda tu Visita</span>
+            <h2>Queremos conocer tu historia</h2>
+            <p class="lead">
+              Cada matrimonio es unico. Cuentanos sobre tu celebracion ideal y agendamos una visita para que conozcas el espacio.
+            </p>
+
+            <div class="mt-8">
+              <div class="feature-item mb-6">
+                <div class="feature-item__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </div>
+                <div class="feature-item__content">
+                  <h4>Llamanos</h4>
+                  <p>+56 9 XXXX XXXX</p>
+                </div>
+              </div>
+
+              <div class="feature-item mb-6">
+                <div class="feature-item__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div class="feature-item__content">
+                  <h4>Escribenos</h4>
+                  <p>matrimonios@guesthousevillarrica.cl</p>
+                </div>
+              </div>
+
+              <a href="https://wa.me/56900000000?text=Hola!%20Estoy%20interesado%20en%20celebrar%20mi%20matrimonio%20en%20GuestHouse%20Villarrica" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                </svg>
+                WhatsApp Directo
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-matrimonios scroll-reveal">
+            <form data-validate>
+              <div class="form-group">
+                <label class="form-label" for="nombres">Nombres de la pareja *</label>
+                <input type="text" id="nombres" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email *</label>
+                <input type="email" id="email" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="telefono">Telefono</label>
+                <input type="tel" id="telefono" class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fecha">Fecha tentativa</label>
+                <input type="date" id="fecha" class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="invitados">Numero de invitados</label>
+                <select id="invitados" class="form-input">
+                  <option value="">Seleccionar...</option>
+                  <option value="30-50">30 - 50</option>
+                  <option value="50-80">50 - 80</option>
+                  <option value="80-100">80 - 100</option>
+                  <option value="100-150">100 - 150</option>
+                  <option value="150+">Mas de 150</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="mensaje">Cuentanos sobre tu celebracion ideal</label>
+                <textarea id="mensaje" class="form-textarea" rows="4"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">Enviar Solicitud</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">GuestHouse <span>Villarrica</span></div>
+          <p class="footer__description">El lugar perfecto para celebrar tu matrimonio en la Araucania.</p>
+        </div>
+        <div>
+          <h4 class="footer__title">Explorar</h4>
+          <ul class="footer__links">
+            <li><a href="alojamiento.html">Alojamiento</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="cowork.html">CoWork & Cafe</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Contacto Matrimonios</h4>
+          <div class="footer__contact-item">
+            <span>matrimonios@guesthousevillarrica.cl</span>
+          </div>
+          <div class="footer__contact-item">
+            <span>+56 9 XXXX XXXX</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 GuestHouse Villarrica. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/56900000000?text=Hola!%20Me%20interesa%20celebrar%20mi%20matrimonio%20en%20GuestHouse" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
