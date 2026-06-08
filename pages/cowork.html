@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CoWork y Café en GuestHouse Villarrica - Espacio de trabajo con vista al volcán, Internet Starlink, café de especialidad.">
+  <meta name="description" content="CoWork y Café en Flor del Bosque - Espacio de trabajo con vista al volcán, Internet Starlink, café de especialidad.">
 
-  <title>CoWork & Café | GuestHouse Villarrica</title>
+  <title>CoWork & Café | Flor del Bosque</title>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +17,11 @@
 
   <header class="header header--scrolled" id="header">
     <div class="header__inner">
-      <a href="../index.html" class="header__logo">GuestHouse <span>Villarrica</span></a>
+      <a href="../index.html" class="header__logo">Flor del <span>Bosque</span></a>
       <nav class="nav">
         <a href="alojamiento.html" class="nav__link" data-i18n="nav.accommodation">Alojamiento</a>
         <a href="experiencias.html" class="nav__link" data-i18n="nav.experiences">Experiencias</a>
+        <a href="agenda.html" class="nav__link" data-i18n="nav.agenda">Agenda</a>
         <a href="matrimonios.html" class="nav__link" data-i18n="nav.weddings">Matrimonios</a>
         <a href="cowork.html" class="nav__link nav__link--active" data-i18n="nav.cowork">CoWork & Café</a>
         <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
@@ -36,6 +37,7 @@
   <nav class="mobile-nav">
     <a href="alojamiento.html" class="mobile-nav__link" data-i18n="nav.accommodation">Alojamiento</a>
     <a href="experiencias.html" class="mobile-nav__link" data-i18n="nav.experiences">Experiencias</a>
+    <a href="agenda.html" class="mobile-nav__link" data-i18n="nav.agenda">Agenda</a>
     <a href="matrimonios.html" class="mobile-nav__link" data-i18n="nav.weddings">Matrimonios</a>
     <a href="cowork.html" class="mobile-nav__link" data-i18n="nav.cowork">CoWork & Café</a>
     <a href="nosotros.html" class="mobile-nav__link" data-i18n="nav.about">Nosotros</a>
@@ -46,7 +48,7 @@
     <section class="page-header">
       <div class="container">
         <h1 class="page-header__title">CoWork & Café</h1>
-        <p class="page-header__subtitle">Trabaja con vista al volcán. Internet Starlink de alta velocidad, café de especialidad y la tranquilidad del bosque.</p>
+        <p class="page-header__subtitle">Tu oficina en el bosque. Starlink de alta velocidad, café de especialidad, chimenea a leña y vista al Volcán Villarrica. Sin ruido, solo foco.</p>
       </div>
     </section>
 
@@ -283,25 +285,84 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
+        <!-- Brand -->
         <div class="footer__brand">
-          <div class="footer__logo">GuestHouse <span>Villarrica</span></div>
-          <p class="footer__description">Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.</p>
+          <div class="footer__logo">Flor del <span>Bosque</span></div>
+          <p class="footer__description" data-i18n="footer.description">
+            Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.
+          </p>
+          <div class="footer__social">
+            <a href="https://instagram.com/guesthousevillarrica" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/guesthousevillarrica" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
         </div>
+
+        <!-- Explorar -->
         <div>
-          <h4 class="footer__title">Explorar</h4>
+          <h4 class="footer__title" data-i18n="footer.explore">Explorar</h4>
           <ul class="footer__links">
             <li><a href="alojamiento.html">Alojamiento</a></li>
             <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="agenda.html">Agenda</a></li>
             <li><a href="matrimonios.html">Matrimonios</a></li>
+            <li><a href="cowork.html">CoWork & Café</a></li>
+            <li><a href="coliving.html">Coliving</a></li>
+            <li><a href="galeria.html">Galería</a></li>
           </ul>
         </div>
+
+        <!-- Servicios -->
         <div>
-          <h4 class="footer__title">Contacto</h4>
-          <div class="footer__contact-item"><span>+56 9 XXXX XXXX</span></div>
+          <h4 class="footer__title" data-i18n="footer.services">Servicios</h4>
+          <ul class="footer__links">
+            <li><a href="experiencias.html#retiros">Retiros</a></li>
+            <li><a href="experiencias.html#capacitaciones">Capacitaciones</a></li>
+            <li><a href="experiencias.html#talleres">Talleres</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h4 class="footer__title" data-i18n="footer.contact">Contacto</h4>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Orillas Río Toltén, Villarrica, Chile</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+56 9 XXXX XXXX</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>hola@flordelbosque.cl</span>
+          </div>
         </div>
       </div>
+
       <div class="footer__bottom">
-        <p>&copy; 2026 GuestHouse Villarrica.</p>
+        <p>&copy; 2026 Flor del Bosque. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+        <div class="footer__legal">
+          <a href="terminos.html" data-i18n="footer.privacy">Privacidad</a>
+          <a href="terminos.html" data-i18n="footer.terms">Términos</a>
+        </div>
       </div>
     </div>
   </footer>

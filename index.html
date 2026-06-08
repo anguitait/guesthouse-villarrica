@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GuestHouse Villarrica - Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica. Experiencias, matrimonios, cowork y más.">
+  <meta name="description" content="Flor del Bosque - Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica. Experiencias, matrimonios, cowork y más.">
   <meta name="keywords" content="alojamiento villarrica, hotel villarrica, matrimonios villarrica, cowork villarrica, retiros araucanía">
 
-  <title>GuestHouse Villarrica | Despierta frente al Volcán</title>
+  <title>Flor del Bosque | Despierta frente al Volcán</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
@@ -19,8 +19,12 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/main.css">
 
+  <!-- Language alternates -->
+  <link rel="alternate" hreflang="es" href="https://flordelbosque.cl/">
+  <link rel="alternate" hreflang="en" href="https://flordelbosque.cl/pages/en.html">
+
   <!-- Open Graph -->
-  <meta property="og:title" content="GuestHouse Villarrica | Despierta frente al Volcán">
+  <meta property="og:title" content="Flor del Bosque | Despierta frente al Volcán">
   <meta property="og:description" content="Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CL">
@@ -30,7 +34,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Hotel",
-    "name": "GuestHouse Villarrica",
+    "name": "Flor del Bosque",
     "description": "Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica",
     "address": {
       "@type": "PostalAddress",
@@ -53,12 +57,13 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="/" class="header__logo">
-        GuestHouse <span>Villarrica</span>
+        Flor del <span>Bosque</span>
       </a>
 
       <nav class="nav">
         <a href="pages/alojamiento.html" class="nav__link" data-i18n="nav.accommodation">Alojamiento</a>
         <a href="pages/experiencias.html" class="nav__link" data-i18n="nav.experiences">Experiencias</a>
+        <a href="pages/agenda.html" class="nav__link" data-i18n="nav.agenda">Agenda</a>
         <a href="pages/matrimonios.html" class="nav__link" data-i18n="nav.weddings">Matrimonios</a>
         <a href="pages/cowork.html" class="nav__link" data-i18n="nav.cowork">CoWork & Café</a>
         <a href="pages/nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
@@ -80,6 +85,7 @@
   <nav class="mobile-nav">
     <a href="pages/alojamiento.html" class="mobile-nav__link" data-i18n="nav.accommodation">Alojamiento</a>
     <a href="pages/experiencias.html" class="mobile-nav__link" data-i18n="nav.experiences">Experiencias</a>
+    <a href="pages/agenda.html" class="mobile-nav__link" data-i18n="nav.agenda">Agenda</a>
     <a href="pages/matrimonios.html" class="mobile-nav__link" data-i18n="nav.weddings">Matrimonios</a>
     <a href="pages/cowork.html" class="mobile-nav__link" data-i18n="nav.cowork">CoWork & Café</a>
     <a href="pages/nosotros.html" class="mobile-nav__link" data-i18n="nav.about">Nosotros</a>
@@ -94,18 +100,19 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
       <div class="hero__background">
-        <img src="images/hero/vista-aerea-drone.jpg" alt="Vista aérea GuestHouse Villarrica con volcán de fondo">
+        <img src="images/hero/vista-aerea-drone.jpg" alt="Vista aérea Flor del Bosque con volcán de fondo">
       </div>
       <div class="hero__overlay"></div>
 
       <div class="hero__content">
-        <span class="hero__overline" data-i18n="hero.overline">Villarrica, Chile</span>
-        <h1 class="hero__title" data-i18n="hero.title">Despierta frente al Volcán Villarrica</h1>
-        <p class="hero__subtitle" data-i18n="hero.subtitle">Un refugio en la naturaleza a orillas del Río Toltén. Alojamiento, experiencias y eventos en 1 hectárea de bosque nativo.</p>
+        <span class="hero__overline" data-i18n="hero.overline">Flor del Bosque</span>
+        <h1 class="hero__title" data-i18n="hero.title">Vive La Araucanía desde adentro</h1>
+        <p class="hero__subtitle" data-i18n="hero.subtitle">Un espacio de hospitalidad regenerativa donde viajeros de todo el mundo viven, trabajan, aprenden y participan en experiencias de sustentabilidad, cultura local y bienestar a orillas del río Toltén.</p>
 
         <div class="hero__actions">
-          <a href="#reservar" class="btn btn-primary" data-i18n="hero.cta.book">Reservar ahora</a>
-          <a href="#el-lugar" class="btn btn-outline-light" data-i18n="hero.cta.explore">Explorar</a>
+          <a href="#reservar" class="btn btn-primary" data-i18n="hero.cta.book">Reservar estadía</a>
+          <a href="pages/experiencias.html" class="btn btn-outline-light" data-i18n="hero.cta.explore">Conocer experiencias</a>
+          <a href="pages/coliving.html" class="btn btn-outline-light" data-i18n="hero.cta.coliving">Estadías largas (Eco Work Retreat)</a>
         </div>
 
         <!-- Booking Widget -->
@@ -138,7 +145,7 @@
       <div class="container">
         <div class="about-split scroll-reveal">
           <div class="about-split__image">
-            <img src="images/lugar/casa-exterior.jpg" alt="Casa GuestHouse Villarrica">
+            <img src="images/lugar/casa-exterior.jpg" alt="Casa Flor del Bosque">
           </div>
           <div class="about-split__content">
             <span class="overline" data-i18n="section.place.overline">El Lugar</span>
@@ -147,7 +154,7 @@
               Ubicados en las orillas del Río Toltén, con vista privilegiada al Volcán Villarrica. Una hectárea de naturaleza, madera nativa y tranquilidad absoluta.
             </p>
             <p>
-              Nuestra GuestHouse combina la calidez de la madera nativa, el arte local y una cocina Km 0 con productos de nuestra huerta e invernadero. Un espacio donde la naturaleza y la hospitalidad se encuentran.
+              Nuestra casa combina la calidez de la madera nativa, el arte local y una cocina Km 0 con productos de nuestra huerta e invernadero. Un espacio donde la naturaleza y la hospitalidad se encuentran.
             </p>
             <a href="pages/nosotros.html" class="btn btn-outline mt-8">Conocer nuestra historia</a>
           </div>
@@ -164,12 +171,146 @@
             <div class="stat__label">Habitaciones</div>
           </div>
           <div class="stat">
+            <div class="stat__number">12+</div>
+            <div class="stat__label">Talleres al Mes</div>
+          </div>
+          <div class="stat">
             <div class="stat__number">100+</div>
             <div class="stat__label">Eventos</div>
           </div>
           <div class="stat">
             <div class="stat__number">4.9</div>
             <div class="stat__label">Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Participar Section (No vienes a alojarte) -->
+    <section class="section" id="participar">
+      <div class="container">
+        <div class="about-split scroll-reveal">
+          <div class="about-split__content">
+            <span class="overline">Vivir + Aprender + Regenerar</span>
+            <h2>No vienes a alojarte. Vienes a participar.</h2>
+            <p class="lead">
+              En Flor del Bosque los huéspedes pueden cosechar alimentos de la huerta, aprender sobre apicultura, participar en talleres de bioconstrucción, conocer iniciativas locales, plantar árboles nativos y descubrir formas prácticas de vida sustentable.
+            </p>
+          </div>
+          <div class="about-split__image">
+            <img src="images/experiencias/gallinero-huerta.jpg" alt="Huerta regenerativa y gallinas de libre pastoreo en Flor del Bosque">
+          </div>
+        </div>
+
+        <div class="grid grid--2 mt-12 scroll-reveal">
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Casa patrimonial de madera con 7 habitaciones</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Huerta regenerativa e invernadero</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22c6.23-.05 7.87-5.57 7.5-10-.36-4.34-3.95-9.96-7.5-10-3.55.04-7.14 5.66-7.5 10-.37 4.43 1.27 9.95 7.5 10z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Gallinas de libre pastoreo</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Talleres semanales con especialistas</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Cultura mapuche viva</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Observación de aves y naturaleza</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Espacios para trabajo remoto (Starlink)</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Comunidad internacional de nómadas</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Experiencias durante las cuatro estaciones</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Participación real en proyectos de conservación</h4>
+            </div>
           </div>
         </div>
       </div>
@@ -301,12 +442,189 @@
       </div>
     </section>
 
+    <!-- Cuatro Estaciones Section -->
+    <section class="section section--cream" id="estaciones">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Todo el año</span>
+          <h2>Las cuatro estaciones de Flor del Bosque</h2>
+        </div>
+
+        <div class="grid grid--4 scroll-reveal">
+          <div class="feature-item" style="flex-direction: column; text-align: center;">
+            <div class="feature-item__icon" style="margin: 0 auto var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+              </svg>
+            </div>
+            <h4>Otoño</h4>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary);">Hongos silvestres, colores del bosque, fotografía de naturaleza y gastronomía de temporada.</p>
+          </div>
+
+          <div class="feature-item" style="flex-direction: column; text-align: center;">
+            <div class="feature-item__icon" style="margin: 0 auto var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+              </svg>
+            </div>
+            <h4>Invierno</h4>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary);">Chimenea, bienestar profundo, gastronomía reconfortante y cielos despejados para astronomía.</p>
+          </div>
+
+          <div class="feature-item" style="flex-direction: column; text-align: center;">
+            <div class="feature-item__icon" style="margin: 0 auto var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>
+              </svg>
+            </div>
+            <h4>Primavera</h4>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary);">Polinizadores, flores nativas, observación de aves migratorias y siembra en la huerta.</p>
+          </div>
+
+          <div class="feature-item" style="flex-direction: column; text-align: center;">
+            <div class="feature-item__icon" style="margin: 0 auto var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </div>
+            <h4>Verano</h4>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary);">Huerta en cosecha, río Toltén, excursiones al volcán y eventos nocturnos al aire libre.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impacto Section (Tu estadía genera impacto) -->
+    <section class="section section--dark" id="impacto">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Hospitalidad regenerativa</span>
+          <h2>Tu estadía genera impacto</h2>
+          <p class="lead">Cada visita contribuye a un territorio más vivo: empleo local, conocimiento compartido, economía circular y conservación de la biodiversidad.</p>
+        </div>
+
+        <div class="grid grid--3 scroll-reveal">
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Empleo local femenino</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Talleres con especialistas</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Compra a productores locales</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Conservación de biodiversidad</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Jardines para polinizadores</h4>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <div class="feature-item__content">
+              <h4>Educación ambiental</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lo que viene este mes (1.6) -->
+    <section class="section section--cream" id="proximas">
+      <div class="container">
+        <div class="section__header section__header--center scroll-reveal">
+          <span class="overline">Agenda</span>
+          <h2>Lo que viene este mes</h2>
+        </div>
+
+        <div class="grid grid--3 scroll-reveal">
+          <div style="background: var(--surface-elevated); border: 1px solid var(--color-neutral-200); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column;">
+            <span class="card-room__category">Taller</span>
+            <h3 style="font-size: var(--text-xl); margin: var(--space-2) 0 var(--space-1);">Cocina Km 0</h3>
+            <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-4);">Sábados 10:00 · 8 cupos</p>
+            <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);">
+              <span class="card-room__price">$45.000</span>
+              <a href="https://wa.me/56900000000?text=Hola!%20Quiero%20reservar%20un%20cupo%20en%20el%20taller%20Cocina%20Km%200" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Reservar cupo</a>
+            </div>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--color-neutral-200); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column;">
+            <span class="card-room__category">Velada del Fuego</span>
+            <h3 style="font-size: var(--text-xl); margin: var(--space-2) 0 var(--space-1);">Velada del Fuego</h3>
+            <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-4);">Último viernes del mes · Cupos limitados</p>
+            <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);">
+              <span class="card-room__price">$25.000</span>
+              <a href="https://wa.me/56900000000?text=Hola!%20Quiero%20inscribirme%20en%20la%20pr%C3%B3xima%20Velada%20del%20Fuego" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Reservar cupo</a>
+            </div>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--color-neutral-200); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column;">
+            <span class="card-room__category">Bienestar</span>
+            <h3 style="font-size: var(--text-xl); margin: var(--space-2) 0 var(--space-1);">Forest Bathing</h3>
+            <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-4);">Viernes 16:00 · 8 cupos</p>
+            <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);">
+              <span class="card-room__price">$30.000</span>
+              <a href="https://wa.me/56900000000?text=Hola!%20Quiero%20reservar%20una%20sesi%C3%B3n%20de%20Forest%20Bathing" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Reservar cupo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12 scroll-reveal">
+          <a href="pages/agenda.html" class="btn btn-primary">Ver agenda completa →</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Matrimonios Banner -->
     <section class="section" id="matrimonios">
       <div class="container">
         <div class="banner-cta scroll-reveal">
           <div class="banner-cta__background">
-            <img src="images/matrimonios/novios-carreta.jpg" alt="Matrimonio en GuestHouse Villarrica">
+            <img src="images/matrimonios/novios-carreta.jpg" alt="Matrimonio en Flor del Bosque">
           </div>
           <div class="banner-cta__overlay"></div>
           <div class="banner-cta__content">
@@ -385,7 +703,7 @@
           </div>
 
           <div class="about-split__image">
-            <img src="images/cowork/living-principal.jpg" alt="Espacio CoWork GuestHouse Villarrica">
+            <img src="images/cowork/living-principal.jpg" alt="Espacio CoWork Flor del Bosque">
           </div>
         </div>
       </div>
@@ -443,13 +761,13 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section class="section section--cream">
+    <section class="section section--cream" id="newsletter">
       <div class="container">
         <div class="newsletter scroll-reveal">
-          <h2 class="newsletter__title" data-i18n="newsletter.title">Mantente conectado</h2>
-          <p class="newsletter__text" data-i18n="newsletter.text">Recibe novedades, ofertas especiales y lo mejor de la Araucanía.</p>
+          <h2 class="newsletter__title" data-i18n="newsletter.title">Agenda y novedades</h2>
+          <p class="newsletter__text" data-i18n="newsletter.text">Recibe el calendario mensual de talleres, la Velada del Fuego y la programación de temporada de Flor del Bosque.</p>
           <form class="newsletter__form" data-validate>
-            <input type="email" class="newsletter__input" placeholder="Tu email" data-i18n="newsletter.placeholder" required>
+            <input type="email" class="newsletter__input" placeholder="Tu email para recibir la agenda mensual" data-i18n="newsletter.placeholder" required>
             <button type="submit" class="btn btn-primary" data-i18n="newsletter.button">Suscribirse</button>
           </form>
         </div>
@@ -464,7 +782,7 @@
       <div class="footer__grid">
         <!-- Brand -->
         <div class="footer__brand">
-          <div class="footer__logo">GuestHouse <span>Villarrica</span></div>
+          <div class="footer__logo">Flor del <span>Bosque</span></div>
           <p class="footer__description" data-i18n="footer.description">
             Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.
           </p>
@@ -490,8 +808,10 @@
           <ul class="footer__links">
             <li><a href="pages/alojamiento.html">Alojamiento</a></li>
             <li><a href="pages/experiencias.html">Experiencias</a></li>
+            <li><a href="pages/agenda.html">Agenda</a></li>
             <li><a href="pages/matrimonios.html">Matrimonios</a></li>
             <li><a href="pages/cowork.html">CoWork & Café</a></li>
+            <li><a href="pages/coliving.html">Coliving</a></li>
             <li><a href="pages/galeria.html">Galería</a></li>
           </ul>
         </div>
@@ -503,7 +823,6 @@
             <li><a href="pages/experiencias.html#retiros">Retiros</a></li>
             <li><a href="pages/experiencias.html#capacitaciones">Capacitaciones</a></li>
             <li><a href="pages/experiencias.html#talleres">Talleres</a></li>
-            <li><a href="pages/coliving.html">Coliving</a></li>
           </ul>
         </div>
 
@@ -528,13 +847,13 @@
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <span>hola@guesthousevillarrica.cl</span>
+            <span>hola@flordelbosque.cl</span>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p>&copy; 2026 GuestHouse Villarrica. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+        <p>&copy; 2026 Flor del Bosque. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
         <div class="footer__legal">
           <a href="pages/terminos.html" data-i18n="footer.privacy">Privacidad</a>
           <a href="pages/terminos.html" data-i18n="footer.terms">Términos</a>
@@ -544,7 +863,7 @@
   </footer>
 
   <!-- WhatsApp Button -->
-  <a href="https://wa.me/56900000000?text=Hola!%20Me%20interesa%20GuestHouse%20Villarrica" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <a href="https://wa.me/56900000000?text=Hola!%20Me%20interesa%20Flor%20del%20Bosque" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
