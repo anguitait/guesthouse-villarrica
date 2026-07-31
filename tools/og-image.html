@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+  Plantilla para regenerar images/og-image.jpg (la imagen que se ve al compartir
+  el sitio en WhatsApp, Facebook, LinkedIn, etc.).
+
+  Para regenerarla:
+    1. python3 -m http.server 8777   (desde la raiz del sitio)
+    2. Abrir http://localhost:8777/tools/og-image.html en una ventana de 1200x630
+    3. Captura de pantalla -> sips -s format jpeg -s formatOptions 82 captura.png --out images/og-image.jpg
+
+  Requiere la tipografia Montserrat instalada en el sistema.
+  Esta plantilla NO se publica: solo genera el JPG.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card img.bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(26,39,22,.55) 0%, rgba(26,39,22,.30) 45%, rgba(26,39,22,.72) 100%),
+      radial-gradient(ellipse at 50% 45%, rgba(26,39,22,.18) 0%, rgba(26,39,22,.62) 100%);
+  }
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .content img.logo {
+    width: 620px;
+    height: auto;
+    filter: drop-shadow(0 6px 24px rgba(0,0,0,.35));
+  }
+  .rule {
+    width: 96px;
+    height: 2px;
+    background: #d7b286;
+    margin: 44px 0 30px;
+  }
+  .tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(0,0,0,.45);
+  }
+  .sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #d7b286;
+    margin-top: 16px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.5);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="bg" src="http://localhost:8777/images/hero/vista-aerea-drone.jpg">
+    <div class="veil"></div>
+    <div class="content">
+      <img class="logo" src="http://localhost:8777/images/logo/logo-horizontal-blanco.svg">
+      <div class="rule"></div>
+      <div class="tagline">Villarrica · La Araucanía · Chile</div>
+      <div class="sub">Orillas del Río Toltén</div>
+    </div>
+  </div>
+</body>
+</html>

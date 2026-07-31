@@ -151,10 +151,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-.header--scrolled .header__logo {
-  color: var(--color-primary);
-}
-
 .header--scrolled .nav__link {
   color: var(--text-primary);
 }
@@ -167,17 +163,55 @@
   margin: 0 auto;
 }
 
+/* Logo: white lockup over the hero, full-colour once the header goes solid.
+   Both variants are stacked and cross-faded so there is no reload flash. */
 .header__logo {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-inverse);
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
   text-decoration: none;
-  transition: color var(--duration-base) var(--ease-out);
 }
 
-.header__logo span {
-  font-weight: var(--font-weight-light);
+.header__logo img {
+  display: block;
+  width: auto;
+  height: 40px;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    height var(--duration-slow) var(--ease-out);
+}
+
+.header__logo img + img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.header__logo--dark {
+  opacity: 0;
+}
+
+.header--scrolled .header__logo img {
+  height: 34px;
+}
+
+.header--scrolled .header__logo--light {
+  opacity: 0;
+}
+
+.header--scrolled .header__logo--dark {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .header__logo img {
+    height: 32px;
+  }
+
+  .header--scrolled .header__logo img {
+    height: 28px;
+  }
 }
 
 /* Navigation */
@@ -800,14 +834,16 @@
 }
 
 .footer__logo {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-4);
+  display: inline-block;
+  line-height: 0;
+  margin-bottom: var(--space-5);
 }
 
-.footer__logo span {
-  font-weight: var(--font-weight-light);
+.footer__logo img {
+  display: block;
+  width: auto;
+  height: 62px;
+  max-width: 100%;
 }
 
 .footer__description {

@@ -9,7 +9,10 @@
   <title>Flor del Bosque | Despierta frente al Volcán</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="images/logo/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
+  <meta name="theme-color" content="#647156">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,10 +27,22 @@
   <link rel="alternate" hreflang="en" href="https://flordelbosque.cl/pages/en.html">
 
   <!-- Open Graph -->
+  <meta property="og:site_name" content="Flor del Bosque">
   <meta property="og:title" content="Flor del Bosque | Despierta frente al Volcán">
-  <meta property="og:description" content="Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica.">
+  <meta property="og:description" content="Flor del Bosque - Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica. Experiencias, matrimonios, cowork y más.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CL">
+  <meta property="og:url" content="https://flordelbosque.cl/">
+  <meta property="og:image" content="https://flordelbosque.cl/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo Flor del Bosque sobre vista aerea del predio en Villarrica">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flor del Bosque | Despierta frente al Volcán">
+  <meta name="twitter:description" content="Flor del Bosque - Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica. Experiencias, matrimonios, cowork y más.">
+  <meta name="twitter:image" content="https://flordelbosque.cl/images/og-image.jpg">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -56,8 +71,9 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header__inner">
-      <a href="/" class="header__logo">
-        Flor del <span>Bosque</span>
+      <a href="/" class="header__logo" aria-label="Flor del Bosque - Inicio">
+        <img src="images/logo/logo-horizontal-blanco.svg" alt="Flor del Bosque" width="655" height="195" class="header__logo--light">
+        <img src="images/logo/logo-horizontal.svg" alt="" aria-hidden="true" width="655" height="195" class="header__logo--dark">
       </a>
 
       <nav class="nav">
@@ -782,7 +798,9 @@
       <div class="footer__grid">
         <!-- Brand -->
         <div class="footer__brand">
-          <div class="footer__logo">Flor del <span>Bosque</span></div>
+          <a href="/" class="footer__logo" aria-label="Flor del Bosque - Inicio">
+            <img src="images/logo/logo-horizontal-blanco.svg" alt="Flor del Bosque" width="655" height="195">
+          </a>
           <p class="footer__description" data-i18n="footer.description">
             Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.
           </p>
