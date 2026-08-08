@@ -415,7 +415,10 @@
   align-items: center;
   padding: var(--space-section) var(--container-padding);
   padding-top: calc(var(--space-section) + 80px);
-  background: var(--color-primary);
+  /* Solo visible si la foto del hero no carga. Va en verde profundo
+     para que ese estado coincida con el degradado que normalmente
+     cubre la imagen, y no en oliva, donde el texto daria 4.42. */
+  background: var(--surface-dark);
   color: var(--text-inverse);
   overflow: hidden;
 }
