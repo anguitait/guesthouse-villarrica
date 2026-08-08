@@ -360,6 +360,8 @@
 .section--dark .newsletter .lead,
 .section--dark .newsletter p,
 .section--dark .testimonial p,
+.section--dark .testimonial__source,
+.section--oliva .testimonial__source,
 .section--oliva .newsletter .lead,
 .section--oliva .newsletter p,
 .section--oliva .testimonial p {

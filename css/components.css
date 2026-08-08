@@ -860,7 +860,9 @@
 
 .testimonial__source {
   font-size: var(--text-sm);
-  color: var(--text-muted);
+  /* Atenuado, pero no tanto: con --text-muted caia en 3.64 sobre la
+     tarjeta del testimonio. */
+  color: var(--text-secondary);
 }
 
 /* ─────────────────────────────────────────
