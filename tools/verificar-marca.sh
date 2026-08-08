@@ -65,14 +65,21 @@ else
   falla "images/logo/ fue modificado: $(git diff --name-only -- images/logo/ | tr '\n' ' ')"
 fi
 
+# 776px = 1250x834 menos el 7% inferior, que es donde va la marca "MP".
+# La lista se comparte con tools/prep-images.sh: una sola fuente, para
+# que agregar una foto no obligue a acordarse de editar dos archivos.
 echo "Marca de agua recortada"
-con_marca=(
-  cowork/living-principal cowork/mesas-trabajo
-  experiencias/gallinero-huerta experiencias/hamaca-bosque
-  habitaciones/habitacion-verde hero/vista-aerea-drone
-  lugar/casa-exterior lugar/piscina-casa lugar/piscina-jardin
-)
-for rel in "${con_marca[@]}"; do
+lista=tools/imagenes-con-marca.txt
+con_marca=()
+if [ ! -f "$lista" ]; then
+  falla "falta $lista"
+else
+  # Sin mapfile: macOS trae bash 3.2 y no lo tiene.
+  while IFS= read -r linea; do
+    con_marca+=("$linea")
+  done < <(grep -vE '^[[:space:]]*(#|$)' "$lista")
+fi
+for rel in ${con_marca[@]+"${con_marca[@]}"}; do
   archivo="images/${rel}.jpg"
   if [ ! -f "$archivo" ]; then
     falla "no existe $archivo"
