@@ -984,7 +984,10 @@
   flex-direction: column;
   gap: var(--space-4);
   font-size: var(--text-sm);
-  opacity: 0.6;
+  /* Sin opacity: al 0.6 el pie legal caia en 3.37 sobre el verde
+     profundo. La discrecion se consigue con color, no atenuando el
+     elemento entero, que arrastra tambien a los enlaces. */
+  color: var(--brand-salvia);
 }
 
 @media (min-width: 768px) {
@@ -999,9 +1002,10 @@
   gap: var(--space-6);
 }
 
+/* Sin opacidad: al 0.8 estos enlaces caian en 4.08 sobre el verde
+   profundo. La salvia solida da 6.69 y se ve igual de discreta. */
 .footer__legal a {
-  color: var(--text-inverse);
-  opacity: 0.8;
+  color: var(--brand-salvia);
 }
 
 .footer__legal a:hover {

@@ -119,8 +119,11 @@
   color: var(--on-oliva);
 }
 
+/* Aca NO va arena. Sobre el verde profundo da 7.43, pero sobre el oliva
+   se queda en 2.59: son dos fondos oscuros muy distintos. Blanco da
+   5.20 y es lo unico que pasa. */
 .section--oliva .overline {
-  color: var(--brand-arena);
+  color: var(--on-oliva);
 }
 
 .section--oliva .feature-item__icon {
@@ -288,4 +291,48 @@
   .hide-desktop {
     display: none;
   }
+}
+
+/* ─────────────────────────────────────────
+   BARRIDO DE TEXTO SOBRE FONDO OSCURO
+
+   Los componentes fijan sus colores pensando en fondo claro. Dentro de
+   una seccion oscura esos colores quedan ilegibles, y las reglas del
+   componente ganan por orden de carga. Estas dos listas cubren los
+   descendientes que aparecieron en el barrido de contraste renderizado.
+
+   Ojo: los dos fondos oscuros NO admiten el mismo color. Sobre el verde
+   profundo la salvia da 6.69; sobre el oliva se queda en 2.33. Por eso
+   el bloque oliva va todo en blanco.
+   ───────────────────────────────────────── */
+
+/* Cualquier descendiente que herede un color pensado para fondo claro.
+   El selector es amplio a proposito: es mas seguro pasarse que dejar un
+   gris de 2.64 sobre el verde profundo. */
+.section--dark div,
+.section--dark li,
+.section--dark span,
+.section--dark small,
+.section--dark .card-room__price,
+.section--dark .card-room__description,
+.section--dark .service-item__text,
+.section--dark .text-center {
+  color: var(--brand-salvia);
+}
+
+.section--dark .card-room__title,
+.section--dark .card-room__price strong {
+  color: var(--on-profundo);
+}
+
+.section--oliva div,
+.section--oliva li,
+.section--oliva span,
+.section--oliva small,
+.section--oliva .card-room__price,
+.section--oliva .card-room__title,
+.section--oliva .card-room__description,
+.section--oliva .service-item__text,
+.section--oliva .text-center {
+  color: var(--on-oliva);
 }
