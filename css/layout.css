@@ -22,11 +22,13 @@
 /* Sections */
 .section {
   padding: var(--space-section) 0;
+  background: var(--surface-primary);
 }
 
+/* Bloque oscuro — verde profundo del manual */
 .section--dark {
-  background: var(--color-primary);
-  color: var(--text-inverse);
+  background: var(--brand-profundo);
+  color: var(--on-profundo);
 }
 
 .section--dark h1,
@@ -35,24 +37,24 @@
 .section--dark h4,
 .section--dark h5,
 .section--dark h6 {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark p,
 .section--dark .lead {
-  color: var(--color-neutral-200);
+  color: var(--brand-salvia);
 }
 
 .section--dark .feature-item__content h4 {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark .feature-item__content p {
-  color: var(--color-neutral-200);
+  color: var(--brand-salvia);
 }
 
 .section--dark strong {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark .feature-item__icon {
@@ -60,7 +62,7 @@
 }
 
 .section--dark .overline {
-  color: var(--color-accent-light);
+  color: var(--brand-arena);
 }
 
 .section--dark .pricing-card {
@@ -81,8 +83,42 @@
   color: var(--text-secondary);
 }
 
+/* Bloque oliva — el color que el manual pide que predomine.
+   Una o dos por pagina, tipicamente reserva y CTA.
+   El texto va en blanco puro: el marfil sobre oliva da 4.42
+   y no alcanza AA. */
+.section--oliva {
+  background: var(--brand-oliva);
+  color: var(--on-oliva);
+}
+
+.section--oliva h1,
+.section--oliva h2,
+.section--oliva h3,
+.section--oliva h4,
+.section--oliva h5,
+.section--oliva h6,
+.section--oliva strong {
+  color: var(--on-oliva);
+}
+
+.section--oliva p,
+.section--oliva .lead,
+.section--oliva li {
+  color: var(--on-oliva);
+}
+
+.section--oliva .overline {
+  color: var(--brand-arena);
+}
+
+.section--oliva .feature-item__icon {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Respiro sutil sobre el marfil */
 .section--cream {
-  background: var(--color-neutral-100);
+  background: var(--surface-elevated);
 }
 
 .section--white {
@@ -90,12 +126,24 @@
 }
 
 .section__header {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 .section__header--center {
   text-align: center;
   max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ancho de lectura — manual sec. 6, "composicion respirable" */
+.section__header p,
+.section .lead,
+.prose {
+  max-width: var(--measure);
+}
+
+.section__header--center p {
   margin-left: auto;
   margin-right: auto;
 }
