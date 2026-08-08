@@ -309,6 +309,7 @@
 /* Cualquier descendiente que herede un color pensado para fondo claro.
    El selector es amplio a proposito: es mas seguro pasarse que dejar un
    gris de 2.64 sobre el verde profundo. */
+.section--dark a,
 .section--dark div,
 .section--dark li,
 .section--dark span,
@@ -325,6 +326,7 @@
   color: var(--on-profundo);
 }
 
+.section--oliva a,
 .section--oliva div,
 .section--oliva li,
 .section--oliva span,
@@ -346,6 +348,10 @@
 
    Si agregas otra tarjeta clara sobre fondo oscuro, sumala a esta
    lista o su texto desaparecera. */
+.section--dark [style*="surface-elevated"],
+.section--dark [style*="surface-elevated"] *,
+.section--oliva [style*="surface-elevated"],
+.section--oliva [style*="surface-elevated"] *,
 .section--dark .pricing-card,
 .section--dark .pricing-card *,
 .section--oliva .pricing-card,
@@ -372,13 +378,16 @@
   color: var(--text-secondary);
 }
 
-/* Los botones dentro de esas tarjetas conservan su color propio. */
-.section--dark .newsletter .btn-primary,
-.section--oliva .newsletter .btn-primary {
+/* Los botones dentro de esas tarjetas conservan su color propio: son
+   piezas con su propio fondo y no heredan el de la tarjeta. */
+.section--dark .btn-primary,
+.section--oliva .btn-primary {
   color: var(--on-terracota);
 }
 
 .section--dark .newsletter .btn-outline,
-.section--oliva .newsletter .btn-outline {
+.section--oliva .newsletter .btn-outline,
+.section--dark [style*="surface-elevated"] .btn-outline,
+.section--oliva [style*="surface-elevated"] .btn-outline {
   color: var(--brand-oliva-dark);
 }

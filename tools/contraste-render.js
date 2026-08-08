@@ -40,7 +40,7 @@
       if (cs.backgroundImage && cs.backgroundImage !== 'none') sobreFoto = true;
       // Un ancestro posicionado sobre una imagen (hero, tarjetas con foto)
       // no se puede resolver leyendo colores: hay pixeles debajo.
-      if (n.querySelector && n.matches('.hero, .hero__content, [class*="__image"]')) sobreFoto = true;
+      if (n.querySelector && n.matches('.hero, .hero__content, .banner-cta, [class*="__image"], [class*="__overlay"], [class*="__content"]')) sobreFoto = true;
       const c = parse(cs.backgroundColor);
       if (c.length >= 3) {
         const a = c.length === 4 ? c[3] : 1;
