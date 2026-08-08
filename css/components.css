@@ -563,13 +563,28 @@
   .booking-widget {
     flex-direction: row;
     align-items: flex-end;
+    /* Envuelve antes que desbordar: si los cuatro no caben en una fila,
+       el boton baja a la siguiente en vez de salirse de la caja. */
+    flex-wrap: wrap;
     gap: var(--space-4);
     padding: var(--space-6) var(--space-8);
+  }
+
+  /* El CTA toma su propia fila, a lo ancho. La columna del hero mide
+     650px: metiendo tres campos y el boton en una sola fila, cada campo
+     baja de 140px y el input de fecha nativo se recorta. Una barra
+     ancha abajo se lee como decision y no como accidente. */
+  .booking-widget .btn {
+    flex: 1 0 100%;
   }
 }
 
 .booking-widget__field {
-  flex: 1;
+  flex: 1 1 140px;
+  /* Sin esto los campos heredan min-width:auto y se niegan a bajar del
+     ancho intrinseco del input de fecha, empujando el boton fuera de la
+     caja gris. Es el desborde clasico de flexbox. */
+  min-width: 0;
 }
 
 .booking-widget__label {
@@ -594,11 +609,14 @@
 
 .booking-widget__input {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3);
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: var(--radius-sm);
-  font-size: var(--text-base);
+  /* Un punto menos que el texto base: los campos de fecha nativos tienen
+     un ancho minimo que no baja, y a 18px los cuatro controles no caben
+     en una fila dentro de la columna del hero. */
+  font-size: var(--text-sm);
   color: var(--text-primary);
 }
 
