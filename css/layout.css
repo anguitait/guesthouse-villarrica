@@ -336,3 +336,43 @@
 .section--oliva .text-center {
   color: var(--on-oliva);
 }
+
+/* Tarjetas de fondo claro DENTRO de una seccion oscura.
+
+   El barrido de arriba usa selectores de descendiente muy amplios, y
+   eso arrastra tambien el texto de las tarjetas que traen su propio
+   fondo claro: quedaba blanco sobre marfil, invisible. Aca se les
+   devuelve el color normal.
+
+   Si agregas otra tarjeta clara sobre fondo oscuro, sumala a esta
+   lista o su texto desaparecera. */
+.section--dark .newsletter,
+.section--dark .newsletter *,
+.section--dark .testimonial,
+.section--dark .testimonial *,
+.section--oliva .newsletter,
+.section--oliva .newsletter *,
+.section--oliva .testimonial,
+.section--oliva .testimonial * {
+  color: var(--text-primary);
+}
+
+.section--dark .newsletter .lead,
+.section--dark .newsletter p,
+.section--dark .testimonial p,
+.section--oliva .newsletter .lead,
+.section--oliva .newsletter p,
+.section--oliva .testimonial p {
+  color: var(--text-secondary);
+}
+
+/* Los botones dentro de esas tarjetas conservan su color propio. */
+.section--dark .newsletter .btn-primary,
+.section--oliva .newsletter .btn-primary {
+  color: var(--on-terracota);
+}
+
+.section--dark .newsletter .btn-outline,
+.section--oliva .newsletter .btn-outline {
+  color: var(--brand-oliva-dark);
+}
