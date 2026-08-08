@@ -83,8 +83,8 @@
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary-light);
+  background-color: var(--brand-oliva-dark);
+  border-color: var(--brand-oliva-dark);
   transform: translateY(-2px);
 }
 
@@ -438,9 +438,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0.6) 0%,
-    rgba(26, 46, 31, 0.4) 50%,
-    rgba(26, 46, 31, 0.7) 100%
+    rgba(29, 42, 34, 0.6) 0%,
+    rgba(29, 42, 34, 0.4) 50%,
+    rgba(29, 42, 34, 0.7) 100%
   );
 }
 
@@ -448,9 +448,9 @@
   .hero__overlay {
     background: linear-gradient(
       90deg,
-      rgba(26, 46, 31, 0.85) 0%,
-      rgba(26, 46, 31, 0.4) 60%,
-      rgba(26, 46, 31, 0.2) 100%
+      rgba(29, 42, 34, 0.85) 0%,
+      rgba(29, 42, 34, 0.4) 60%,
+      rgba(29, 42, 34, 0.2) 100%
     );
   }
 }
@@ -709,8 +709,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0) 0%,
-    rgba(26, 46, 31, 0.7) 100%
+    rgba(29, 42, 34, 0) 0%,
+    rgba(29, 42, 34, 0.7) 100%
   );
   transition: background var(--duration-slow) var(--ease-out);
 }
@@ -718,8 +718,8 @@
 .card-experience:hover .card-experience__overlay {
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0) 30%,
-    rgba(26, 46, 31, 0.85) 100%
+    rgba(29, 42, 34, 0) 30%,
+    rgba(29, 42, 34, 0.85) 100%
   );
 }
 
@@ -806,7 +806,7 @@
    ───────────────────────────────────────── */
 
 .footer {
-  background: var(--color-primary);
+  background: var(--surface-dark);
   color: var(--text-inverse);
   padding: var(--space-16) 0 var(--space-8);
 }

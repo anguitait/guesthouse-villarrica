@@ -30,6 +30,22 @@ PARES = [
     ("--brand-oliva",     "--surface-primary",  3.0, "titulo grande en oliva"),
 ]
 
+# Pares tal como se pintan en pantalla, no como se declaran.
+# (token_texto, token_fondo, opacidad, ratio_minimo, descripcion)
+# Un par declarado puede cumplir y aun asi fallar al pintarse, si el
+# componente aplica opacity o si el token de fondo cambio de significado.
+PARES_PINTADOS = [
+    ("--text-inverse",   "--surface-dark",  1.0, 4.5, "texto del footer"),
+    ("--text-inverse",   "--surface-dark",  0.8, 4.5, "footer atenuado (opacity .8)"),
+    ("--text-inverse",   "--surface-dark",  1.0, 4.5, "titulo de page-header"),
+    ("--text-inverse",   "--surface-dark",  0.8, 4.5, "subtitulo de page-header"),
+    ("--color-neutral-50", "--color-primary",      1.0, 4.5, "boton secundario"),
+    ("--color-neutral-50", "--brand-oliva-dark",   1.0, 4.5, "boton secundario en hover"),
+    ("--on-oliva",       "--brand-oliva",   1.0, 4.5, "texto en seccion oliva"),
+    ("--brand-arena",    "--brand-profundo",1.0, 4.5, "rotulo en seccion profunda"),
+    ("--brand-salvia",   "--brand-profundo",1.0, 4.5, "parrafo en seccion profunda"),
+]
+
 
 def cargar_tokens():
     """Devuelve {nombre_token: '#rrggbb'} resolviendo alias var(--otro)."""
@@ -65,28 +81,73 @@ def luminancia(hexstr):
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
 
+def componer(hex_frente, hex_fondo, alpha):
+    """Color resultante de pintar hex_frente sobre hex_fondo con opacidad alpha.
+
+    El navegador compone en espacio sRGB no lineal, canal por canal, que es
+    lo que se replica aqui. Con alpha=1 devuelve hex_frente sin tocar.
+    """
+    f = [int(hex_frente[i:i + 2], 16) for i in (1, 3, 5)]
+    b = [int(hex_fondo[i:i + 2], 16) for i in (1, 3, 5)]
+    mezcla = [round(alpha * fc + (1 - alpha) * bc) for fc, bc in zip(f, b)]
+    return "#%02x%02x%02x" % tuple(mezcla)
+
+
 def ratio(hex_a, hex_b):
     la, lb = luminancia(hex_a), luminancia(hex_b)
     return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
 
 
-def main():
-    tokens = cargar_tokens()
-    fallos = []
+def evaluar_par(tokens, t_texto, t_fondo, minimo, desc, opacidad=1.0):
+    """Resuelve dos tokens a color, compone la opacidad si aplica, y calcula
+    el ratio. Devuelve (ratio_o_None, hex_texto_o_None, hex_fondo_o_None,
+    token_faltante_o_None). Compartido por ambas tablas para no duplicar
+    la logica de lookup/ratio entre pares declarados y pares pintados.
+    """
+    hex_texto, hex_fondo = tokens.get(t_texto), tokens.get(t_fondo)
+    if not hex_texto or not hex_fondo:
+        faltante = t_texto if not hex_texto else t_fondo
+        return None, hex_texto, hex_fondo, faltante
+    hex_efectivo = hex_texto if opacidad >= 1.0 else componer(hex_texto, hex_fondo, opacidad)
+    return ratio(hex_efectivo, hex_fondo), hex_texto, hex_fondo, None
+
+
+def revisar_tabla(tokens, pares, fallos):
+    """Imprime una tabla de pares y acumula sus fallos en `fallos`. Cada
+    fila de `pares` es (token_texto, token_fondo, [opacidad,] minimo, desc):
+    con 4 elementos se asume opacidad 1.0, con 5 se usa la opacidad dada.
+    """
     print(f"{'par':<44}{'ratio':>7} {'min':>6}")
     print("-" * 60)
-    for t_texto, t_fondo, minimo, desc in PARES:
-        hex_texto, hex_fondo = tokens.get(t_texto), tokens.get(t_fondo)
-        if not hex_texto or not hex_fondo:
-            faltante = t_texto if not hex_texto else t_fondo
+    for fila in pares:
+        if len(fila) == 5:
+            t_texto, t_fondo, opacidad, minimo, desc = fila
+        else:
+            t_texto, t_fondo, minimo, desc = fila
+            opacidad = 1.0
+        r, _, _, faltante = evaluar_par(tokens, t_texto, t_fondo, minimo, desc, opacidad)
+        if faltante:
             fallos.append(f"token no definido o no resoluble: {faltante}")
             print(f"{desc:<44}{'?':>7} {minimo:>6.1f}  <-- {faltante} falta")
             continue
-        r = ratio(hex_texto, hex_fondo)
+        ya_indicada = "opacity" in desc.lower()
+        etiqueta = desc if opacidad >= 1.0 or ya_indicada else f"{desc} (opacity {opacidad:g})"
         marca = "" if r >= minimo else "  <-- FALLA"
-        print(f"{desc:<44}{r:>7.2f} {minimo:>6.1f}{marca}")
+        print(f"{etiqueta:<44}{r:>7.2f} {minimo:>6.1f}{marca}")
         if r < minimo:
-            fallos.append(f"{desc}: {r:.2f} < {minimo}")
+            fallos.append(f"{etiqueta}: {r:.2f} < {minimo}")
+
+
+def main():
+    tokens = cargar_tokens()
+    fallos = []
+
+    print("Pares declarados")
+    revisar_tabla(tokens, PARES, fallos)
+
+    print()
+    print("Pares pintados (con opacidad compuesta)")
+    revisar_tabla(tokens, PARES_PINTADOS, fallos)
 
     print()
     if fallos:
@@ -94,7 +155,7 @@ def main():
         for f in fallos:
             print(f"  - {f}")
         return 1
-    print(f"OK — {len(PARES)} pares cumplen WCAG AA")
+    print(f"OK — {len(PARES)} pares declarados y {len(PARES_PINTADOS)} pintados cumplen WCAG AA")
     return 0
 
 
