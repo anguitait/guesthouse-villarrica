@@ -106,6 +106,19 @@ else
   falla "revisar: python3 tools/filigranas-bien-puestas.py"
 fi
 
+# Marcadores de contenido sin completar. Esta asercion nace roja a
+# proposito: pages/nosotros.html se publico con el relato de la
+# fundadora sin escribir y con cuatro miembros del equipo llamados
+# "[Nombre]". Es contenido, no marca, pero no deberia salir en vivo.
+echo "Contenido sin completar"
+pendientes=$(grep -rhoE '\[(Nombre|Rol|Texto pendiente|Cierre del relato|Reemplazar)[^]]*\]' \
+  index.html pages/ 2>/dev/null | sort -u | head -6)
+if [ -z "$pendientes" ]; then
+  ok "sin marcadores de relleno"
+else
+  falla "quedan marcadores: $(echo "$pendientes" | tr '\n' ' ')"
+fi
+
 echo "Assets de marca intactos"
 if [ -z "$(git diff --name-only -- images/logo/)" ] \
    && [ -z "$(git diff --cached --name-only -- images/logo/)" ]; then

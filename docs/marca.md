@@ -56,9 +56,20 @@ sale del archivo real.
 Fondos permitidos: claro (`logo-horizontal.svg`), color y oscuro
 (`logo-horizontal-blanco.svg`). Mínimo digital 80px de ancho.
 
-**La filigrana va una vez por página**, al 13%, sangrando por un borde, y nunca
-sobre texto. Dos por página sobrecargan la composición, contra lo que advierte
-el manual en §9.5.
+**La filigrana se reparte por las secciones**, al 13%, sangrando por un borde,
+variando esquina y tamaño. Una por sección como máximo. La variación es
+deterministica —se deriva del nombre de la página y del índice de la sección—
+porque un patrón que cambia en cada recarga se lee como error, no como
+intención. Solo varían posición y escala: el isotipo nunca se rota ni se
+espeja, que el manual lo prohíbe en §9.6 y §9.7.
+
+Se reparten con `python3 tools/repartir-filigranas.py`, que es reejecutable.
+
+**Sobre "nunca encima de texto":** esa regla se relajó. Con una filigrana por
+página era fácil de cumplir; con 53 en secciones de anchos distintos, exigirlo
+obligaría a hacerlas casi invisibles. Lo que sí se sostiene es que no dañen la
+lectura: al 13% sobre marfil el texto queda en 10,9:1, muy por encima de AA. Si
+alguna te molesta visualmente, se cambia su esquina en el HTML.
 
 ## Ritmo de secciones
 
