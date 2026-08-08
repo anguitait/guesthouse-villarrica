@@ -771,8 +771,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(29, 42, 34, 0) 0%,
-    rgba(29, 42, 34, 0.7) 100%
+    rgba(29, 42, 34, 0) 35%,
+    rgba(29, 42, 34, 0.55) 65%,
+    rgba(29, 42, 34, 0.88) 100%
   );
   transition: background var(--duration-slow) var(--ease-out);
 }
@@ -814,10 +815,18 @@
   border-radius: var(--radius-sm);
 }
 
+/* El titulo va sobre la foto, encima del degradado: sin color propio
+   heredaba el verde profundo del texto base y quedaba ilegible. */
+.card-experience__content,
+.card-experience__title {
+  color: var(--text-inverse);
+  text-shadow: 0 1px 3px rgba(29, 42, 34, 0.55);
+}
+
 .card-experience__title {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-semibold);
   margin: 0;
 }
 

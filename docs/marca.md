@@ -89,15 +89,15 @@ regla es que nunca dominen una pantalla — valen dentro de una tarjeta o media
 columna, nunca como hero. Son la primera prioridad de reemplazo.
 
 Al llegar fotos nuevas: reemplaza el original en `images/` y corre
-`./tools/prep-images.sh`. Es idempotente. Los contenedores tienen `aspect-ratio`
-fijo, así que cambiar una foto no mueve el layout.
+`python3 tools/prep-images.py`. Es idempotente. Los contenedores tienen
+`aspect-ratio` fijo, así que cambiar una foto no mueve el layout.
 
-`tools/prep-images.sh --variantes` genera además versiones de 640px y WebP. Hoy
-no se generan por defecto porque ningún HTML las referencia.
-
-**Cuidado con `sips`:** `-c` recorta desde el **centro**, no desde arriba. Un
-recorte con offset 0 deja la mitad de la marca de agua abajo. El script ya
-compensa con un offset negativo; si escribes otro recorte, tenlo presente.
+**No uses `sips` para recortar.** `sips -c` recorta desde el **centro**, y
+compensar con un offset negativo empuja la ventana fuera del borde superior:
+en vez de fallar, **rellena con negro**. Así se publicaron las nueve fotos con
+29 filas negras arriba, con la altura correcta y el verificador en verde,
+porque solo se medía el alto. `prep-images.py` usa Pillow, que recorta por
+coordenadas y no inventa píxeles, y revisa **los dos bordes** al terminar.
 
 ## Lo que el arnés NO cubre
 

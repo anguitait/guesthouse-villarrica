@@ -152,6 +152,39 @@ for rel in ${con_marca[@]+"${con_marca[@]}"}; do
   fi
 done
 
+# Medir solo la altura no basta: el recorte con sips relleno de negro el
+# borde superior de las nueve y se publicaron asi, con la altura correcta.
+if python3 - <<'PY2'
+import pathlib, sys
+from PIL import Image
+malas = []
+lista = pathlib.Path("tools/imagenes-con-marca.txt")
+for linea in lista.read_text().splitlines():
+    linea = linea.strip()
+    if not linea or linea.startswith("#"):
+        continue
+    ruta = pathlib.Path("images") / f"{linea}.jpg"
+    if not ruta.exists():
+        continue
+    im = Image.open(ruta).convert("RGB")
+    w, h = im.size
+    paso = max(1, w // 40)
+    for borde, rango in (("arriba", range(h)), ("abajo", range(h - 1, -1, -1))):
+        for y in rango:
+            fila = [im.getpixel((x, y)) for x in range(0, w, paso)]
+            if max(max(px) for px in fila) < 24:
+                malas.append(f"{linea} ({borde})")
+            break
+if malas:
+    print(" ".join(malas))
+    sys.exit(1)
+PY2
+then
+  ok "ninguna foto con borde relleno de negro"
+else
+  falla "hay fotos con borde negro: revisar salida anterior"
+fi
+
 echo
 if [ "$fallos" -eq 0 ]; then
   echo "OK — todas las aserciones pasan"
