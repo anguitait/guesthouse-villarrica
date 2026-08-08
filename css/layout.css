@@ -116,6 +116,24 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
+.section--oliva .pricing-card {
+  background: var(--surface-elevated);
+}
+
+.section--oliva .pricing-card h3,
+.section--oliva .pricing-card__title {
+  color: var(--text-primary);
+}
+
+.section--oliva .pricing-card p,
+.section--oliva .pricing-card__period {
+  color: var(--text-muted);
+}
+
+.section--oliva .pricing-card__features li {
+  color: var(--text-secondary);
+}
+
 /* Respiro sutil sobre el marfil */
 .section--cream {
   background: var(--surface-elevated);
