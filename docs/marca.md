@@ -119,6 +119,18 @@ leerlos.
    viejo, pero no un color nuevo inventado a mano.** Nada impide que alguien
    escriba `#ff0000` en un componente.
 
+## Secciones ocultas en Nosotros
+
+`pages/nosotros.html` tiene dos secciones con el atributo `hidden`:
+`#fundadora` y `#equipo`. Su contenido todavía es de relleno — el relato en
+primera persona sin escribir, y cuatro integrantes llamados `[Nombre]` con
+`[Rol — ej. …]`.
+
+Para reponerlas: borra el atributo `hidden` de la etiqueta `<section>` y
+reemplaza los marcadores entre corchetes. `tools/relleno-visible.py` falla si
+un marcador queda a la vista, y no cuenta los que estén dentro de una sección
+oculta.
+
 ## Correo: pendiente fuera del repo
 
 El sitio publica `hola@flordelbosque.cl` como única dirección de contacto, pero
