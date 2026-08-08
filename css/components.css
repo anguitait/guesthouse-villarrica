@@ -1159,14 +1159,18 @@
   z-index: 0;
 }
 
-/* Sangra por el borde superior derecho */
+/* Sangra por el borde superior derecho.
+   El desplazamiento hacia afuera es grande a proposito: deja entrar
+   poco mas de un tercio de la forma, que es lo que hace falta para que
+   no quede por debajo del texto. Verificado con
+   tools/filigrana-sobre-texto.js, que mide los glifos y no la caja. */
 .filigrana--sup-der {
-  top: calc(var(--filigrana-size) * -0.22);
-  right: calc(var(--filigrana-size) * -0.18);
+  top: calc(var(--filigrana-size) * -0.34);
+  right: calc(var(--filigrana-size) * -0.62);
 }
 
 /* Sangra por el borde inferior izquierdo */
 .filigrana--inf-izq {
-  bottom: calc(var(--filigrana-size) * -0.28);
-  left: calc(var(--filigrana-size) * -0.22);
+  bottom: calc(var(--filigrana-size) * -0.40);
+  left: calc(var(--filigrana-size) * -0.62);
 }
