@@ -165,18 +165,29 @@
 
 /* Logo: white lockup over the hero, full-colour once the header goes solid.
    Both variants are stacked and cross-faded so there is no reload flash. */
+/* Manual pag. 10: area de seguridad equivalente a X alrededor del
+   logotipo. Va en el ancla y no en las img porque la segunda variante
+   esta en position:absolute y se posiciona contra la caja de padding
+   del ancestro: asi las dos se desplazan igual y el cross-fade no se
+   descuadra. */
 .header__logo {
   position: relative;
   display: block;
   flex-shrink: 0;
   line-height: 0;
   text-decoration: none;
+  padding: 0.35em;
 }
 
+/* Manual pag. 10: minimo digital de 80px de ancho para el logo
+   completo. Con height 40px y la proporcion 3.365:1 del SVG el ancho
+   real es ~135px, y ~94px en el breakpoint mas chico, asi que esta
+   regla no llega a activarse: es una red contra regresiones. */
 .header__logo img {
   display: block;
   width: auto;
   height: 40px;
+  min-width: 80px;
   transition:
     opacity var(--duration-slow) var(--ease-out),
     height var(--duration-slow) var(--ease-out);
