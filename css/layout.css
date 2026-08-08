@@ -346,6 +346,10 @@
 
    Si agregas otra tarjeta clara sobre fondo oscuro, sumala a esta
    lista o su texto desaparecera. */
+.section--dark .pricing-card,
+.section--dark .pricing-card *,
+.section--oliva .pricing-card,
+.section--oliva .pricing-card *,
 .section--dark .newsletter,
 .section--dark .newsletter *,
 .section--dark .testimonial,
