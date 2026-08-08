@@ -110,6 +110,16 @@ fi
 # proposito: pages/nosotros.html se publico con el relato de la
 # fundadora sin escribir y con cuatro miembros del equipo llamados
 # "[Nombre]". Es contenido, no marca, pero no deberia salir en vivo.
+# Los precios salieron del sitio hasta que esten definidos. Esta
+# asercion evita que vuelva a colarse uno suelto en una tarjeta o en
+# prosa. Cuando existan los definitivos, se quita este bloque.
+echo "Precios fuera"
+if grep -rqE '\$\s?[0-9]|USD\s*[0-9]' index.html pages/ 2>/dev/null; then
+  falla "reaparecieron importes: $(grep -rloE '\$\s?[0-9]|USD\s*[0-9]' index.html pages/ | tr '\n' ' ')"
+else
+  ok "sin importes en el sitio"
+fi
+
 echo "Contenido sin completar"
 pendientes=$(grep -rhoE '\[(Nombre|Rol|Texto pendiente|Cierre del relato|Reemplazar)[^]]*\]' \
   index.html pages/ 2>/dev/null | sort -u | head -6)

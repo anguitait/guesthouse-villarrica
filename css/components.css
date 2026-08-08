@@ -88,10 +88,12 @@
   transform: translateY(-2px);
 }
 
+/* El borde va en oliva, pero el texto no: oliva sobre marfil da 4.23 y
+   no alcanza AA. El oliva oscuro se mantiene en familia y da 6.27. */
 .btn-outline {
   background-color: transparent;
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  color: var(--brand-oliva-dark);
 }
 
 .btn-outline:hover {
@@ -691,7 +693,9 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-secondary);
+  /* El arena solo funciona sobre fondo oscuro: sobre blanco da 1.98.
+     Aca la tarjeta es clara, asi que va terracota (6.70). */
+  color: var(--brand-terracota);
 }
 
 .card-room__title {

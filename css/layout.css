@@ -108,6 +108,17 @@
   color: var(--on-oliva);
 }
 
+/* Paridad con .section--dark. Sin estas dos, .feature-item__content p
+   conserva su gris de components.css —que carga despues de este
+   archivo y gana por orden— y queda en 1.46:1 sobre el oliva. */
+.section--oliva .feature-item__content h4 {
+  color: var(--on-oliva);
+}
+
+.section--oliva .feature-item__content p {
+  color: var(--on-oliva);
+}
+
 .section--oliva .overline {
   color: var(--brand-arena);
 }
