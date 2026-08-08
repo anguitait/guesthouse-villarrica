@@ -582,6 +582,16 @@
   opacity: 0.8;
 }
 
+/* Altura unica para input, select y boton. Sin esto cada control se
+   dimensiona solo —input 54px, select 48px, boton 57px— y como la fila
+   alinea por abajo, las etiquetas quedan a distinta altura arriba. */
+.booking-widget__input,
+.booking-widget select,
+.booking-widget .btn {
+  height: 52px;
+  min-height: 52px;
+}
+
 .booking-widget__input {
   width: 100%;
   padding: var(--space-3) var(--space-4);
