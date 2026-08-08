@@ -36,6 +36,17 @@ for hex in '#c45d3a' '#d97b5c' '#9e4a2e' '#3d6b6e' '#5a8a8d' '#2a4a4c' '#1a2e1f'
   fi
 done
 
+# Los mismos colores viejos escritos como rgb(), que el grep de hex no ve.
+# Es por donde se colaron un box-shadow naranjo y el fondo del header.
+for triplete in '196, *93, *58' '26, *46, *31' '250, *248, *245' \
+                '242, *237, *230' '139, *111, *74' '61, *107, *110'; do
+  if grep -rqE "rgba?\($triplete" css/ 2>/dev/null; then
+    falla "sigue presente rgb($triplete) del palette viejo"
+  else
+    ok "eliminado rgb($triplete)"
+  fi
+done
+
 if grep -rq -- '--color-river' css/ 2>/dev/null; then
   falla "quedan tokens --color-river"
 else
@@ -81,6 +92,20 @@ then
   ok "ninguna foto de interior se usa como hero"
 else
   falla "foto de interior usada como hero: revisar salida anterior"
+fi
+
+# Una sola por pagina: el manual advierte contra sobrecargar la
+# composicion, y dos filigranas la sobrecargan enseguida.
+echo "Filigrana del isotipo"
+filigrana_mal=""
+for f in "${html_files[@]}"; do
+  n=$(grep -c 'class="filigrana' "$f")
+  [ "$n" = "1" ] || filigrana_mal="$filigrana_mal $f($n)"
+done
+if [ -z "$filigrana_mal" ]; then
+  ok "una filigrana por pagina en los ${#html_files[@]} HTML"
+else
+  falla "paginas con cantidad distinta de 1:$filigrana_mal"
 fi
 
 echo "Assets de marca intactos"

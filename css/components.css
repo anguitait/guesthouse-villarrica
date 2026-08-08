@@ -73,7 +73,7 @@
   background-color: var(--color-accent-dark);
   border-color: var(--color-accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(196, 93, 58, 0.3);
+  box-shadow: 0 4px 12px rgba(123, 78, 53, 0.3);
 }
 
 .btn-secondary {
@@ -144,7 +144,7 @@
 }
 
 .header--scrolled {
-  background: rgba(250, 248, 245, 0.95);
+  background: rgba(242, 236, 226, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: var(--space-3) var(--container-padding);
@@ -1072,7 +1072,7 @@
 .form-select:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(196, 93, 58, 0.15);
+  box-shadow: 0 0 0 3px rgba(123, 78, 53, 0.15);
 }
 
 .form-textarea {
@@ -1117,3 +1117,45 @@
 .stagger-2 { transition-delay: 0.2s; }
 .stagger-3 { transition-delay: 0.3s; }
 .stagger-4 { transition-delay: 0.4s; }
+
+/* ===========================================
+   FILIGRANA DEL ISOTIPO
+   Direccion "Claros del bosque", intensidad sobria.
+   Reglas duras:
+     - una sola por pagina
+     - nunca sobre texto
+     - solo variantes oficiales de images/logo/
+     - jamas redibujada ni recoloreada
+   =========================================== */
+
+.section--con-filigrana {
+  position: relative;
+  overflow: hidden;
+}
+
+.section--con-filigrana > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.filigrana {
+  position: absolute;
+  width: var(--filigrana-size);
+  height: auto;
+  opacity: var(--filigrana-opacity);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Sangra por el borde superior derecho */
+.filigrana--sup-der {
+  top: calc(var(--filigrana-size) * -0.22);
+  right: calc(var(--filigrana-size) * -0.18);
+}
+
+/* Sangra por el borde inferior izquierdo */
+.filigrana--inf-izq {
+  bottom: calc(var(--filigrana-size) * -0.28);
+  left: calc(var(--filigrana-size) * -0.22);
+}
