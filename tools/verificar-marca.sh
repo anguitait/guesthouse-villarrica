@@ -42,6 +42,21 @@ else
   ok "tokens --color-river eliminados"
 fi
 
+echo "Datos de contacto"
+if grep -rq '56900000000\|+56 9 XXXX XXXX' index.html pages/ js/ 2>/dev/null; then
+  falla "queda el telefono placeholder"
+else
+  ok "telefono real en todos los enlaces"
+fi
+
+correos_extra=$(grep -rhoE '[a-zA-Z0-9._%+-]+@flordelbosque\.cl' index.html pages/ 2>/dev/null \
+  | grep -v '^hola@flordelbosque\.cl$' | sort -u)
+if [ -z "$correos_extra" ]; then
+  ok "hola@flordelbosque.cl es la unica direccion"
+else
+  falla "sobreviven otras direcciones: $(echo "$correos_extra" | tr '\n' ' ')"
+fi
+
 echo "Assets de marca intactos"
 if [ -z "$(git diff --name-only -- images/logo/)" ] \
    && [ -z "$(git diff --cached --name-only -- images/logo/)" ]; then
