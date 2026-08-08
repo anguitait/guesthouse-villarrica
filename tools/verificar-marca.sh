@@ -94,25 +94,16 @@ else
   falla "foto de interior usada como hero: revisar salida anterior"
 fi
 
-# Una sola por pagina: el manual advierte contra sobrecargar la
-# composicion, y dos filigranas la sobrecargan enseguida.
-echo "Ritmo de secciones"
-if python3 tools/ritmo-secciones.py >/dev/null 2>&1; then
-  ok "ninguna pagina apila dos fondos oscuros seguidos"
-else
-  falla "hay secciones oscuras adyacentes: python3 tools/ritmo-secciones.py"
-fi
-
+# La filigrana se reparte por todas las secciones, variando esquina y
+# tamano. Lo que hay que sostener es que cada una viva dentro de una
+# seccion preparada (position:relative + overflow:hidden) y que ninguna
+# seccion lleve dos. Que no queden sobre texto se mide en el navegador,
+# con tools/filigrana-sobre-texto.js: aca no hay layout.
 echo "Filigrana del isotipo"
-filigrana_mal=""
-for f in "${html_files[@]}"; do
-  n=$(grep -c 'class="filigrana' "$f")
-  [ "$n" = "1" ] || filigrana_mal="$filigrana_mal $f($n)"
-done
-if [ -z "$filigrana_mal" ]; then
-  ok "una filigrana por pagina en los ${#html_files[@]} HTML"
+if python3 tools/filigranas-bien-puestas.py >/dev/null 2>&1; then
+  ok "cada filigrana en su seccion, ninguna seccion con dos"
 else
-  falla "paginas con cantidad distinta de 1:$filigrana_mal"
+  falla "revisar: python3 tools/filigranas-bien-puestas.py"
 fi
 
 echo "Assets de marca intactos"

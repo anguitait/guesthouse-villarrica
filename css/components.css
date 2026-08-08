@@ -419,13 +419,17 @@
    HERO
    ───────────────────────────────────────── */
 
+/* El alto y el padding son mas contenidos que el resto de las secciones
+   a proposito: con 100vh y el aire de --space-section, el widget de
+   reserva caia debajo del pliegue y obligaba a bajar para reservar, que
+   es lo primero que tiene que estar a mano. */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
-  padding: var(--space-section) var(--container-padding);
-  padding-top: calc(var(--space-section) + 80px);
+  padding: var(--space-16) var(--container-padding);
+  padding-top: calc(var(--space-16) + 80px);
   /* Solo visible si la foto del hero no carga. Va en verde profundo
      para que ese estado coincida con el degradado que normalmente
      cubre la imagen, y no en oliva, donde el texto daria 4.42. */
@@ -447,25 +451,37 @@
   object-fit: cover;
 }
 
+/* El velo tiene que sostener texto marfil sobre lo mas claro de la foto
+   —pasto a pleno sol—, no solo sobre el bosque. Con alpha 0.4 el
+   subtitulo caia por debajo de 4.5:1; desde 0.6 se sostiene. Por eso la
+   columna de texto se mantiene sobre 0.72 y recien clarea a la derecha,
+   donde no hay texto y conviene ver la casa. */
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(29, 42, 34, 0.6) 0%,
-    rgba(29, 42, 34, 0.4) 50%,
-    rgba(29, 42, 34, 0.7) 100%
+    rgba(29, 42, 34, 0.72) 0%,
+    rgba(29, 42, 34, 0.66) 50%,
+    rgba(29, 42, 34, 0.78) 100%
   );
 }
 
 @media (min-width: 768px) {
   .hero__overlay {
-    background: linear-gradient(
-      90deg,
-      rgba(29, 42, 34, 0.85) 0%,
-      rgba(29, 42, 34, 0.4) 60%,
-      rgba(29, 42, 34, 0.2) 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        rgba(29, 42, 34, 0.88) 0%,
+        rgba(29, 42, 34, 0.76) 45%,
+        rgba(29, 42, 34, 0.42) 75%,
+        rgba(29, 42, 34, 0.18) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(29, 42, 34, 0.45) 0%,
+        rgba(29, 42, 34, 0) 30%
+      );
   }
 }
 
@@ -1150,8 +1166,9 @@
 }
 
 .filigrana {
+  --fw: var(--filigrana-size);
   position: absolute;
-  width: var(--filigrana-size);
+  width: var(--fw);
   height: auto;
   opacity: var(--filigrana-opacity);
   pointer-events: none;
@@ -1159,18 +1176,23 @@
   z-index: 0;
 }
 
-/* Sangra por el borde superior derecho.
-   El desplazamiento hacia afuera es grande a proposito: deja entrar
-   poco mas de un tercio de la forma, que es lo que hace falta para que
-   no quede por debajo del texto. Verificado con
-   tools/filigrana-sobre-texto.js, que mide los glifos y no la caja. */
-.filigrana--sup-der {
-  top: calc(var(--filigrana-size) * -0.34);
-  right: calc(var(--filigrana-size) * -0.62);
-}
+/* Variantes de tamano. El ancho vive en --fw para que los
+   desplazamientos de esquina se calculen sobre el tamano real de cada
+   filigrana y no sobre el token base. */
+.filigrana--sm { --fw: calc(var(--filigrana-size) * 0.62); }
+.filigrana--lg { --fw: calc(var(--filigrana-size) * 1.4); }
 
-/* Sangra por el borde inferior izquierdo */
-.filigrana--inf-izq {
-  bottom: calc(var(--filigrana-size) * -0.40);
-  left: calc(var(--filigrana-size) * -0.62);
-}
+/* Esquinas. El desplazamiento hacia afuera es grande a proposito: deja
+   entrar poco mas de un tercio de la forma, que es lo que hace falta
+   para que no quede por debajo del texto. Lo que entra es una medida
+   FIJA (--filigrana-entra), no una fraccion del tamano: asi la variante
+   grande se ve mas escalada pero no invade mas. Verificado con
+   tools/filigrana-sobre-texto.js, que mide los glifos y no las cajas. */
+.filigrana--sup-der { top: calc(var(--fw) * -1 + var(--filigrana-entra)); right: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--sup-izq { top: calc(var(--fw) * -1 + var(--filigrana-entra)); left: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--inf-der { bottom: calc(var(--fw) * -1 + var(--filigrana-entra)); right: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--inf-izq { bottom: calc(var(--fw) * -1 + var(--filigrana-entra)); left: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+
+/* Sobre fondo oscuro va la variante blanca y mas tenue: al 13% el
+   blanco sobre verde profundo se lee como una mancha. */
+.filigrana--clara { opacity: 0.07; }
