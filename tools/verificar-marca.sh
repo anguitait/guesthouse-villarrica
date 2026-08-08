@@ -96,6 +96,13 @@ fi
 
 # Una sola por pagina: el manual advierte contra sobrecargar la
 # composicion, y dos filigranas la sobrecargan enseguida.
+echo "Ritmo de secciones"
+if python3 tools/ritmo-secciones.py >/dev/null 2>&1; then
+  ok "ninguna pagina apila dos fondos oscuros seguidos"
+else
+  falla "hay secciones oscuras adyacentes: python3 tools/ritmo-secciones.py"
+fi
+
 echo "Filigrana del isotipo"
 filigrana_mal=""
 for f in "${html_files[@]}"; do
