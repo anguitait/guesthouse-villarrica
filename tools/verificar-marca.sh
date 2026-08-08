@@ -57,6 +57,32 @@ else
   falla "sobreviven otras direcciones: $(echo "$correos_extra" | tr '\n' ' ')"
 fi
 
+# Las tres fotos de interior tienen muros verde lima y rojo, fuera de la
+# paleta. No se corrigen de color porque muestran piezas reales y un
+# huesped reserva mirandolas. La regla es que nunca dominen una pantalla:
+# valen dentro de una tarjeta o media columna, nunca como hero.
+echo "Fotos de interior contenidas"
+if python3 - <<'PY'
+import pathlib, re, sys
+saturadas = ("living-principal", "mesas-trabajo", "habitacion-verde")
+patron = re.compile(r'<img[^>]*src="[^"]*(' + "|".join(saturadas) + r')')
+malas = []
+for p in [pathlib.Path("index.html")] + sorted(pathlib.Path("pages").glob("*.html")):
+    t = p.read_text()
+    for m in patron.finditer(t):
+        antes = t[:m.start()]
+        if re.search(r'<section class="hero"(?:(?!</section>).)*$', antes, re.S):
+            malas.append(f"{p.name}:{m.group(1)}")
+if malas:
+    print(" ".join(malas))
+    sys.exit(1)
+PY
+then
+  ok "ninguna foto de interior se usa como hero"
+else
+  falla "foto de interior usada como hero: revisar salida anterior"
+fi
+
 echo "Assets de marca intactos"
 if [ -z "$(git diff --name-only -- images/logo/)" ] \
    && [ -z "$(git diff --cached --name-only -- images/logo/)" ]; then
