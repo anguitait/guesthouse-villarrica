@@ -437,7 +437,7 @@
 /* Page Header */
 .page-header {
   padding: calc(var(--space-32) + 80px) 0 var(--space-16);
-  background: var(--color-primary);
+  background: var(--surface-dark);
   color: var(--text-inverse);
   text-align: center;
 }

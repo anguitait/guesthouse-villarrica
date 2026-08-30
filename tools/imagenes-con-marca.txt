@@ -1,0 +1,23 @@
+# Fotos que traen la marca de agua "MP" del fotografo en el borde inferior.
+#
+# Son las nueve del lote de 1250x834. Las de matrimonios/ y el domo estan a
+# resolucion completa y salieron limpias: no aparecen aqui y no se tocan.
+#
+# El recorte objetivo es 776px de alto, que es 1250x834 menos un 7% inferior.
+# Ese 7% cubre la marca por completo sin alterar el encuadre.
+#
+# Lo leen tanto tools/prep-images.sh (para recortar) como
+# tools/verificar-marca.sh (para comprobar que quedaron en 776px).
+# Una sola lista: agregar una foto aqui la incorpora a los dos.
+#
+# Rutas relativas a images/, sin extension.
+
+cowork/living-principal
+cowork/mesas-trabajo
+experiencias/gallinero-huerta
+experiencias/hamaca-bosque
+habitaciones/habitacion-verde
+hero/vista-aerea-drone
+lugar/casa-exterior
+lugar/piscina-casa
+lugar/piscina-jardin

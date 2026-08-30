@@ -13,8 +13,8 @@
   <meta name="theme-color" content="#647156">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css?v=20260808">
   <!-- Open Graph -->
   <meta property="og:site_name" content="Flor del Bosque">
   <meta property="og:title" content="Nosotros | Flor del Bosque">
@@ -51,7 +51,7 @@
       </nav>
       <div class="header__actions">
         <button class="lang-switch">EN</button>
-        <a href="../index.html#reservar" class="btn btn-primary btn-sm header__cta">Reservar</a>
+        <a href="contacto.html" class="btn btn-primary btn-sm header__cta">Reservar</a>
         <button class="menu-toggle"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -76,7 +76,8 @@
     </section>
 
     <!-- Historia -->
-    <section class="section">
+    <section class="section section--con-filigrana">
+      <img class="filigrana filigrana--sup-izq" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="about-split scroll-reveal">
           <div class="about-split__image">
@@ -100,16 +101,18 @@
     </section>
 
     <!-- La Fundadora (6.2) — PLACEHOLDER: reemplazar con la historia real y la foto de la fundadora -->
-    <section class="section" id="fundadora">
+    <!-- OCULTA: el contenido todavia es de relleno. Para reponerla, borra el atributo hidden y reemplaza los marcadores entre corchetes. -->
+    <section class="section section--con-filigrana" id="fundadora" hidden>
+      <img class="filigrana filigrana--inf-der filigrana--sm" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="about-split scroll-reveal">
           <div class="about-split__content">
             <span class="overline">La fundadora</span>
             <h2>La historia detrás de Flor del Bosque</h2>
-            <p class="lead" style="font-style: italic; color: var(--text-muted);">
+            <p class="lead" style="font-style: italic;">
               [Texto pendiente — relato en primera persona de la fundadora. Incluir: por qué nació Flor del Bosque, por qué elegiste La Araucanía, por qué quieres conectar viajeros con el territorio y cómo surge la idea de hospitalidad regenerativa.]
             </p>
-            <p style="font-style: italic; color: var(--text-muted);">
+            <p style="font-style: italic;">
               [Cierre del relato — una frase personal y cercana que conecte con quien lee.]
             </p>
             <p class="mt-8" style="color: var(--text-secondary);">— [Nombre de la fundadora], fundadora de Flor del Bosque</p>
@@ -123,7 +126,8 @@
     </section>
 
     <!-- Valores -->
-    <section class="section section--cream">
+    <section class="section section--cream section--con-filigrana">
+      <img class="filigrana filigrana--sup-der filigrana--lg" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="section__header section__header--center scroll-reveal">
           <span class="overline">Lo que nos mueve</span>
@@ -138,7 +142,7 @@
             </p>
           </div>
 
-          <div class="testimonial" style="border-left-color: var(--color-river);">
+          <div class="testimonial" style="border-left-color: var(--brand-oliva);">
             <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Conexión con la Naturaleza</h3>
             <p style="color: var(--text-secondary);">
               El río, el bosque y el volcán son parte de la experiencia. Diseñamos cada espacio para que la naturaleza sea protagonista.
@@ -163,7 +167,8 @@
     </section>
 
     <!-- Sustentabilidad -->
-    <section class="section">
+    <section class="section section--con-filigrana">
+      <img class="filigrana filigrana--inf-izq" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="about-split scroll-reveal">
           <div class="about-split__content">
@@ -218,7 +223,7 @@
                 </div>
                 <div class="feature-item__content">
                   <h4>Proveedores Locales</h4>
-                  <p>90% de nuestros insumos provienen de La Araucanía. ¿Eres productor local? Trabaja con nosotros: <a href="mailto:km0@flordelbosque.cl">km0@flordelbosque.cl</a></p>
+                  <p>90% de nuestros insumos provienen de La Araucanía. ¿Eres productor local? Trabaja con nosotros: <a href="mailto:hola@flordelbosque.cl">hola@flordelbosque.cl</a></p>
                 </div>
               </div>
             </div>
@@ -231,7 +236,9 @@
     </section>
 
     <!-- Equipo (6.5) — PLACEHOLDER: reemplazar nombres, roles y fotos reales del equipo -->
-    <section class="section section--cream" id="equipo">
+    <!-- OCULTA: el contenido todavia es de relleno. Para reponerla, borra el atributo hidden y reemplaza los marcadores entre corchetes. -->
+    <section class="section section--cream section--con-filigrana" id="equipo" hidden>
+      <img class="filigrana filigrana--sup-izq filigrana--sm" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="section__header section__header--center scroll-reveal">
           <span class="overline">Equipo</span>
@@ -241,7 +248,7 @@
 
         <div class="grid grid--4 scroll-reveal">
           <div style="text-align: center;">
-            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center;">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <h4>[Nombre]</h4>
@@ -249,7 +256,7 @@
           </div>
 
           <div style="text-align: center;">
-            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center;">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <h4>[Nombre]</h4>
@@ -257,7 +264,7 @@
           </div>
 
           <div style="text-align: center;">
-            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center;">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <h4>[Nombre]</h4>
@@ -265,7 +272,7 @@
           </div>
 
           <div style="text-align: center;">
-            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+            <div style="width: 120px; height: 120px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--color-neutral-200); display: flex; align-items: center; justify-content: center;">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <h4>[Nombre]</h4>
@@ -276,7 +283,8 @@
     </section>
 
     <!-- Como Llegar -->
-    <section class="section section--dark" id="como-llegar">
+    <section class="section section--cream section--con-filigrana" id="como-llegar">
+      <img class="filigrana filigrana--inf-der filigrana--lg" src="../images/logo/isotipo-verde.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="section__header section__header--center scroll-reveal">
           <span class="overline">Ubicación</span>
@@ -287,41 +295,42 @@
         <div class="grid grid--2 scroll-reveal" style="align-items: start;">
           <div>
             <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-6);">Desde Santiago</h3>
-            <ul style="color: var(--color-neutral-200); line-height: 1.8;">
-              <li><strong style="color: var(--text-inverse);">En avión:</strong> Vuelo a Temuco (ZCO). Desde ahí, 1 hora en auto.</li>
-              <li><strong style="color: var(--text-inverse);">En auto:</strong> Ruta 5 Sur hasta Victoria, luego ruta a Villarrica. ~8 horas.</li>
-              <li><strong style="color: var(--text-inverse);">En bus:</strong> Terminal Sur a Villarrica. ~9 horas. Buses JAC, Pullman.</li>
+            <ul style=" line-height: 1.8;">
+              <li><strong>En avión:</strong> Vuelo a Temuco (ZCO). Desde ahí, 1 hora en auto.</li>
+              <li><strong>En auto:</strong> Ruta 5 Sur hasta Victoria, luego ruta a Villarrica. ~8 horas.</li>
+              <li><strong>En bus:</strong> Terminal Sur a Villarrica. ~9 horas. Buses JAC, Pullman.</li>
             </ul>
 
             <h3 style="font-size: var(--text-xl); margin: var(--space-8) 0 var(--space-6);">Desde Temuco</h3>
-            <ul style="color: var(--color-neutral-200); line-height: 1.8;">
+            <ul style=" line-height: 1.8;">
               <li>Tomar ruta a Freire, luego a Villarrica.</li>
               <li>1 hora aproximadamente.</li>
               <li>Podemos coordinar transfer desde el aeropuerto.</li>
             </ul>
 
-            <a href="contacto.html" class="btn btn-outline-light mt-8">Coordinar transfer</a>
+            <a href="contacto.html" class="btn btn-outline mt-8">Coordinar transfer</a>
           </div>
 
           <div>
             <div class="map-container" style="height: 400px; border-radius: var(--radius-lg); overflow: hidden;">
               <iframe src="https://www.google.com/maps?q=-39.2614638,-72.2383335&z=16&hl=es&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Flor del Bosque en Google Maps"></iframe>
             </div>
-            <a href="https://maps.app.goo.gl/shE1wQHZwsP6cjdS6" target="_blank" rel="noopener" class="btn btn-outline-light mt-6">Cómo llegar (Google Maps) →</a>
+            <a href="https://maps.app.goo.gl/shE1wQHZwsP6cjdS6" target="_blank" rel="noopener" class="btn btn-outline mt-6">Cómo llegar (Google Maps) →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Contacto rapido -->
-    <section class="section">
+    <section class="section section--oliva section--con-filigrana">
+      <img class="filigrana filigrana--sup-der filigrana--clara" src="../images/logo/isotipo-blanco.svg" alt="" aria-hidden="true">
       <div class="container">
         <div class="newsletter scroll-reveal">
           <h2 class="newsletter__title">¿Tienes preguntas?</h2>
           <p class="newsletter__text">Estamos aquí para ayudarte a planificar tu estadía perfecta.</p>
           <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
             <a href="contacto.html" class="btn btn-primary">Ir a Contacto</a>
-            <a href="https://wa.me/56900000000" class="btn btn-outline" target="_blank">WhatsApp</a>
+            <a href="https://wa.me/56985488233" class="btn btn-outline" target="_blank">WhatsApp</a>
           </div>
         </div>
       </div>
@@ -341,16 +350,11 @@
             Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.
           </p>
           <div class="footer__social">
-            <a href="https://instagram.com/guesthousevillarrica" target="_blank" rel="noopener" aria-label="Instagram">
+            <a href="https://instagram.com/hostalflordelbosque" target="_blank" rel="noopener" aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-            <a href="https://facebook.com/guesthousevillarrica" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
               </svg>
             </a>
           </div>
@@ -394,7 +398,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
-            <span>+56 9 XXXX XXXX</span>
+            <span>+56 9 8548 8233</span>
           </div>
           <div class="footer__contact-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -416,10 +420,10 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/56900000000" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+  <a href="https://wa.me/56985488233" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=20260808"></script>
 </body>
 </html>

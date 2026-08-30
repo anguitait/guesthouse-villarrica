@@ -22,11 +22,13 @@
 /* Sections */
 .section {
   padding: var(--space-section) 0;
+  background: var(--surface-primary);
 }
 
+/* Bloque oscuro — verde profundo del manual */
 .section--dark {
-  background: var(--color-primary);
-  color: var(--text-inverse);
+  background: var(--brand-profundo);
+  color: var(--on-profundo);
 }
 
 .section--dark h1,
@@ -35,24 +37,24 @@
 .section--dark h4,
 .section--dark h5,
 .section--dark h6 {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark p,
 .section--dark .lead {
-  color: var(--color-neutral-200);
+  color: var(--brand-salvia);
 }
 
 .section--dark .feature-item__content h4 {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark .feature-item__content p {
-  color: var(--color-neutral-200);
+  color: var(--brand-salvia);
 }
 
 .section--dark strong {
-  color: var(--text-inverse);
+  color: var(--on-profundo);
 }
 
 .section--dark .feature-item__icon {
@@ -60,7 +62,7 @@
 }
 
 .section--dark .overline {
-  color: var(--color-accent-light);
+  color: var(--brand-arena);
 }
 
 .section--dark .pricing-card {
@@ -81,8 +83,74 @@
   color: var(--text-secondary);
 }
 
+/* Bloque oliva — el color que el manual pide que predomine.
+   Una o dos por pagina, tipicamente reserva y CTA.
+   El texto va en blanco puro: el marfil sobre oliva da 4.42
+   y no alcanza AA. */
+.section--oliva {
+  background: var(--brand-oliva);
+  color: var(--on-oliva);
+}
+
+.section--oliva h1,
+.section--oliva h2,
+.section--oliva h3,
+.section--oliva h4,
+.section--oliva h5,
+.section--oliva h6,
+.section--oliva strong {
+  color: var(--on-oliva);
+}
+
+.section--oliva p,
+.section--oliva .lead,
+.section--oliva li {
+  color: var(--on-oliva);
+}
+
+/* Paridad con .section--dark. Sin estas dos, .feature-item__content p
+   conserva su gris de components.css —que carga despues de este
+   archivo y gana por orden— y queda en 1.46:1 sobre el oliva. */
+.section--oliva .feature-item__content h4 {
+  color: var(--on-oliva);
+}
+
+.section--oliva .feature-item__content p {
+  color: var(--on-oliva);
+}
+
+/* Aca NO va arena. Sobre el verde profundo da 7.43, pero sobre el oliva
+   se queda en 2.59: son dos fondos oscuros muy distintos. Blanco da
+   5.20 y es lo unico que pasa. */
+.section--oliva .overline {
+  color: var(--on-oliva);
+}
+
+.section--oliva .feature-item__icon {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.section--oliva .pricing-card {
+  background: var(--surface-elevated);
+}
+
+.section--oliva .pricing-card h3,
+.section--oliva .pricing-card__title {
+  color: var(--text-primary);
+}
+
+.section--oliva .pricing-card p,
+.section--oliva .pricing-card__period {
+  color: var(--text-muted);
+}
+
+.section--oliva .pricing-card__features li {
+  color: var(--text-secondary);
+}
+
+/* Respiro sutil sobre el marfil */
 .section--cream {
-  background: var(--color-neutral-100);
+  background: var(--surface-elevated);
 }
 
 .section--white {
@@ -90,12 +158,24 @@
 }
 
 .section__header {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 .section__header--center {
   text-align: center;
   max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ancho de lectura — manual sec. 6, "composicion respirable" */
+.section__header p,
+.section .lead,
+.prose {
+  max-width: var(--measure);
+}
+
+.section__header--center p {
   margin-left: auto;
   margin-right: auto;
 }
@@ -211,4 +291,103 @@
   .hide-desktop {
     display: none;
   }
+}
+
+/* ─────────────────────────────────────────
+   BARRIDO DE TEXTO SOBRE FONDO OSCURO
+
+   Los componentes fijan sus colores pensando en fondo claro. Dentro de
+   una seccion oscura esos colores quedan ilegibles, y las reglas del
+   componente ganan por orden de carga. Estas dos listas cubren los
+   descendientes que aparecieron en el barrido de contraste renderizado.
+
+   Ojo: los dos fondos oscuros NO admiten el mismo color. Sobre el verde
+   profundo la salvia da 6.69; sobre el oliva se queda en 2.33. Por eso
+   el bloque oliva va todo en blanco.
+   ───────────────────────────────────────── */
+
+/* Cualquier descendiente que herede un color pensado para fondo claro.
+   El selector es amplio a proposito: es mas seguro pasarse que dejar un
+   gris de 2.64 sobre el verde profundo. */
+.section--dark a,
+.section--dark div,
+.section--dark li,
+.section--dark span,
+.section--dark small,
+.section--dark .card-room__price,
+.section--dark .card-room__description,
+.section--dark .service-item__text,
+.section--dark .text-center {
+  color: var(--brand-salvia);
+}
+
+.section--dark .card-room__title,
+.section--dark .card-room__price strong {
+  color: var(--on-profundo);
+}
+
+.section--oliva a,
+.section--oliva div,
+.section--oliva li,
+.section--oliva span,
+.section--oliva small,
+.section--oliva .card-room__price,
+.section--oliva .card-room__title,
+.section--oliva .card-room__description,
+.section--oliva .service-item__text,
+.section--oliva .text-center {
+  color: var(--on-oliva);
+}
+
+/* Tarjetas de fondo claro DENTRO de una seccion oscura.
+
+   El barrido de arriba usa selectores de descendiente muy amplios, y
+   eso arrastra tambien el texto de las tarjetas que traen su propio
+   fondo claro: quedaba blanco sobre marfil, invisible. Aca se les
+   devuelve el color normal.
+
+   Si agregas otra tarjeta clara sobre fondo oscuro, sumala a esta
+   lista o su texto desaparecera. */
+.section--dark [style*="surface-elevated"],
+.section--dark [style*="surface-elevated"] *,
+.section--oliva [style*="surface-elevated"],
+.section--oliva [style*="surface-elevated"] *,
+.section--dark .pricing-card,
+.section--dark .pricing-card *,
+.section--oliva .pricing-card,
+.section--oliva .pricing-card *,
+.section--dark .newsletter,
+.section--dark .newsletter *,
+.section--dark .testimonial,
+.section--dark .testimonial *,
+.section--oliva .newsletter,
+.section--oliva .newsletter *,
+.section--oliva .testimonial,
+.section--oliva .testimonial * {
+  color: var(--text-primary);
+}
+
+.section--dark .newsletter .lead,
+.section--dark .newsletter p,
+.section--dark .testimonial p,
+.section--dark .testimonial__source,
+.section--oliva .testimonial__source,
+.section--oliva .newsletter .lead,
+.section--oliva .newsletter p,
+.section--oliva .testimonial p {
+  color: var(--text-secondary);
+}
+
+/* Los botones dentro de esas tarjetas conservan su color propio: son
+   piezas con su propio fondo y no heredan el de la tarjeta. */
+.section--dark .btn-primary,
+.section--oliva .btn-primary {
+  color: var(--on-terracota);
+}
+
+.section--dark .newsletter .btn-outline,
+.section--oliva .newsletter .btn-outline,
+.section--dark [style*="surface-elevated"] .btn-outline,
+.section--oliva [style*="surface-elevated"] .btn-outline {
+  color: var(--brand-oliva-dark);
 }

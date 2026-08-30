@@ -73,7 +73,7 @@
   background-color: var(--color-accent-dark);
   border-color: var(--color-accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(196, 93, 58, 0.3);
+  box-shadow: 0 4px 12px rgba(123, 78, 53, 0.3);
 }
 
 .btn-secondary {
@@ -83,15 +83,17 @@
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary-light);
+  background-color: var(--brand-oliva-dark);
+  border-color: var(--brand-oliva-dark);
   transform: translateY(-2px);
 }
 
+/* El borde va en oliva, pero el texto no: oliva sobre marfil da 4.23 y
+   no alcanza AA. El oliva oscuro se mantiene en familia y da 6.27. */
 .btn-outline {
   background-color: transparent;
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  color: var(--brand-oliva-dark);
 }
 
 .btn-outline:hover {
@@ -144,7 +146,7 @@
 }
 
 .header--scrolled {
-  background: rgba(250, 248, 245, 0.95);
+  background: rgba(242, 236, 226, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: var(--space-3) var(--container-padding);
@@ -165,18 +167,29 @@
 
 /* Logo: white lockup over the hero, full-colour once the header goes solid.
    Both variants are stacked and cross-faded so there is no reload flash. */
+/* Manual pag. 10: area de seguridad equivalente a X alrededor del
+   logotipo. Va en el ancla y no en las img porque la segunda variante
+   esta en position:absolute y se posiciona contra la caja de padding
+   del ancestro: asi las dos se desplazan igual y el cross-fade no se
+   descuadra. */
 .header__logo {
   position: relative;
   display: block;
   flex-shrink: 0;
   line-height: 0;
   text-decoration: none;
+  padding: 0.35em;
 }
 
+/* Manual pag. 10: minimo digital de 80px de ancho para el logo
+   completo. Con height 40px y la proporcion 3.365:1 del SVG el ancho
+   real es ~135px, y ~94px en el breakpoint mas chico, asi que esta
+   regla no llega a activarse: es una red contra regresiones. */
 .header__logo img {
   display: block;
   width: auto;
   height: 40px;
+  min-width: 80px;
   transition:
     opacity var(--duration-slow) var(--ease-out),
     height var(--duration-slow) var(--ease-out);
@@ -408,14 +421,21 @@
    HERO
    ───────────────────────────────────────── */
 
+/* El alto y el padding son mas contenidos que el resto de las secciones
+   a proposito: con 100vh y el aire de --space-section, el widget de
+   reserva caia debajo del pliegue y obligaba a bajar para reservar, que
+   es lo primero que tiene que estar a mano. */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
-  padding: var(--space-section) var(--container-padding);
-  padding-top: calc(var(--space-section) + 80px);
-  background: var(--color-primary);
+  padding: var(--space-16) var(--container-padding);
+  padding-top: calc(var(--space-16) + 80px);
+  /* Solo visible si la foto del hero no carga. Va en verde profundo
+     para que ese estado coincida con el degradado que normalmente
+     cubre la imagen, y no en oliva, donde el texto daria 4.42. */
+  background: var(--surface-dark);
   color: var(--text-inverse);
   overflow: hidden;
 }
@@ -433,25 +453,37 @@
   object-fit: cover;
 }
 
+/* El velo tiene que sostener texto marfil sobre lo mas claro de la foto
+   —pasto a pleno sol—, no solo sobre el bosque. Con alpha 0.4 el
+   subtitulo caia por debajo de 4.5:1; desde 0.6 se sostiene. Por eso la
+   columna de texto se mantiene sobre 0.72 y recien clarea a la derecha,
+   donde no hay texto y conviene ver la casa. */
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0.6) 0%,
-    rgba(26, 46, 31, 0.4) 50%,
-    rgba(26, 46, 31, 0.7) 100%
+    rgba(29, 42, 34, 0.72) 0%,
+    rgba(29, 42, 34, 0.66) 50%,
+    rgba(29, 42, 34, 0.78) 100%
   );
 }
 
 @media (min-width: 768px) {
   .hero__overlay {
-    background: linear-gradient(
-      90deg,
-      rgba(26, 46, 31, 0.85) 0%,
-      rgba(26, 46, 31, 0.4) 60%,
-      rgba(26, 46, 31, 0.2) 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        rgba(29, 42, 34, 0.88) 0%,
+        rgba(29, 42, 34, 0.76) 45%,
+        rgba(29, 42, 34, 0.42) 75%,
+        rgba(29, 42, 34, 0.18) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(29, 42, 34, 0.45) 0%,
+        rgba(29, 42, 34, 0) 30%
+      );
   }
 }
 
@@ -533,13 +565,28 @@
   .booking-widget {
     flex-direction: row;
     align-items: flex-end;
+    /* Envuelve antes que desbordar: si los cuatro no caben en una fila,
+       el boton baja a la siguiente en vez de salirse de la caja. */
+    flex-wrap: wrap;
     gap: var(--space-4);
     padding: var(--space-6) var(--space-8);
+  }
+
+  /* El CTA toma su propia fila, a lo ancho. La columna del hero mide
+     650px: metiendo tres campos y el boton en una sola fila, cada campo
+     baja de 140px y el input de fecha nativo se recorta. Una barra
+     ancha abajo se lee como decision y no como accidente. */
+  .booking-widget .btn {
+    flex: 1 0 100%;
   }
 }
 
 .booking-widget__field {
-  flex: 1;
+  flex: 1 1 140px;
+  /* Sin esto los campos heredan min-width:auto y se niegan a bajar del
+     ancho intrinseco del input de fecha, empujando el boton fuera de la
+     caja gris. Es el desborde clasico de flexbox. */
+  min-width: 0;
 }
 
 .booking-widget__label {
@@ -552,13 +599,26 @@
   opacity: 0.8;
 }
 
+/* Altura unica para input, select y boton. Sin esto cada control se
+   dimensiona solo —input 54px, select 48px, boton 57px— y como la fila
+   alinea por abajo, las etiquetas quedan a distinta altura arriba. */
+.booking-widget__input,
+.booking-widget select,
+.booking-widget .btn {
+  height: 52px;
+  min-height: 52px;
+}
+
 .booking-widget__input {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3);
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: var(--radius-sm);
-  font-size: var(--text-base);
+  /* Un punto menos que el texto base: los campos de fecha nativos tienen
+     un ancho minimo que no baja, y a 18px los cuatro controles no caben
+     en una fila dentro de la columna del hero. */
+  font-size: var(--text-sm);
   color: var(--text-primary);
 }
 
@@ -633,7 +693,9 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-secondary);
+  /* El arena solo funciona sobre fondo oscuro: sobre blanco da 1.98.
+     Aca la tarjeta es clara, asi que va terracota (6.70). */
+  color: var(--brand-terracota);
 }
 
 .card-room__title {
@@ -709,8 +771,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0) 0%,
-    rgba(26, 46, 31, 0.7) 100%
+    rgba(29, 42, 34, 0) 35%,
+    rgba(29, 42, 34, 0.55) 65%,
+    rgba(29, 42, 34, 0.88) 100%
   );
   transition: background var(--duration-slow) var(--ease-out);
 }
@@ -718,8 +781,8 @@
 .card-experience:hover .card-experience__overlay {
   background: linear-gradient(
     180deg,
-    rgba(26, 46, 31, 0) 30%,
-    rgba(26, 46, 31, 0.85) 100%
+    rgba(29, 42, 34, 0) 30%,
+    rgba(29, 42, 34, 0.85) 100%
   );
 }
 
@@ -752,10 +815,18 @@
   border-radius: var(--radius-sm);
 }
 
+/* El titulo va sobre la foto, encima del degradado: sin color propio
+   heredaba el verde profundo del texto base y quedaba ilegible. */
+.card-experience__content,
+.card-experience__title {
+  color: var(--text-inverse);
+  text-shadow: 0 1px 3px rgba(29, 42, 34, 0.55);
+}
+
 .card-experience__title {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-semibold);
   margin: 0;
 }
 
@@ -798,7 +869,9 @@
 
 .testimonial__source {
   font-size: var(--text-sm);
-  color: var(--text-muted);
+  /* Atenuado, pero no tanto: con --text-muted caia en 3.64 sobre la
+     tarjeta del testimonio. */
+  color: var(--text-secondary);
 }
 
 /* ─────────────────────────────────────────
@@ -806,7 +879,7 @@
    ───────────────────────────────────────── */
 
 .footer {
-  background: var(--color-primary);
+  background: var(--surface-dark);
   color: var(--text-inverse);
   padding: var(--space-16) 0 var(--space-8);
 }
@@ -922,7 +995,10 @@
   flex-direction: column;
   gap: var(--space-4);
   font-size: var(--text-sm);
-  opacity: 0.6;
+  /* Sin opacity: al 0.6 el pie legal caia en 3.37 sobre el verde
+     profundo. La discrecion se consigue con color, no atenuando el
+     elemento entero, que arrastra tambien a los enlaces. */
+  color: var(--brand-salvia);
 }
 
 @media (min-width: 768px) {
@@ -937,9 +1013,10 @@
   gap: var(--space-6);
 }
 
+/* Sin opacidad: al 0.8 estos enlaces caian en 4.08 sobre el verde
+   profundo. La salvia solida da 6.69 y se ve igual de discreta. */
 .footer__legal a {
-  color: var(--text-inverse);
-  opacity: 0.8;
+  color: var(--brand-salvia);
 }
 
 .footer__legal a:hover {
@@ -1069,7 +1146,7 @@
 .form-select:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(196, 93, 58, 0.15);
+  box-shadow: 0 0 0 3px rgba(123, 78, 53, 0.15);
 }
 
 .form-textarea {
@@ -1114,3 +1191,55 @@
 .stagger-2 { transition-delay: 0.2s; }
 .stagger-3 { transition-delay: 0.3s; }
 .stagger-4 { transition-delay: 0.4s; }
+
+/* ===========================================
+   FILIGRANA DEL ISOTIPO
+   Direccion "Claros del bosque", intensidad sobria.
+   Reglas duras:
+     - una sola por pagina
+     - nunca sobre texto
+     - solo variantes oficiales de images/logo/
+     - jamas redibujada ni recoloreada
+   =========================================== */
+
+.section--con-filigrana {
+  position: relative;
+  overflow: hidden;
+}
+
+.section--con-filigrana > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.filigrana {
+  --fw: var(--filigrana-size);
+  position: absolute;
+  width: var(--fw);
+  height: auto;
+  opacity: var(--filigrana-opacity);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Variantes de tamano. El ancho vive en --fw para que los
+   desplazamientos de esquina se calculen sobre el tamano real de cada
+   filigrana y no sobre el token base. */
+.filigrana--sm { --fw: calc(var(--filigrana-size) * 0.62); }
+.filigrana--lg { --fw: calc(var(--filigrana-size) * 1.4); }
+
+/* Esquinas. El desplazamiento hacia afuera es grande a proposito: deja
+   entrar poco mas de un tercio de la forma, que es lo que hace falta
+   para que no quede por debajo del texto. Lo que entra es una medida
+   FIJA (--filigrana-entra), no una fraccion del tamano: asi la variante
+   grande se ve mas escalada pero no invade mas. Verificado con
+   tools/filigrana-sobre-texto.js, que mide los glifos y no las cajas. */
+.filigrana--sup-der { top: calc(var(--fw) * -1 + var(--filigrana-entra)); right: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--sup-izq { top: calc(var(--fw) * -1 + var(--filigrana-entra)); left: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--inf-der { bottom: calc(var(--fw) * -1 + var(--filigrana-entra)); right: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+.filigrana--inf-izq { bottom: calc(var(--fw) * -1 + var(--filigrana-entra)); left: calc(var(--fw) * -1 + var(--filigrana-entra)); }
+
+/* Sobre fondo oscuro va la variante blanca y mas tenue: al 13% el
+   blanco sobre verde profundo se lee como una mancha. */
+.filigrana--clara { opacity: 0.07; }

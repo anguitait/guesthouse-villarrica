@@ -333,9 +333,62 @@
 
       if (!isValid) {
         e.preventDefault();
+        return;
       }
+
+      // El sitio no tiene backend: sin esto el formulario hacia un submit
+      // nativo sin action, la pagina se recargaba con los campos limpios y
+      // el visitante creia haber enviado su mensaje. No llegaba a nadie.
+      // Mientras no exista un servicio de formularios, el contenido se
+      // entrega por WhatsApp, que es el unico canal que hoy funciona: el
+      // dominio todavia no tiene registros MX.
+      e.preventDefault();
+      window.open(enlaceWhatsApp(textoDelFormulario(form)), '_blank', 'noopener');
+      form.reset();
     });
   });
+
+  // ─────────────────────────────────────────
+  // Reserva y formularios: entrega por WhatsApp
+  // ─────────────────────────────────────────
+
+  const TELEFONO = '56985488233';
+
+  function enlaceWhatsApp(texto) {
+    return 'https://wa.me/' + TELEFONO + '?text=' + encodeURIComponent(texto);
+  }
+
+  function textoDelFormulario(form) {
+    const partes = ['Hola! Escribo desde el sitio web.'];
+    form.querySelectorAll('input, select, textarea').forEach(campo => {
+      const valor = (campo.value || '').trim();
+      if (!valor || campo.type === 'submit' || campo.type === 'button') return;
+      const etiqueta = form.querySelector('label[for="' + campo.id + '"]');
+      const nombre = etiqueta ? etiqueta.textContent.trim() : (campo.name || campo.id || 'Dato');
+      partes.push(nombre.replace(/\s*\*$/, '') + ': ' + valor);
+    });
+    return partes.join('\n');
+  }
+
+  // El widget de fechas no tenia ningun comportamiento: se elegian dias y
+  // huespedes y el boton no hacia nada. Ahora arma la consulta con lo que
+  // la persona ya escribio, en vez de descartarlo.
+  const botonBuscar = document.getElementById('buscar-disponibilidad');
+
+  if (botonBuscar) {
+    botonBuscar.addEventListener('click', function() {
+      const llegada = document.getElementById('checkin');
+      const salida = document.getElementById('checkout');
+      const huespedes = document.getElementById('guests');
+
+      const partes = ['Hola! Quiero consultar disponibilidad.'];
+      if (llegada && llegada.value) partes.push('Llegada: ' + llegada.value);
+      if (salida && salida.value) partes.push('Salida: ' + salida.value);
+      if (huespedes && huespedes.value) partes.push('Huespedes: ' + huespedes.value);
+
+      window.open(enlaceWhatsApp(partes.join('\n')), '_blank', 'noopener');
+    });
+  }
 
   // ─────────────────────────────────────────
   // Lazy Loading Images
