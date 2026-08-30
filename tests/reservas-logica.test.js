@@ -90,3 +90,39 @@ test('no se puede reservar hacia atrás', () => {
 test('se puede reservar desde hoy mismo', () => {
   assert.equal(rangoValido('2026-09-01', '2026-09-03', '2026-09-01'), true);
 });
+
+import { disponibles } from '../js/reservas-logica.js';
+
+const CATALOGO = [
+  { id: 'vista-volcan', capacidad: 2, ocupado: [['2026-09-12', '2026-09-15']] },
+  { id: 'suite-familiar', capacidad: 4, ocupado: [] },
+  { id: 'bosque', capacidad: 2, ocupado: [] }
+];
+
+test('excluye las piezas ocupadas en el rango', () => {
+  const r = disponibles(CATALOGO, '2026-09-13', '2026-09-14', 2);
+  assert.deepEqual(r.map(h => h.id), ['suite-familiar', 'bosque']);
+});
+
+test('excluye las piezas que no alcanzan para el grupo', () => {
+  const r = disponibles(CATALOGO, '2026-10-01', '2026-10-03', 4);
+  assert.deepEqual(r.map(h => h.id), ['suite-familiar']);
+});
+
+test('la capacidad justa alcanza', () => {
+  const r = disponibles([{ id: 'x', capacidad: 2, ocupado: [] }], '2026-10-01', '2026-10-03', 2);
+  assert.equal(r.length, 1);
+});
+
+test('una pieza sin capacidad declarada no se ofrece', () => {
+  // Sin ese dato no se puede filtrar con seguridad, así que se omite.
+  const r = disponibles([{ id: 'x', ocupado: [] }], '2026-10-01', '2026-10-03', 1);
+  assert.deepEqual(r, []);
+});
+
+test('una pieza sin tarifa SÍ se ofrece', () => {
+  // Es el estado normal hoy: las tarifas no están definidas.
+  const r = disponibles([{ id: 'x', capacidad: 2, precio_noche: null, ocupado: [] }],
+    '2026-10-01', '2026-10-03', 2);
+  assert.equal(r.length, 1);
+});

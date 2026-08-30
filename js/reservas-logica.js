@@ -61,3 +61,16 @@ export function rangoValido(llegada, salida, hoy) {
   if (llegada < hoy) return false;
   return llegada < salida;
 }
+
+/**
+ * Una pieza sin capacidad declarada se omite: sin ese dato no hay forma segura
+ * de filtrar. Una pieza sin tarifa, en cambio, se ofrece igual — es el estado
+ * normal mientras el negocio no defina precios.
+ */
+export function disponibles(habitaciones, llegada, salida, huespedes) {
+  return habitaciones.filter(h =>
+    typeof h.capacidad === 'number' &&
+    h.capacidad >= huespedes &&
+    estaLibre(h, llegada, salida)
+  );
+}
