@@ -1,0 +1,28 @@
+name = "flordelbosque-reservas"
+main = "src/index.js"
+compatibility_date = "2026-08-30"
+
+# El cron del spec: cada 10 minutos.
+[triggers]
+crons = ["*/10 * * * *"]
+
+# Dominio propio: evita depender de la URL workers.dev, que cambia con la cuenta,
+# y deja el CORS apuntando a un origen estable.
+routes = [
+  { pattern = "reservas.flordelbosque.cl", custom_domain = true }
+]
+
+# Caché de la disponibilidad. El id lo genera `wrangler kv namespace create CACHE`.
+[[kv_namespaces]]
+binding = "CACHE"
+id = "REEMPLAZAR_CON_EL_ID_REAL"
+
+# Envío de correo a un destino ya verificado en Email Routing.
+[[send_email]]
+name = "CORREO"
+destination_address = "hola@flordelbosque.cl"
+
+[vars]
+ORIGEN_PERMITIDO = "https://flordelbosque.cl"
+DESTINATARIO = "hola@flordelbosque.cl"
+REMITENTE = "reservas@flordelbosque.cl"
