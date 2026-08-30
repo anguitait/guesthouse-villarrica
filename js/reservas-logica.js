@@ -74,3 +74,39 @@ export function disponibles(habitaciones, llegada, salida, huespedes) {
     estaLibre(h, llegada, salida)
   );
 }
+
+function aTexto(utc) {
+  return new Date(utc).toISOString().slice(0, 10);
+}
+
+/** Los días que una estadía ocupa: incluye la llegada, excluye la salida. */
+export function diasDelRango(llegada, salida) {
+  const dias = [];
+  for (let dia = aUTC(llegada); dia < aUTC(salida); dia += MS_POR_DIA) {
+    dias.push(aTexto(dia));
+  }
+  return dias;
+}
+
+/**
+ * Un día se marca sin cupo sólo cuando no queda ninguna pieza libre. Marcarlo
+ * porque una sola esté ocupada escondería disponibilidad real.
+ */
+export function diasSinCupo(habitaciones) {
+  if (habitaciones.length === 0) return new Set();
+
+  const ocupacionPorDia = new Map();
+  for (const habitacion of habitaciones) {
+    for (const [ini, fin] of habitacion.ocupado || []) {
+      for (const dia of diasDelRango(ini, fin)) {
+        ocupacionPorDia.set(dia, (ocupacionPorDia.get(dia) || 0) + 1);
+      }
+    }
+  }
+
+  const sinCupo = new Set();
+  for (const [dia, cuantas] of ocupacionPorDia) {
+    if (cuantas >= habitaciones.length) sinCupo.add(dia);
+  }
+  return sinCupo;
+}

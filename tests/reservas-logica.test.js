@@ -126,3 +126,37 @@ test('una pieza sin tarifa SÍ se ofrece', () => {
     '2026-10-01', '2026-10-03', 2);
   assert.equal(r.length, 1);
 });
+
+import { diasDelRango, diasSinCupo } from '../js/reservas-logica.js';
+
+test('el rango incluye la llegada y excluye la salida', () => {
+  assert.deepEqual(diasDelRango('2026-09-12', '2026-09-15'),
+    ['2026-09-12', '2026-09-13', '2026-09-14']);
+});
+
+test('el rango cruza el fin de mes', () => {
+  assert.deepEqual(diasDelRango('2026-09-29', '2026-10-02'),
+    ['2026-09-29', '2026-09-30', '2026-10-01']);
+});
+
+test('el rango cruza un año bisiesto', () => {
+  assert.deepEqual(diasDelRango('2028-02-28', '2028-03-01'),
+    ['2028-02-28', '2028-02-29']);
+});
+
+test('un día queda sin cupo sólo si todas las piezas están ocupadas', () => {
+  const catalogo = [
+    { id: 'a', ocupado: [['2026-09-12', '2026-09-14']] },
+    { id: 'b', ocupado: [['2026-09-13', '2026-09-15']] }
+  ];
+  // El 12 sólo cae 'a'; el 13 caen ambas; el 14 sólo cae 'b'.
+  assert.deepEqual([...diasSinCupo(catalogo)].sort(), ['2026-09-13']);
+});
+
+test('sin ocupación no hay días sin cupo', () => {
+  assert.equal(diasSinCupo([{ id: 'a', ocupado: [] }]).size, 0);
+});
+
+test('un catálogo vacío no marca días', () => {
+  assert.equal(diasSinCupo([]).size, 0);
+});
