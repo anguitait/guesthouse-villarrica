@@ -131,9 +131,11 @@ Tabla `Reservas`:
 | `notas` | Long text |
 | `origen` | Single select: `Sitio web`, `WhatsApp`, `Manual` |
 
-- [ ] **Step 2: Cargar las 4 habitaciones**
+- [ ] **Step 2: Cargar las 7 habitaciones**
 
-Los datos salen de `pages/alojamiento.html`. **`precio_noche` se deja vacío** — las tarifas no están definidas (spec §6).
+El hostal tiene **7 habitaciones**, como declaran las estadísticas de la portada. `pages/alojamiento.html` sólo publica 4: esa página está incompleta, y el Task 18 la completa.
+
+Cuatro salen del HTML actual. **`precio_noche` se deja vacío en todas** — las tarifas no están definidas (spec §6).
 
 | `id` | `nombre` | `categoria` | `capacidad` | `metros2` | `imagen` | `activa` | `orden` |
 |---|---|---|---|---|---|---|---|
@@ -142,7 +144,11 @@ Los datos salen de `pages/alojamiento.html`. **`precio_noche` se deja vacío** �
 | `familiar` | Suite Familiar | Suite Familiar | 4 | 45 | `images/habitaciones/suite-familiar.jpg` | ✓ | 3 |
 | `rio` | Habitación Río | Habitación Doble | 2 | 25 | `images/lugar/piscina-jardin.jpg` | ✓ | 4 |
 
-Las descripciones y características se copian textualmente de las fichas de `pages/alojamiento.html`. Para capacidad y metros², el dato está en la primera línea de cada lista (`2 huéspedes | 35 m2`).
+Las descripciones y características de esas cuatro se copian textualmente de sus fichas en `pages/alojamiento.html`. Para capacidad y metros², el dato está en la primera línea de cada lista (`2 huéspedes | 35 m2`).
+
+**Las tres restantes las aporta el dueño**, porque no existen en ninguna parte del repositorio. Por cada una hace falta: `id` en minúsculas sin tildes, `nombre`, `categoria`, `capacidad`, `metros2`, `descripcion_es`, `caracteristicas_es` y una foto en `images/habitaciones/`. Se cargan con `orden` 5, 6 y 7.
+
+Sin esos datos, esta tarea y el Task 18 quedan bloqueados; **el resto del plan avanza igual**, porque nada más depende de cuántas habitaciones haya.
 
 **Verificar que cada ruta de `imagen` existe** con `ls images/habitaciones/`. Si un archivo no existe, dejar `imagen` vacío en vez de inventar una ruta.
 
@@ -1028,7 +1034,7 @@ npx wrangler deploy
 curl -s "https://reservas.flordelbosque.cl/api/disponibilidad" | head -40
 ```
 
-Expected: JSON con `actualizado` y las 4 habitaciones cargadas en el Task 2, cada una con `precio_noche: null` y `ocupado: []`.
+Expected: JSON con `actualizado` y las habitaciones cargadas en el Task 2, cada una con `precio_noche: null` y `ocupado: []`.
 
 - [ ] **Step 7: Verificar la frontera de privacidad contra el servicio real**
 
@@ -1947,7 +1953,7 @@ python3 -m http.server 8000 &
 open "http://localhost:8000/pages/reservas.html"
 ```
 
-Expected: se dibujan dos meses de calendario; los días pasados aparecen apagados. Al elegir dos días aparecen las 4 habitaciones con "Consultar" como precio y **sin** número de noches al lado, porque no hay tarifas.
+Expected: se dibujan dos meses de calendario; los días pasados aparecen apagados. Al elegir dos días aparecen las habitaciones que alcanzan para el número de huéspedes, con "Consultar" como precio y **sin** número de noches al lado, porque no hay tarifas.
 
 - [ ] **Step 3: Commit**
 
@@ -2201,11 +2207,11 @@ En `pages/alojamiento.html`, antes de `</body>`:
 
 Con el Worker respondiendo, abrir `http://localhost:8000/pages/alojamiento.html`.
 
-Expected: las cuatro fichas siguen mostrando "Consultar", porque no hay tarifas cargadas. **Que no cambie nada visible es el resultado correcto.**
+Expected: todas las fichas siguen mostrando "Consultar", porque no hay tarifas cargadas. **Que no cambie nada visible es el resultado correcto.**
 
 Para comprobar que el mecanismo funciona, cargar `precio_noche = 85000` en la fila `vista-volcan` de Airtable, esperar 10 minutos o forzar el cron con `npx wrangler triggers` y recargar.
 
-Expected: esa ficha pasa a "$85.000 / noche" y las otras tres siguen en "Consultar". Ése es el estado mixto del spec §6. Dejar el campo vacío otra vez al terminar.
+Expected: esa ficha pasa a "$85.000 / noche" y las demás siguen en "Consultar". Ése es el estado mixto del spec §6. Dejar el campo vacío otra vez al terminar.
 
 Para el camino de falla, cortar la red del navegador y recargar.
 
@@ -2220,7 +2226,81 @@ git commit -m "Refrescar los precios de alojamiento sin que la página dependa d
 
 ---
 
-## Task 18: Verificación de punta a punta
+## Task 18: Publicar las tres habitaciones faltantes
+
+`pages/alojamiento.html` publica 4 de las 7 habitaciones. Esta tarea completa la página para que coincida con las estadísticas de la portada y con Airtable.
+
+**Bloqueada** hasta tener los datos del Task 2 Step 2. No impide ninguna otra tarea.
+
+**Files:**
+- Modify: `pages/alojamiento.html`
+
+- [ ] **Step 1: Confirmar que las fotos existen**
+
+```bash
+ls images/habitaciones/
+```
+
+Expected: una imagen por cada habitación nueva. Si falta alguna, **detenerse y pedirla** — no reutilizar la foto de otra pieza ni dejar la ficha sin imagen.
+
+- [ ] **Step 2: Agregar las fichas**
+
+Por cada habitación nueva, insertar dentro del mismo `<div class="grid">` que contiene las cuatro existentes, después de la ficha `rio`, copiando su estructura exacta:
+
+```html
+          <!-- Room: NOMBRE -->
+          <article class="card-room scroll-reveal" id="ID_DE_AIRTABLE">
+            <div class="card-room__image">
+              <img src="../images/habitaciones/ARCHIVO.jpg" alt="NOMBRE">
+            </div>
+            <div class="card-room__content">
+              <span class="card-room__category">CATEGORIA</span>
+              <h2 class="card-room__title">NOMBRE</h2>
+              <p class="card-room__description">
+                DESCRIPCION
+              </p>
+              <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
+                <li>N huéspedes | M m2</li>
+                <li>CARACTERISTICA</li>
+              </ul>
+              <div class="card-room__footer">
+                <div class="card-room__price">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary">Reservar</a>
+              </div>
+            </div>
+          </article>
+```
+
+El `id` del `<article>` **debe ser idéntico** al campo `id` de Airtable: de eso depende que `js/alojamiento-datos.js` empareje la ficha con sus datos.
+
+El precio va como `Consultar`, igual que las otras: las tarifas siguen sin definirse.
+
+- [ ] **Step 3: Verificar**
+
+```bash
+grep -c 'article class="card-room' pages/alojamiento.html
+grep -c 'card-room__price">Consultar' pages/alojamiento.html
+bash tools/verificar-marca.sh
+```
+
+Expected: `7`, `7`, y el arnés de marca pasa.
+
+- [ ] **Step 4: Verificar el emparejamiento con Airtable**
+
+Abrir `http://localhost:8000/pages/alojamiento.html` con la consola del navegador abierta.
+
+Expected: ningún error, y las 7 fichas visibles. Para probar el emparejamiento, cargar un `precio_noche` en Airtable a una de las tres nuevas, forzar el cron y recargar: esa ficha debe cambiar. Dejar el campo vacío al terminar.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add pages/alojamiento.html
+git commit -m "Publicar las tres habitaciones que faltaban en alojamiento"
+```
+
+---
+
+## Task 19: Verificación de punta a punta
 
 Los tests cubren la lógica; esto cubre que las piezas conversen entre sí. Ninguno de estos pasos se puede automatizar sin montar más andamio del que la verificación justifica.
 
