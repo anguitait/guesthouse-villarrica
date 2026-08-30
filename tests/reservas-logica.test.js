@@ -170,3 +170,15 @@ test('dos reservas solapadas de la misma pieza no esconden a las demás', () => 
   ];
   assert.equal(diasSinCupo(catalogo).size, 0);
 });
+
+// Airtable manda "2026-09-12" o "2026-09-12T00:00:00.000Z" según un interruptor
+// de la interfaz. El sistema no puede depender de que alguien lo deje apagado.
+test('tolera las fechas que Airtable manda con hora', () => {
+  assert.equal(noches('2026-09-12T00:00:00.000Z', '2026-09-15T00:00:00.000Z'), 3);
+  assert.deepEqual(diasDelRango('2026-09-12T00:00:00.000Z', '2026-09-15T00:00:00.000Z'),
+    ['2026-09-12', '2026-09-13', '2026-09-14']);
+});
+
+test('mezclar fechas con y sin hora sigue dando lo mismo', () => {
+  assert.equal(noches('2026-09-12', '2026-09-15T00:00:00.000Z'), 3);
+});

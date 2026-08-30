@@ -22,8 +22,15 @@ export function estaLibre(habitacion, llegada, salida) {
 
 const MS_POR_DIA = 86400000;
 
+/**
+ * Recorta cualquier parte horaria antes de convertir. Airtable manda
+ * "2026-09-12" o "2026-09-12T00:00:00.000Z" según un interruptor de su interfaz,
+ * y sin este recorte la segunda forma producía NaN en silencio: el calendario
+ * dejaba de marcar los días ocupados aunque la habitación sí se excluyera de
+ * los resultados, que es la peor combinación posible.
+ */
 function aUTC(fecha) {
-  const [anio, mes, dia] = fecha.split('-').map(Number);
+  const [anio, mes, dia] = fecha.slice(0, 10).split('-').map(Number);
   return Date.UTC(anio, mes - 1, dia);
 }
 
