@@ -903,14 +903,17 @@ main = "src/index.js"
 compatibility_date = "2026-08-30"
 
 # El cron del spec: cada 10 minutos.
-[triggers]
-crons = ["*/10 * * * *"]
-
 # Dominio propio: evita depender de la URL workers.dev, que cambia con la cuenta,
-# y deja el CORS apuntando a un origen estable.
+# y deja el CORS apuntando a un origen estable. Va ANTES de cualquier [tabla]:
+# en TOML una clave suelta pertenece a la última tabla declarada, así que escrita
+# más abajo quedaría anidada como triggers.routes, invisible para wrangler.
 routes = [
   { pattern = "reservas.flordelbosque.cl", custom_domain = true }
 ]
+
+# El cron del spec: cada 10 minutos.
+[triggers]
+crons = ["*/10 * * * *"]
 
 # Caché de la disponibilidad. El id se llena en el Step 3.
 [[kv_namespaces]]
@@ -1092,7 +1095,7 @@ function cuerpoDeLaSolicitud(solicitud) {
     `Habitación: ${solicitud.nombreHabitacion}`,
     `Llegada:    ${solicitud.llegada}`,
     `Salida:     ${solicitud.salida}`,
-    `Huéspedes:  ${solicitud.huespedes}`,
+    `Huéspedes:  ${solicitud.huespedes || '(no indicado)'}`,
     '',
     `Nombre:   ${solicitud.nombre}`,
     `Email:    ${solicitud.email}`,
