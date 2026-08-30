@@ -160,3 +160,13 @@ test('sin ocupación no hay días sin cupo', () => {
 test('un catálogo vacío no marca días', () => {
   assert.equal(diasSinCupo([]).size, 0);
 });
+
+test('dos reservas solapadas de la misma pieza no esconden a las demás', () => {
+  // Dato inconsistente cargado a mano en Airtable: la pieza 'a' tiene dos
+  // reservas que se pisan. Eso no puede hacer desaparecer a la pieza 'b'.
+  const catalogo = [
+    { id: 'a', ocupado: [['2026-09-12', '2026-09-14'], ['2026-09-12', '2026-09-14']] },
+    { id: 'b', ocupado: [] }
+  ];
+  assert.equal(diasSinCupo(catalogo).size, 0);
+});

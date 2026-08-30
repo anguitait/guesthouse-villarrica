@@ -91,21 +91,27 @@ export function diasDelRango(llegada, salida) {
 /**
  * Un día se marca sin cupo sólo cuando no queda ninguna pieza libre. Marcarlo
  * porque una sola esté ocupada escondería disponibilidad real.
+ *
+ * Cuenta piezas, no reservas: si una habitación trae dos rangos que se pisan
+ * —dato inconsistente cargado a mano— debe seguir contando como una sola pieza
+ * ocupada, o el día se marcaría sin cupo teniendo otras libres.
  */
 export function diasSinCupo(habitaciones) {
   if (habitaciones.length === 0) return new Set();
 
-  const ocupacionPorDia = new Map();
+  const piezasPorDia = new Map();
   for (const habitacion of habitaciones) {
+    const diasDeEstaPieza = new Set();
     for (const [ini, fin] of habitacion.ocupado || []) {
-      for (const dia of diasDelRango(ini, fin)) {
-        ocupacionPorDia.set(dia, (ocupacionPorDia.get(dia) || 0) + 1);
-      }
+      for (const dia of diasDelRango(ini, fin)) diasDeEstaPieza.add(dia);
+    }
+    for (const dia of diasDeEstaPieza) {
+      piezasPorDia.set(dia, (piezasPorDia.get(dia) || 0) + 1);
     }
   }
 
   const sinCupo = new Set();
-  for (const [dia, cuantas] of ocupacionPorDia) {
+  for (const [dia, cuantas] of piezasPorDia) {
     if (cuantas >= habitaciones.length) sinCupo.add(dia);
   }
   return sinCupo;
