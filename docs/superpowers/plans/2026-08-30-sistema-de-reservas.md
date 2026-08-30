@@ -2138,12 +2138,14 @@ sed -i '' 's|href="contacto.html" class="btn btn-primary btn-sm header__cta"|hre
 
 ```bash
 grep -rc 'reservas.html' index.html pages/alojamiento.html
-grep -rn 'href="[^"]*contacto.html"' index.html pages/*.html | grep -c "btn-primary"
+grep -rn 'href="[^"]*contacto.html"' index.html pages/*.html | grep "btn-primary"
 ```
 
-Expected: la primera cuenta es mayor que 0 en ambos archivos. La segunda debe dar `0`: ningún botón primario debe seguir apuntando a contacto.
+Expected: la primera cuenta es mayor que 0 en ambos archivos. La segunda debe listar **exactamente dos**, y ambos deben ser botones de contacto y no de reserva: `Contactar` en `agenda.html` e `Ir a Contacto` en `nosotros.html`. Si aparece cualquier otro, quedó un botón de reserva sin redirigir.
 
-Los enlaces a `contacto.html` que **no** son botones de reserva —el del menú, el del pie de página, el de "Consultar disponibilidad" del coliving— se conservan intactos.
+**El `sed` no alcanza el CTA del hero.** `index.html` tiene `<a href="pages/contacto.html" class="btn btn-primary" data-i18n="hero.cta.book">Reservar estadía</a>` — el botón de reserva más visible del sitio — sin las clases `btn-sm header__cta` ni `btn-full`. Hay que redirigirlo a mano, o el botón chico del header iría a reservas y el grande del hero a contacto.
+
+Los enlaces a `contacto.html` que **no** son botones de reserva se conservan intactos: "Consultar disponibilidad" del coliving, "Solicitar cotización" de experiencias y "Coordinar transfer" de nosotros.
 
 - [ ] **Step 4: Verificar en el navegador**
 
