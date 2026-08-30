@@ -22,7 +22,7 @@ function cuerpoDeLaSolicitud(solicitud) {
     `Habitación: ${solicitud.nombreHabitacion}`,
     `Llegada:    ${solicitud.llegada}`,
     `Salida:     ${solicitud.salida}`,
-    `Huéspedes:  ${solicitud.huespedes}`,
+    `Huéspedes:  ${solicitud.huespedes || '(no indicado)'}`,
     '',
     `Nombre:   ${solicitud.nombre}`,
     `Email:    ${solicitud.email}`,
