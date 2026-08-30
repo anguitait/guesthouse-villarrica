@@ -390,9 +390,9 @@
     return partes.join('\n');
   }
 
-  // El widget de fechas no tenia ningun comportamiento: se elegian dias y
-  // huespedes y el boton no hacia nada. Ahora arma la consulta con lo que
-  // la persona ya escribio, en vez de descartarlo.
+  // Antes esto abría WhatsApp con las fechas, que era lo mejor posible cuando no
+  // existía dónde consultar disponibilidad. Ahora esa página existe y las fechas
+  // viajan hacia ella. No es una regresión: es el destino que le faltaba.
   const botonBuscar = document.getElementById('buscar-disponibilidad');
 
   if (botonBuscar) {
@@ -401,12 +401,14 @@
       const salida = document.getElementById('checkout');
       const huespedes = document.getElementById('guests');
 
-      const partes = ['Hola! Quiero consultar disponibilidad.'];
-      if (llegada && llegada.value) partes.push('Llegada: ' + llegada.value);
-      if (salida && salida.value) partes.push('Salida: ' + salida.value);
-      if (huespedes && huespedes.value) partes.push('Huespedes: ' + huespedes.value);
+      const parametros = new URLSearchParams();
+      if (llegada && llegada.value) parametros.set('llegada', llegada.value);
+      if (salida && salida.value) parametros.set('salida', salida.value);
+      if (huespedes && huespedes.value) parametros.set('huespedes', huespedes.value);
 
-      window.open(enlaceWhatsApp(partes.join('\n')), '_blank', 'noopener');
+      // El widget sólo existe en la portada, así que la ruta es relativa a la raíz.
+      const consulta = parametros.toString();
+      window.location.href = 'pages/reservas.html' + (consulta ? '?' + consulta : '');
     });
   }
 
