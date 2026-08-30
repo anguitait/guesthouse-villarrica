@@ -1389,6 +1389,16 @@ test('sin ocupación no hay días sin cupo', () => {
 test('un catálogo vacío no marca días', () => {
   assert.equal(diasSinCupo([]).size, 0);
 });
+
+test('dos reservas solapadas de la misma pieza no esconden a las demás', () => {
+  // Dato inconsistente cargado a mano en Airtable: la pieza 'a' tiene dos
+  // reservas que se pisan. Eso no puede hacer desaparecer a la pieza 'b'.
+  const catalogo = [
+    { id: 'a', ocupado: [['2026-09-12', '2026-09-14'], ['2026-09-12', '2026-09-14']] },
+    { id: 'b', ocupado: [] }
+  ];
+  assert.equal(diasSinCupo(catalogo).size, 0);
+});
 ```
 
 - [ ] **Step 2: Correr y verificar que falla**
@@ -1418,21 +1428,27 @@ export function diasDelRango(llegada, salida) {
 /**
  * Un día se marca sin cupo sólo cuando no queda ninguna pieza libre. Marcarlo
  * porque una sola esté ocupada escondería disponibilidad real.
+ *
+ * Cuenta piezas, no reservas: si una habitación trae dos rangos que se pisan
+ * —dato inconsistente cargado a mano— debe seguir contando como una sola pieza
+ * ocupada, o el día se marcaría sin cupo teniendo otras libres.
  */
 export function diasSinCupo(habitaciones) {
   if (habitaciones.length === 0) return new Set();
 
-  const ocupacionPorDia = new Map();
+  const piezasPorDia = new Map();
   for (const habitacion of habitaciones) {
+    const diasDeEstaPieza = new Set();
     for (const [ini, fin] of habitacion.ocupado || []) {
-      for (const dia of diasDelRango(ini, fin)) {
-        ocupacionPorDia.set(dia, (ocupacionPorDia.get(dia) || 0) + 1);
-      }
+      for (const dia of diasDelRango(ini, fin)) diasDeEstaPieza.add(dia);
+    }
+    for (const dia of diasDeEstaPieza) {
+      piezasPorDia.set(dia, (piezasPorDia.get(dia) || 0) + 1);
     }
   }
 
   const sinCupo = new Set();
-  for (const [dia, cuantas] of ocupacionPorDia) {
+  for (const [dia, cuantas] of piezasPorDia) {
     if (cuantas >= habitaciones.length) sinCupo.add(dia);
   }
   return sinCupo;
@@ -1443,7 +1459,7 @@ export function diasSinCupo(habitaciones) {
 
 Run: `npm test`
 
-Expected: los 44 tests pasan.
+Expected: los 45 tests pasan.
 
 - [ ] **Step 5: Commit**
 
@@ -2312,7 +2328,7 @@ Los tests cubren la lógica; esto cubre que las piezas conversen entre sí. Ning
 
 Run: `npm test`
 
-Expected: los 44 tests pasan, sin ninguno saltado.
+Expected: los 45 tests pasan, sin ninguno saltado.
 
 - [ ] **Step 2: Enviar una solicitud real**
 
