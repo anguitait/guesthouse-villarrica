@@ -1992,7 +1992,7 @@ git commit -m "Agregar el calendario, los resultados y el envío de la solicitud
 
 - [ ] **Step 1: Agregar los estilos**
 
-Agregar al final de `css/components.css`, usando sólo tokens ya existentes para no romper el arnés de marca:
+Agregar al final de `css/components.css`, usando sólo tokens que existan de verdad en `css/tokens.css` — la paleta usa el prefijo `--brand-*`, no `--color-*`. Nunca colores literales, o el arnés de marca falla:
 
 ```css
 /* ─── Reservas ─────────────────────────────────────── */
@@ -2009,8 +2009,8 @@ Agregar al final de `css/components.css`, usando sólo tokens ya existentes para
 .reservas__error {
   padding: var(--space-4);
   border-radius: var(--radius-md);
-  background: var(--color-sand);
-  color: var(--color-deep);
+  background: var(--brand-arena);
+  color: var(--text-primary);
   margin-bottom: var(--space-6);
 }
 
@@ -2035,7 +2035,7 @@ Agregar al final de `css/components.css`, usando sólo tokens ya existentes para
 }
 .calendario__dia--libre { cursor: pointer; }
 .calendario__dia--libre:hover,
-.calendario__dia--libre:focus { background: var(--color-sage); }
+.calendario__dia--libre:focus { background: var(--brand-salvia); }
 .calendario__dia--ocupado {
   opacity: 0.35;
   text-decoration: line-through;
@@ -2067,16 +2067,17 @@ Run: `bash tools/verificar-marca.sh`
 
 Expected: pasa. Si reclama por un token inexistente, reemplazarlo por el token equivalente que sí exista en `css/tokens.css` — **no** agregar colores literales.
 
-- [ ] **Step 3: Actualizar el `?v=` de los estilos**
+- [ ] **Step 3: Actualizar el `?v=` de los estilos Y del JS**
 
-Cambiar `css/main.css?v=20260808` por `css/main.css?v=20260830` en los 11 HTML:
+Suben los dos, no sólo el CSS: `js/main.js` gana las claves i18n del Task 13, y sin subir su versión los visitantes recurrentes reciben el archivo cacheado y pierden las traducciones al inglés de la página nueva.
 
 ```bash
 grep -rl "main.css?v=" --include="*.html" . | xargs sed -i '' 's/main\.css?v=[0-9]*/main.css?v=20260830/g'
-grep -rc "main.css?v=20260830" index.html pages/reservas.html
+grep -rl "main.js?v=" --include="*.html" . | xargs sed -i '' 's/main\.js?v=[0-9]*/main.js?v=20260830/g'
+grep -rho 'main\.\(css\|js\)?v=[0-9]*' index.html pages/*.html | sort | uniq -c
 ```
 
-Expected: `1` en ambos.
+Expected: 11 de `main.css?v=20260830` y 11 de `main.js?v=20260830`.
 
 - [ ] **Step 4: Commit**
 
