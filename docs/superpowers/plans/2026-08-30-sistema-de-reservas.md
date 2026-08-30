@@ -197,7 +197,7 @@ test('el arnés de tests corre', () => {
 
 - [ ] **Step 2: Correrlo y verificar que falla**
 
-Run: `node --test tests/`
+Run: `node --test "tests/**/*.test.js"`
 
 Expected: falla con `SyntaxError: Cannot use import statement outside a module`. Node trata los `.js` como CommonJS mientras no exista un `package.json` que declare lo contrario.
 
@@ -211,10 +211,12 @@ Expected: falla con `SyntaxError: Cannot use import statement outside a module`.
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test \"tests/**/*.test.js\""
   }
 }
 ```
+
+El glob es explícito por dos razones: `node --test tests/` no funciona en Node 25, que interpreta el directorio como un archivo a ejecutar; y `node --test` a secas recorrería también los worktrees de `.claude/`, que son copias completas del repositorio, corriendo cada test varias veces.
 
 Este archivo existe sólo para los tests y el Worker. No agrega dependencias ni build al sitio, que sigue siendo HTML estático servido por GitHub Pages.
 
