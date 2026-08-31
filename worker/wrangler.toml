@@ -17,7 +17,7 @@ crons = ["*/10 * * * *"]
 # Caché de la disponibilidad. El id lo genera `wrangler kv namespace create CACHE`.
 [[kv_namespaces]]
 binding = "CACHE"
-id = "REEMPLAZAR_CON_EL_ID_REAL"
+id = "30cfa39d108748cea09db57871431665"
 
 # Envío de correo a un destino ya verificado en Email Routing.
 [[send_email]]
