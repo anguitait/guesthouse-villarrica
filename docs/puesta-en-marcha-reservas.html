@@ -1,0 +1,522 @@
+<title>Puesta en marcha de reservas</title>
+<style>
+  :root {
+    --oliva: #647157;
+    --oliva-dark: #4f5946;
+    --profundo: #1d2a22;
+    --salvia: #a7b19c;
+    --arena: #d2b286;
+    --terracota: #7b4e35;
+    --marfil: #f2ece2;
+
+    --ground: #f2ece2;
+    --surface: #fbf8f3;
+    --surface-sunk: #e9e1d4;
+    --ink: #1d2a22;
+    --ink-soft: #55604e;
+    --ink-faint: #7d8676;
+    --rule: #d8cfc0;
+    --accent: #7b4e35;
+    --accent-soft: #f0e2d6;
+    --marker-bg: #647157;
+    --marker-ink: #f2ece2;
+    --code-bg: #1d2a22;
+    --code-ink: #ded6c8;
+    --code-token: #c6cfba;
+
+    --sans: "Avenir Next", "Century Gothic", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #161f19;
+      --surface: #1d2a22;
+      --surface-sunk: #131b16;
+      --ink: #e8e2d6;
+      --ink-soft: #b3bcaa;
+      --ink-faint: #869080;
+      --rule: #2f3d33;
+      --accent: #c9926b;
+      --accent-soft: #2b2019;
+      --marker-bg: #a7b19c;
+      --marker-ink: #161f19;
+      --code-bg: #0f1712;
+      --code-ink: #ded6c8;
+      --code-token: #a7b19c;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #161f19;
+    --surface: #1d2a22;
+    --surface-sunk: #131b16;
+    --ink: #e8e2d6;
+    --ink-soft: #b3bcaa;
+    --ink-faint: #869080;
+    --rule: #2f3d33;
+    --accent: #c9926b;
+    --accent-soft: #2b2019;
+    --marker-bg: #a7b19c;
+    --marker-ink: #161f19;
+    --code-bg: #0f1712;
+    --code-ink: #ded6c8;
+    --code-token: #a7b19c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.25rem 6rem;
+  }
+
+  .wrap { max-width: 47rem; margin: 0 auto; }
+
+  header.top {
+    padding: 4.5rem 0 2.5rem;
+    border-bottom: 2px solid var(--oliva);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.3rem + 3vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0 0 1rem;
+  }
+
+  .standfirst {
+    font-size: 1.1875rem;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 34em;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    text-wrap: balance;
+  }
+
+  p { margin: 0 0 0.9rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .phase { margin-top: 4rem; }
+
+  .phase__head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 2rem;
+  }
+
+  .phase__num {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    flex: none;
+  }
+
+  .phase__where {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    color: var(--ink-faint);
+    font-family: var(--mono);
+  }
+
+  ol.steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    counter-reset: paso;
+  }
+
+  ol.steps > li {
+    counter-increment: paso;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+  }
+
+  ol.steps > li::before {
+    content: counter(paso);
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--marker-bg);
+    color: var(--marker-ink);
+    display: grid;
+    place-items: center;
+    margin-top: -0.15rem;
+  }
+
+  .step__body { min-width: 0; }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    padding: 1rem 1.1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 0.9rem 0;
+  }
+
+  pre .c { color: var(--code-token); }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.875em;
+    background: var(--surface-sunk);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  .tablewrap {
+    overflow-x: auto;
+    margin: 0.9rem 0;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9375rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  thead th {
+    background: var(--surface-sunk);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  td code { background: none; padding: 0; color: var(--accent); }
+
+  .note {
+    background: var(--surface);
+    border-left: 3px solid var(--salvia);
+    padding: 1rem 1.15rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+    font-size: 0.9375rem;
+  }
+
+  .warn {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 1.15rem 1.3rem;
+    border-radius: 0 6px 6px 0;
+    margin: 2rem 0;
+  }
+
+  .warn h3 { color: var(--accent); }
+
+  .pending {
+    background: var(--surface);
+    border: 1px dashed var(--arena);
+    padding: 1rem 1.15rem;
+    border-radius: 6px;
+    margin: 0.9rem 0;
+    font-size: 0.9375rem;
+  }
+
+  .handback {
+    margin-top: 4rem;
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+  }
+
+  .handback ul { margin: 0.75rem 0 0; padding-left: 1.1rem; }
+  .handback li { margin-bottom: 0.4rem; }
+
+  strong { font-weight: 600; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 34rem) {
+    ol.steps > li { grid-template-columns: 1.6rem 1fr; gap: 0 0.75rem; }
+    ol.steps > li::before { width: 1.6rem; height: 1.6rem; font-size: 0.6875rem; }
+    th, td { padding: 0.45rem 0.6rem; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Flor del Bosque · Sistema de reservas</p>
+    <h1>Puesta en marcha</h1>
+    <p class="standfirst">
+      El código está escrito y probado. Faltan las dos cuentas que sólo tú puedes
+      configurar. Son unos veinte minutos, en este orden.
+    </p>
+  </header>
+
+  <section class="phase">
+    <div class="phase__head">
+      <span class="phase__num">Fase 1</span>
+      <h2>La base de datos</h2>
+      <span class="phase__where">airtable.com</span>
+    </div>
+
+    <ol class="steps">
+
+      <li><div class="step__body">
+        <h3>Crear la base</h3>
+        <p>Una base nueva llamada <code>Flor del Bosque</code>, con dos tablas. Los
+        nombres de tabla y de campo importan: el código los busca exactamente así,
+        en minúsculas y sin tildes.</p>
+        <div class="note">
+          Toda tabla de Airtable nace con un campo primario llamado <code>Name</code>
+          que <strong>no se puede borrar</strong>. En <code>Habitaciones</code>
+          renómbralo a <code>nombre</code>, y en <code>Reservas</code> a
+          <code>huesped</code>, en vez de crear campos aparte.
+        </div>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Tabla <code>Habitaciones</code></h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Nota</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>Single line text</td><td>Ej. <code>vista-volcan</code>. No cambia nunca</td></tr>
+              <tr><td><code>nombre</code></td><td>Single line text</td><td>Vista Volcán</td></tr>
+              <tr><td><code>categoria</code></td><td>Single select</td><td>Suite Premium, Habitación Doble…</td></tr>
+              <tr><td><code>precio_noche</code></td><td>Number entero</td><td><strong>Déjalo vacío</strong></td></tr>
+              <tr><td><code>capacidad</code></td><td>Number entero</td><td>Obligatorio</td></tr>
+              <tr><td><code>metros2</code></td><td>Number entero</td><td>Opcional</td></tr>
+              <tr><td><code>descripcion_es</code></td><td>Long text</td><td></td></tr>
+              <tr><td><code>descripcion_en</code></td><td>Long text</td><td></td></tr>
+              <tr><td><code>caracteristicas_es</code></td><td>Long text</td><td>Una por línea</td></tr>
+              <tr><td><code>caracteristicas_en</code></td><td>Long text</td><td>Una por línea</td></tr>
+              <tr><td><code>imagen</code></td><td>Single line text</td><td>Ruta desde la raíz del sitio</td></tr>
+              <tr><td><code>activa</code></td><td>Checkbox</td><td>Sin marcar, no se ofrece</td></tr>
+              <tr><td><code>orden</code></td><td>Number entero</td><td>Orden de despliegue</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Tabla <code>Reservas</code></h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Nota</th></tr></thead>
+            <tbody>
+              <tr><td><code>habitacion</code></td><td>Link to another record</td><td>Ver abajo</td></tr>
+              <tr><td><code>llegada</code></td><td>Date</td><td><strong>Sin hora</strong>, formato ISO</td></tr>
+              <tr><td><code>salida</code></td><td>Date</td><td><strong>Sin hora</strong>, formato ISO</td></tr>
+              <tr><td><code>huesped</code></td><td>Single line text</td><td>Nunca sale de Airtable</td></tr>
+              <tr><td><code>email</code></td><td>Email</td><td>Nunca sale de Airtable</td></tr>
+              <tr><td><code>telefono</code></td><td>Phone</td><td>Nunca sale de Airtable</td></tr>
+              <tr><td><code>estado</code></td><td>Single select</td><td>Solicitud · Confirmada · Cancelada</td></tr>
+              <tr><td><code>notas</code></td><td>Long text</td><td></td></tr>
+              <tr><td><code>origen</code></td><td>Single select</td><td>Sitio web · WhatsApp · Manual</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          Los tres estados deben escribirse tal cual. <strong>Solicitud</strong> y
+          <strong>Confirmada</strong> ocupan la pieza; <strong>Cancelada</strong> la
+          libera. Si escribes otra cosa, esa reserva no bloqueará nada.
+        </div>
+
+        <h3 style="margin-top:1.4rem">El campo <code>habitacion</code>, paso a paso</h3>
+        <p>Agregar campo → tipo <strong>Link to another record</strong> → elegir la
+        tabla <code>Habitaciones</code>. Luego, en las opciones del campo,
+        <strong>desactivar «Allow linking to multiple records»</strong>.</p>
+        <p>Una reserva es una pieza. Si permites varias, alguien podría vincular dos
+        habitaciones a un mismo registro y quedarían ambas bloqueadas por una sola
+        reserva.</p>
+        <p>Airtable creará solo un campo recíproco en <code>Habitaciones</code>,
+        llamado <code>Reservas</code>. Déjalo: el código ignora los campos que no
+        conoce. Y como el selector muestra el campo primario de la tabla vinculada,
+        si renombraste el primario a <code>nombre</code> verás «Vista Volcán» al
+        vincular, en vez de una fila en blanco.</p>
+
+        <h3 style="margin-top:1.4rem">Las fechas van sin hora</h3>
+        <p>El campo Date trae un interruptor <strong>«Include time»</strong>. Debe
+        quedar apagado. Con la hora encendida, Airtable manda
+        <code>2026-09-12T00:00:00.000Z</code> en vez de <code>2026-09-12</code>.</p>
+        <p>El código ahora tolera ambas formas, pero la correcta es sin hora: el
+        check-in y el check-out son días, no instantes.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Cargar las habitaciones</h3>
+        <p>Las siete, con <code>precio_noche</code> vacío en todas. Cuatro salen de la
+        página de alojamiento actual:</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>id</th><th>nombre</th><th>capacidad</th><th>m²</th><th>orden</th></tr></thead>
+            <tbody>
+              <tr><td><code>vista-volcan</code></td><td>Vista Volcán</td><td>2</td><td>35</td><td>1</td></tr>
+              <tr><td><code>bosque</code></td><td>Habitación Bosque</td><td>2</td><td>25</td><td>2</td></tr>
+              <tr><td><code>familiar</code></td><td>Suite Familiar</td><td>4</td><td>45</td><td>3</td></tr>
+              <tr><td><code>rio</code></td><td>Habitación Río</td><td>2</td><td>25</td><td>4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pending">
+          <strong>Las otras tres las necesito de ti.</strong> No existen en ninguna parte
+          del sitio ni del repositorio. Por cada una: id, nombre, categoría, capacidad,
+          m², descripción y una foto. Van con orden 5, 6 y 7.
+        </div>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Vista de seguimiento</h3>
+        <p>En <code>Reservas</code>, una vista llamada <code>Solicitudes sin resolver</code>:
+        filtro <code>estado = Solicitud</code>, ordenada por fecha de creación.</p>
+        <p>Sirve para algo concreto: como las solicitudes ocupan la pieza, una que nadie
+        responda la mantiene bloqueada. Esta vista te las muestra para que las canceles.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Crear el token</h3>
+        <p>En <code>airtable.com/create/tokens</code>, un Personal Access Token con
+        permisos <code>data.records:read</code> y <code>data.records:write</code>,
+        y acceso <strong>sólo</strong> a la base Flor del Bosque.</p>
+        <p>Anota también el <strong>Base ID</strong>: aparece en la URL de la base y
+        empieza con <code>app</code>.</p>
+      </div></li>
+
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase__head">
+      <span class="phase__num">Fase 2</span>
+      <h2>El servicio</h2>
+      <span class="phase__where">dash.cloudflare.com</span>
+    </div>
+
+    <ol class="steps">
+
+      <li><div class="step__body">
+        <h3>Confirmar el correo de destino</h3>
+        <p>En <strong>Email Routing → Destination addresses</strong>, que
+        <code>hola@flordelbosque.cl</code> figure como <em>Verified</em>.</p>
+        <p>El Worker envía las solicitudes por ahí. Si no está verificada, rechaza el envío.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Crear el widget de Turnstile</h3>
+        <p>En <strong>Turnstile</strong>, un widget para el dominio
+        <code>flordelbosque.cl</code>. Te da dos llaves distintas y ambas se usan
+        en lugares distintos.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Pegar la Site Key en el sitio</h3>
+        <p>En <code>pages/reservas.html</code>, reemplazar el texto
+        <code>REEMPLAZAR_CON_LA_SITE_KEY</code> por la Site Key. Es pública, va en el HTML.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Crear la caché</h3>
+        <pre><code>cd worker
+npx wrangler kv namespace create CACHE</code></pre>
+        <p>Imprime un bloque con <code>id = "..."</code>. Ese id reemplaza a
+        <code>REEMPLAZAR_CON_EL_ID_REAL</code> en <code>worker/wrangler.toml</code>.</p>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Cargar los tres secretos</h3>
+        <pre><code>npx wrangler secret put AIRTABLE_TOKEN
+npx wrangler secret put AIRTABLE_BASE_ID
+npx wrangler secret put TURNSTILE_SECRET</code></pre>
+        <div class="note">
+          Estos tres nunca van a un archivo del repositorio. El token de Airtable en
+          particular da acceso de lectura a la tabla completa, con los nombres, correos
+          y teléfonos de tus huéspedes.
+        </div>
+      </div></li>
+
+      <li><div class="step__body">
+        <h3>Publicar</h3>
+        <pre><code>npx wrangler deploy</code></pre>
+        <p>Cloudflare crea solo el registro DNS de <code>reservas.flordelbosque.cl</code>.
+        Puede tardar un minuto en responder. Para comprobarlo:</p>
+        <pre><code>curl -s https://reservas.flordelbosque.cl/api/disponibilidad</code></pre>
+        <p>Debe devolver tus habitaciones, cada una con
+        <code>"precio_noche": null</code> y <code>"ocupado": []</code>.</p>
+      </div></li>
+
+    </ol>
+  </section>
+
+  <div class="warn">
+    <h3>Turnstile tiene dos mitades y hacen falta las dos</h3>
+    <p>La Site Key va en el HTML y el Secret va en el Worker. Si desplegas el Worker
+    pero olvidas pegar la Site Key, el formulario se envía y falla la validación.</p>
+    <p>El síntoma no apunta al problema: se ve como un error de envío, no como una
+    llave faltante. Si algo falla al probar, revisa esto primero.</p>
+  </div>
+
+  <div class="handback">
+    <h3>Cuando termines, avísame</h3>
+    <p>Con esto puedo cerrar lo que queda:</p>
+    <ul>
+      <li>Los datos de las tres habitaciones que faltan, para publicarlas en la página de alojamiento</li>
+      <li>Que el Worker ya responde, para correr la verificación de punta a punta</li>
+      <li>Si el correo de prueba llegó y si cayó en spam, que es el único riesgo que no pude descartar</li>
+    </ul>
+  </div>
+
+</div>
