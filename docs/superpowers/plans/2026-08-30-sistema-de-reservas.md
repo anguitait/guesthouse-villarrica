@@ -197,7 +197,7 @@ test('el arnés de tests corre', () => {
 
 - [ ] **Step 2: Correrlo y verificar que falla**
 
-Run: `node --test tests/`
+Run: `node --test "tests/**/*.test.js"`
 
 Expected: falla con `SyntaxError: Cannot use import statement outside a module`. Node trata los `.js` como CommonJS mientras no exista un `package.json` que declare lo contrario.
 
@@ -211,10 +211,12 @@ Expected: falla con `SyntaxError: Cannot use import statement outside a module`.
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test \"tests/**/*.test.js\""
   }
 }
 ```
+
+El glob es explícito por dos razones: `node --test tests/` no funciona en Node 25, que interpreta el directorio como un archivo a ejecutar; y `node --test` a secas recorrería también los worktrees de `.claude/`, que son copias completas del repositorio, corriendo cada test varias veces.
 
 Este archivo existe sólo para los tests y el Worker. No agrega dependencias ni build al sitio, que sigue siendo HTML estático servido por GitHub Pages.
 
@@ -901,14 +903,17 @@ main = "src/index.js"
 compatibility_date = "2026-08-30"
 
 # El cron del spec: cada 10 minutos.
-[triggers]
-crons = ["*/10 * * * *"]
-
 # Dominio propio: evita depender de la URL workers.dev, que cambia con la cuenta,
-# y deja el CORS apuntando a un origen estable.
+# y deja el CORS apuntando a un origen estable. Va ANTES de cualquier [tabla]:
+# en TOML una clave suelta pertenece a la última tabla declarada, así que escrita
+# más abajo quedaría anidada como triggers.routes, invisible para wrangler.
 routes = [
   { pattern = "reservas.flordelbosque.cl", custom_domain = true }
 ]
+
+# El cron del spec: cada 10 minutos.
+[triggers]
+crons = ["*/10 * * * *"]
 
 # Caché de la disponibilidad. El id se llena en el Step 3.
 [[kv_namespaces]]
@@ -1090,7 +1095,7 @@ function cuerpoDeLaSolicitud(solicitud) {
     `Habitación: ${solicitud.nombreHabitacion}`,
     `Llegada:    ${solicitud.llegada}`,
     `Salida:     ${solicitud.salida}`,
-    `Huéspedes:  ${solicitud.huespedes}`,
+    `Huéspedes:  ${solicitud.huespedes || '(no indicado)'}`,
     '',
     `Nombre:   ${solicitud.nombre}`,
     `Email:    ${solicitud.email}`,
@@ -1387,6 +1392,16 @@ test('sin ocupación no hay días sin cupo', () => {
 test('un catálogo vacío no marca días', () => {
   assert.equal(diasSinCupo([]).size, 0);
 });
+
+test('dos reservas solapadas de la misma pieza no esconden a las demás', () => {
+  // Dato inconsistente cargado a mano en Airtable: la pieza 'a' tiene dos
+  // reservas que se pisan. Eso no puede hacer desaparecer a la pieza 'b'.
+  const catalogo = [
+    { id: 'a', ocupado: [['2026-09-12', '2026-09-14'], ['2026-09-12', '2026-09-14']] },
+    { id: 'b', ocupado: [] }
+  ];
+  assert.equal(diasSinCupo(catalogo).size, 0);
+});
 ```
 
 - [ ] **Step 2: Correr y verificar que falla**
@@ -1416,21 +1431,27 @@ export function diasDelRango(llegada, salida) {
 /**
  * Un día se marca sin cupo sólo cuando no queda ninguna pieza libre. Marcarlo
  * porque una sola esté ocupada escondería disponibilidad real.
+ *
+ * Cuenta piezas, no reservas: si una habitación trae dos rangos que se pisan
+ * —dato inconsistente cargado a mano— debe seguir contando como una sola pieza
+ * ocupada, o el día se marcaría sin cupo teniendo otras libres.
  */
 export function diasSinCupo(habitaciones) {
   if (habitaciones.length === 0) return new Set();
 
-  const ocupacionPorDia = new Map();
+  const piezasPorDia = new Map();
   for (const habitacion of habitaciones) {
+    const diasDeEstaPieza = new Set();
     for (const [ini, fin] of habitacion.ocupado || []) {
-      for (const dia of diasDelRango(ini, fin)) {
-        ocupacionPorDia.set(dia, (ocupacionPorDia.get(dia) || 0) + 1);
-      }
+      for (const dia of diasDelRango(ini, fin)) diasDeEstaPieza.add(dia);
+    }
+    for (const dia of diasDeEstaPieza) {
+      piezasPorDia.set(dia, (piezasPorDia.get(dia) || 0) + 1);
     }
   }
 
   const sinCupo = new Set();
-  for (const [dia, cuantas] of ocupacionPorDia) {
+  for (const [dia, cuantas] of piezasPorDia) {
     if (cuantas >= habitaciones.length) sinCupo.add(dia);
   }
   return sinCupo;
@@ -1441,7 +1462,7 @@ export function diasSinCupo(habitaciones) {
 
 Run: `npm test`
 
-Expected: los 44 tests pasan.
+Expected: los 45 tests pasan.
 
 - [ ] **Step 5: Commit**
 
@@ -1971,7 +1992,7 @@ git commit -m "Agregar el calendario, los resultados y el envío de la solicitud
 
 - [ ] **Step 1: Agregar los estilos**
 
-Agregar al final de `css/components.css`, usando sólo tokens ya existentes para no romper el arnés de marca:
+Agregar al final de `css/components.css`, usando sólo tokens que existan de verdad en `css/tokens.css` — la paleta usa el prefijo `--brand-*`, no `--color-*`. Nunca colores literales, o el arnés de marca falla:
 
 ```css
 /* ─── Reservas ─────────────────────────────────────── */
@@ -1988,8 +2009,8 @@ Agregar al final de `css/components.css`, usando sólo tokens ya existentes para
 .reservas__error {
   padding: var(--space-4);
   border-radius: var(--radius-md);
-  background: var(--color-sand);
-  color: var(--color-deep);
+  background: var(--brand-arena);
+  color: var(--text-primary);
   margin-bottom: var(--space-6);
 }
 
@@ -2014,7 +2035,7 @@ Agregar al final de `css/components.css`, usando sólo tokens ya existentes para
 }
 .calendario__dia--libre { cursor: pointer; }
 .calendario__dia--libre:hover,
-.calendario__dia--libre:focus { background: var(--color-sage); }
+.calendario__dia--libre:focus { background: var(--brand-salvia); }
 .calendario__dia--ocupado {
   opacity: 0.35;
   text-decoration: line-through;
@@ -2046,16 +2067,17 @@ Run: `bash tools/verificar-marca.sh`
 
 Expected: pasa. Si reclama por un token inexistente, reemplazarlo por el token equivalente que sí exista en `css/tokens.css` — **no** agregar colores literales.
 
-- [ ] **Step 3: Actualizar el `?v=` de los estilos**
+- [ ] **Step 3: Actualizar el `?v=` de los estilos Y del JS**
 
-Cambiar `css/main.css?v=20260808` por `css/main.css?v=20260830` en los 11 HTML:
+Suben los dos, no sólo el CSS: `js/main.js` gana las claves i18n del Task 13, y sin subir su versión los visitantes recurrentes reciben el archivo cacheado y pierden las traducciones al inglés de la página nueva.
 
 ```bash
 grep -rl "main.css?v=" --include="*.html" . | xargs sed -i '' 's/main\.css?v=[0-9]*/main.css?v=20260830/g'
-grep -rc "main.css?v=20260830" index.html pages/reservas.html
+grep -rl "main.js?v=" --include="*.html" . | xargs sed -i '' 's/main\.js?v=[0-9]*/main.js?v=20260830/g'
+grep -rho 'main\.\(css\|js\)?v=[0-9]*' index.html pages/*.html | sort | uniq -c
 ```
 
-Expected: `1` en ambos.
+Expected: 11 de `main.css?v=20260830` y 11 de `main.js?v=20260830`.
 
 - [ ] **Step 4: Commit**
 
@@ -2116,12 +2138,14 @@ sed -i '' 's|href="contacto.html" class="btn btn-primary btn-sm header__cta"|hre
 
 ```bash
 grep -rc 'reservas.html' index.html pages/alojamiento.html
-grep -rn 'href="[^"]*contacto.html"' index.html pages/*.html | grep -c "btn-primary"
+grep -rn 'href="[^"]*contacto.html"' index.html pages/*.html | grep "btn-primary"
 ```
 
-Expected: la primera cuenta es mayor que 0 en ambos archivos. La segunda debe dar `0`: ningún botón primario debe seguir apuntando a contacto.
+Expected: la primera cuenta es mayor que 0 en ambos archivos. La segunda debe listar **exactamente dos**, y ambos deben ser botones de contacto y no de reserva: `Contactar` en `agenda.html` e `Ir a Contacto` en `nosotros.html`. Si aparece cualquier otro, quedó un botón de reserva sin redirigir.
 
-Los enlaces a `contacto.html` que **no** son botones de reserva —el del menú, el del pie de página, el de "Consultar disponibilidad" del coliving— se conservan intactos.
+**El `sed` no alcanza el CTA del hero.** `index.html` tiene `<a href="pages/contacto.html" class="btn btn-primary" data-i18n="hero.cta.book">Reservar estadía</a>` — el botón de reserva más visible del sitio — sin las clases `btn-sm header__cta` ni `btn-full`. Hay que redirigirlo a mano, o el botón chico del header iría a reservas y el grande del hero a contacto.
+
+Los enlaces a `contacto.html` que **no** son botones de reserva se conservan intactos: "Consultar disponibilidad" del coliving, "Solicitar cotización" de experiencias y "Coordinar transfer" de nosotros.
 
 - [ ] **Step 4: Verificar en el navegador**
 
@@ -2310,7 +2334,7 @@ Los tests cubren la lógica; esto cubre que las piezas conversen entre sí. Ning
 
 Run: `npm test`
 
-Expected: los 44 tests pasan, sin ninguno saltado.
+Expected: los 45 tests pasan, sin ninguno saltado.
 
 - [ ] **Step 2: Enviar una solicitud real**
 

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css?v=20260808">
+  <link rel="stylesheet" href="../css/main.css?v=20260901">
   <!-- Open Graph -->
   <meta property="og:site_name" content="Flor del Bosque">
   <meta property="og:title" content="Alojamiento | Flor del Bosque">
@@ -52,7 +52,7 @@
       </nav>
       <div class="header__actions">
         <button class="lang-switch" aria-label="Cambiar idioma">EN</button>
-        <a href="contacto.html" class="btn btn-primary btn-sm header__cta">Reservar</a>
+        <a href="reservas.html" class="btn btn-primary btn-sm header__cta">Reservar</a>
         <button class="menu-toggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -69,7 +69,7 @@
     <a href="cowork.html" class="mobile-nav__link" data-i18n="nav.cowork">CoWork & Café</a>
     <a href="nosotros.html" class="mobile-nav__link" data-i18n="nav.about">Nosotros</a>
     <div class="mobile-nav__cta">
-      <a href="contacto.html" class="btn btn-primary btn-full">Reservar</a>
+      <a href="reservas.html" class="btn btn-primary btn-full">Reservar</a>
     </div>
   </nav>
   <div class="overlay"></div>
@@ -89,99 +89,163 @@
       <div class="container">
         <div class="grid grid--2" style="gap: var(--space-12);">
 
-          <!-- Room: Vista Volcán -->
-          <article class="card-room scroll-reveal" id="vista-volcan">
-            <div class="card-room__image">
-              <img src="../images/habitaciones/habitacion-verde.jpg" alt="Suite Vista Volcán">
-              <span class="card-room__badge">Popular</span>
-            </div>
+          <!-- Room: Magnolio -->
+          <article class="card-room scroll-reveal" id="magnolio">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
             <div class="card-room__content">
-              <span class="card-room__category">Suite Premium</span>
-              <h2 class="card-room__title">Vista Volcán</h2>
-              <p class="card-room__description">
-                Nuestra suite más especial. Despierta cada mañana con la majestuosidad del Volcán Villarrica frente a tu ventana. Cama king size, bañera con vista, terraza privada con sillones y chimenea a leña.
+              <span class="card-room__category" data-i18n="hab.magnolio.cat">Habitación Doble – Baño Compartido</span>
+              <h2 class="card-room__title">Magnolio</h2>
+              <p class="card-room__description" data-i18n="hab.magnolio.desc">
+                Habitación del primer piso con cama matrimonial y piso de madera. Cuenta con un gran clóset, veladores con lámparas y un ventanal con salida directa al jardín. Comparte un baño completo con ducha con la habitación Arrayán. El desayuno no está incluido y se puede agregar por $5.000 por noche.
               </p>
               <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
-                <li>2 huéspedes | 35 m2</li>
-                <li>Cama King | Bañera</li>
-                <li>Terraza privada | Chimenea</li>
-                <li>Vista al Volcán Villarrica</li>
+                <li data-i18n="hab.magnolio.cap">2 huéspedes</li>
+                <li data-i18n="hab.magnolio.c1">Cama matrimonial</li>
+                <li data-i18n="hab.magnolio.c2">Baño compartido con ducha (con Arrayán)</li>
+                <li data-i18n="hab.magnolio.c3">Salida directa al jardín</li>
+                <li data-i18n="hab.magnolio.c4">Ventanal al jardín</li>
               </ul>
               <div class="card-room__footer">
-                <div class="card-room__price">Consultar</div>
-                <a href="contacto.html" class="btn btn-sm btn-primary">Reservar</a>
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
               </div>
             </div>
           </article>
 
-          <!-- Room: Bosque -->
-          <article class="card-room scroll-reveal" id="bosque">
-            <div class="card-room__image">
-              <img src="../images/habitaciones/habitacion-verde.jpg" alt="Habitación Bosque">
-            </div>
+          <!-- Room: Arrayán -->
+          <article class="card-room scroll-reveal" id="arrayan">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
             <div class="card-room__content">
-              <span class="card-room__category">Habitación Doble</span>
-              <h2 class="card-room__title">Habitación Bosque</h2>
-              <p class="card-room__description">
-                Rodeada de coigues y lengas centenarias. El sonido del bosque te acompaña mientras descansas. Perfecta para quienes buscan desconexión total y contacto con la naturaleza.
+              <span class="card-room__category" data-i18n="hab.arrayan.cat">Habitación Twin – Baño Compartido</span>
+              <h2 class="card-room__title">Arrayán</h2>
+              <p class="card-room__description" data-i18n="hab.arrayan.desc">
+                Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Magnolio. El desayuno no está incluido y se puede agregar por $5.000 por noche.
               </p>
               <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
-                <li>2 huéspedes | 25 m2</li>
-                <li>Cama Queen | Ducha</li>
-                <li>Vista al bosque nativo</li>
-                <li>Escritorio de trabajo</li>
+                <li data-i18n="hab.arrayan.cap">2 huéspedes</li>
+                <li data-i18n="hab.arrayan.c1">2 camas</li>
+                <li data-i18n="hab.arrayan.c2">Escritorio</li>
+                <li data-i18n="hab.arrayan.c3">Baño compartido con ducha (con Magnolio)</li>
+                <li data-i18n="hab.arrayan.c4">Salida directa al jardín</li>
               </ul>
               <div class="card-room__footer">
-                <div class="card-room__price">Consultar</div>
-                <a href="contacto.html" class="btn btn-sm btn-primary">Reservar</a>
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
               </div>
             </div>
           </article>
 
-          <!-- Room: Familiar -->
-          <article class="card-room scroll-reveal" id="familiar">
-            <div class="card-room__image">
-              <img src="../images/lugar/piscina-casa.jpg" alt="Suite Familiar">
-            </div>
+          <!-- Room: Canelo -->
+          <article class="card-room scroll-reveal" id="canelo">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
             <div class="card-room__content">
-              <span class="card-room__category">Suite Familiar</span>
-              <h2 class="card-room__title">Suite Familiar</h2>
-              <p class="card-room__description">
-                Amplia suite de dos ambientes perfecta para familias. Incluye dormitorio principal, sala con sofá cama, cocineta equipada y acceso directo al jardín con juegos para niños.
+              <span class="card-room__category" data-i18n="hab.canelo.cat">Habitación Twin – Baño Exterior</span>
+              <h2 class="card-room__title">Canelo</h2>
+              <p class="card-room__description" data-i18n="hab.canelo.desc">
+                Habitación del primer piso con dos camas y clóset amplio, piso de madera y ventanal con salida directa al jardín. El baño completo con ducha es de uso exclusivo de la habitación y se encuentra fuera de ella. El desayuno no está incluido y se puede agregar por $5.000 por noche.
               </p>
               <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
-                <li>4-5 huéspedes | 50 m2</li>
-                <li>Cama King + Sofá cama</li>
-                <li>Cocineta | Jardin privado</li>
-                <li>Ideal para niños</li>
+                <li data-i18n="hab.canelo.cap">2 huéspedes</li>
+                <li data-i18n="hab.canelo.c1">2 camas</li>
+                <li data-i18n="hab.canelo.c2">Baño exclusivo con ducha, fuera de la habitación</li>
+                <li data-i18n="hab.canelo.c3">Salida directa al jardín</li>
+                <li data-i18n="hab.canelo.c4">Ventanal al jardín</li>
               </ul>
               <div class="card-room__footer">
-                <div class="card-room__price">Consultar</div>
-                <a href="contacto.html" class="btn btn-sm btn-primary">Reservar</a>
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
               </div>
             </div>
           </article>
 
-          <!-- Room: Rio -->
-          <article class="card-room scroll-reveal" id="rio">
-            <div class="card-room__image">
-              <img src="../images/lugar/piscina-jardin.jpg" alt="Habitación Río">
-            </div>
+          <!-- Room: Laurel -->
+          <article class="card-room scroll-reveal" id="laurel">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
             <div class="card-room__content">
-              <span class="card-room__category">Habitación Doble</span>
-              <h2 class="card-room__title">Habitación Río</h2>
-              <p class="card-room__description">
-                Ubicada en el ala más cercana al Río Toltén. Escucha el sonido del agua mientras descansas. Ventanales amplios que enmarcan el paso del río.
+              <span class="card-room__category" data-i18n="hab.laurel.cat">Habitación Doble</span>
+              <h2 class="card-room__title">Laurel</h2>
+              <p class="card-room__description" data-i18n="hab.laurel.desc">
+                Habitación del primer piso con baño privado dentro de la habitación y ducha. Gran clóset, piso de madera y ventanal con salida directa al jardín. El desayuno no está incluido y se puede agregar por $5.000 por noche.
               </p>
               <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
-                <li>2 huéspedes | 22 m2</li>
-                <li>Cama Queen | Ducha</li>
-                <li>Vista al Río Toltén</li>
-                <li>Balcón pequeño</li>
+                <li data-i18n="hab.laurel.cap">2 huéspedes</li>
+                <li data-i18n="hab.laurel.c1">Cama matrimonial</li>
+                <li data-i18n="hab.laurel.c2">Baño privado en la habitación, con ducha</li>
+                <li data-i18n="hab.laurel.c3">Salida directa al jardín</li>
+                <li data-i18n="hab.laurel.c4">Ventanal al jardín</li>
               </ul>
               <div class="card-room__footer">
-                <div class="card-room__price">Consultar</div>
-                <a href="contacto.html" class="btn btn-sm btn-primary">Reservar</a>
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Room: Coihue -->
+          <article class="card-room scroll-reveal" id="coihue">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
+            <div class="card-room__content">
+              <span class="card-room__category" data-i18n="hab.coihue.cat">Suite Premium</span>
+              <h2 class="card-room__title">Coihue</h2>
+              <p class="card-room__description" data-i18n="hab.coihue.desc">
+                Habitación amplia del segundo piso con baño privado dentro y ducha. Cuenta con cama matrimonial y una cama chica adicional, dos veladores y una linda vista al jardín y a la piscina. Capacidad para 2 adultos y 1 niño. El desayuno no está incluido y se puede agregar por $5.000 por noche.
+              </p>
+              <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
+                <li data-i18n="hab.coihue.cap">3 huéspedes</li>
+                <li data-i18n="hab.coihue.c1">Cama matrimonial + cama chica adicional</li>
+                <li data-i18n="hab.coihue.c2">Baño privado en la habitación, con ducha</li>
+                <li data-i18n="hab.coihue.c3">Vista al jardín y a la piscina</li>
+                <li data-i18n="hab.coihue.c4">2 veladores</li>
+              </ul>
+              <div class="card-room__footer">
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Room: Fuinque -->
+          <article class="card-room scroll-reveal" id="fuinque">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
+            <div class="card-room__content">
+              <span class="card-room__category" data-i18n="hab.fuinque.cat">Habitación Doble Superior</span>
+              <h2 class="card-room__title">Fuinque</h2>
+              <p class="card-room__description" data-i18n="hab.fuinque.desc">
+                Habitación del segundo piso con cama matrimonial y baño privado dentro de la habitación, con ducha y tragaluces en el techo que le dan mucha luz natural. Incluye un arrimo de clóset para la ropa. El desayuno no está incluido y se puede agregar por $5.000 por noche.
+              </p>
+              <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
+                <li data-i18n="hab.fuinque.cap">2 huéspedes</li>
+                <li data-i18n="hab.fuinque.c1">Cama matrimonial</li>
+                <li data-i18n="hab.fuinque.c2">Baño privado en la habitación, con ducha</li>
+                <li data-i18n="hab.fuinque.c3">Tragaluces en el techo</li>
+                <li data-i18n="hab.fuinque.c4">Arrimo de clóset</li>
+              </ul>
+              <div class="card-room__footer">
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Room: Tineo -->
+          <article class="card-room scroll-reveal" id="tineo">
+            <div class="card-room__image card-room__image--marca" aria-hidden="true"></div>
+            <div class="card-room__content">
+              <span class="card-room__category" data-i18n="hab.tineo.cat">Habitación Doble</span>
+              <h2 class="card-room__title">Tineo</h2>
+              <p class="card-room__description" data-i18n="hab.tineo.desc">
+                Habitación del segundo piso con cama matrimonial y baño privado dentro de la habitación, con ducha. Cuenta con repisas para guardar y ordenar la ropa. El desayuno no está incluido y se puede agregar por $5.000 por noche.
+              </p>
+              <ul style="font-size: var(--text-sm); color: var(--text-secondary); margin: var(--space-4) 0;">
+                <li data-i18n="hab.tineo.cap">2 huéspedes</li>
+                <li data-i18n="hab.tineo.c1">Cama matrimonial</li>
+                <li data-i18n="hab.tineo.c2">Baño privado en la habitación, con ducha</li>
+                <li data-i18n="hab.tineo.c3">Repisas para la ropa</li>
+                <li data-i18n="hab.tineo.c4">Veladores con lámparas</li>
+              </ul>
+              <div class="card-room__footer">
+                <div class="card-room__price" data-i18n="hab.consultar">Consultar</div>
+                <a href="reservas.html" class="btn btn-sm btn-primary" data-i18n="hab.reservar">Reservar</a>
               </div>
             </div>
           </article>
@@ -401,6 +465,7 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <script src="../js/main.js?v=20260808"></script>
+  <script src="../js/main.js?v=20260901"></script>
+  <script type="module" src="../js/alojamiento-datos.js?v=20260901"></script>
 </body>
 </html>

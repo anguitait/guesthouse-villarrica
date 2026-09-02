@@ -3,3 +3,5 @@
 .playwright-mcp/
 __pycache__/
 .claude/
+.wrangler/
+node_modules/

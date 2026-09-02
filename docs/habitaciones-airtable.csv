@@ -1,0 +1,96 @@
+id,nombre,categoria,precio_noche,capacidad,metros2,descripcion_es,descripcion_en,caracteristicas_es,caracteristicas_en,imagen,activa,orden
+magnolio,Magnolio,Habitación Doble – Baño Compartido,35000,2,,"Habitación del primer piso con cama matrimonial y piso de madera. Cuenta con un gran clóset, veladores con lámparas y un ventanal con salida directa al jardín. Comparte un baño completo con ducha con la habitación Arrayán. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Ground-floor room with a double bed and wooden floors. It features a large closet, bedside tables with lamps and a full-height window opening directly onto the garden. Shares a full bathroom with shower with the Arrayán room. Breakfast is not included and can be added for CLP 5,000 per night.","Cama matrimonial
+Baño compartido con ducha (con Arrayán)
+Salida directa al jardín
+Ventanal al jardín
+Clóset amplio
+Piso de madera
+Veladores con lámparas
+Primer piso","Double bed
+Shared bathroom with shower (with Arrayán)
+Direct garden access
+Garden-facing picture window
+Large closet
+Wooden floors
+Bedside tables with lamps
+Ground floor",,true,1
+arrayan,Arrayán,Habitación Twin – Baño Compartido,35000,2,,"Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Magnolio. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Ground-floor room with two beds and a work desk, wooden floors and a large closet. Full-height window with direct garden access and bedside tables with lamps. Shares a full bathroom with shower with the Magnolio room. Breakfast is not included and can be added for CLP 5,000 per night.","2 camas
+Escritorio
+Baño compartido con ducha (con Magnolio)
+Salida directa al jardín
+Ventanal al jardín
+Clóset amplio
+Piso de madera
+Veladores con lámparas
+Primer piso","2 beds
+Desk
+Shared bathroom with shower (with Magnolio)
+Direct garden access
+Garden-facing picture window
+Large closet
+Wooden floors
+Bedside tables with lamps
+Ground floor",,true,2
+canelo,Canelo,Habitación Twin – Baño Exterior,40000,2,,"Habitación del primer piso con dos camas y clóset amplio, piso de madera y ventanal con salida directa al jardín. El baño completo con ducha es de uso exclusivo de la habitación y se encuentra fuera de ella. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Ground-floor room with two beds and a spacious closet, wooden floors and a full-height window opening onto the garden. The full bathroom with shower is for the exclusive use of this room and is located just outside it. Breakfast is not included and can be added for CLP 5,000 per night.","2 camas
+Baño exclusivo con ducha, fuera de la habitación
+Salida directa al jardín
+Ventanal al jardín
+Clóset amplio
+Piso de madera
+Veladores con lámparas
+Primer piso","2 beds
+Exclusive-use bathroom with shower, outside the room
+Direct garden access
+Garden-facing picture window
+Spacious closet
+Wooden floors
+Bedside tables with lamps
+Ground floor",,true,3
+laurel,Laurel,Habitación Doble,45000,2,,"Habitación del primer piso con baño privado dentro de la habitación y ducha. Gran clóset, piso de madera y ventanal con salida directa al jardín. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Ground-floor room with a private en-suite bathroom with shower. Large closet, wooden floors and a full-height window opening directly onto the garden. Breakfast is not included and can be added for CLP 5,000 per night.","Cama matrimonial
+Baño privado en la habitación, con ducha
+Salida directa al jardín
+Ventanal al jardín
+Clóset amplio
+Piso de madera
+Veladores con lámparas
+Primer piso","Double bed
+Private en-suite bathroom with shower
+Direct garden access
+Garden-facing picture window
+Large closet
+Wooden floors
+Bedside tables with lamps
+Ground floor",,true,4
+coihue,Coihue,Suite Premium,45000,3,,"Habitación amplia del segundo piso con baño privado dentro y ducha. Cuenta con cama matrimonial y una cama chica adicional, dos veladores y una linda vista al jardín y a la piscina. Capacidad para 2 adultos y 1 niño. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Spacious second-floor room with a private en-suite bathroom and shower. It has a double bed plus an extra small bed, two bedside tables and lovely views over the garden and the pool. Sleeps 2 adults and 1 child. Breakfast is not included and can be added for CLP 5,000 per night.","Cama matrimonial + cama chica adicional
+Baño privado en la habitación, con ducha
+Vista al jardín y a la piscina
+2 veladores
+Habitación amplia
+Segundo piso
+Apta para 2 adultos y 1 niño","Double bed + extra small bed
+Private en-suite bathroom with shower
+Garden and pool views
+2 bedside tables
+Spacious room
+Second floor
+Suitable for 2 adults and 1 child",,true,5
+fuinque,Fuinque,Habitación Doble Superior,45000,2,,"Habitación del segundo piso con cama matrimonial y baño privado dentro de la habitación, con ducha y tragaluces en el techo que le dan mucha luz natural. Incluye un arrimo de clóset para la ropa. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Second-floor room with a double bed and a private en-suite bathroom with shower and ceiling skylights that fill the space with natural light. Includes a wardrobe unit for clothes. Breakfast is not included and can be added for CLP 5,000 per night.","Cama matrimonial
+Baño privado en la habitación, con ducha
+Tragaluces en el techo
+Arrimo de clóset
+Veladores con lámparas
+Segundo piso","Double bed
+Private en-suite bathroom with shower
+Ceiling skylights
+Wardrobe unit
+Bedside tables with lamps
+Second floor",,true,6
+tineo,Tineo,Habitación Doble,45000,2,,"Habitación del segundo piso con cama matrimonial y baño privado dentro de la habitación, con ducha. Cuenta con repisas para guardar y ordenar la ropa. El desayuno no está incluido y se puede agregar por $5.000 por noche.","Second-floor room with a double bed and a private en-suite bathroom with shower. It has open shelving for storing and organising clothes. Breakfast is not included and can be added for CLP 5,000 per night.","Cama matrimonial
+Baño privado en la habitación, con ducha
+Repisas para la ropa
+Veladores con lámparas
+Segundo piso","Double bed
+Private en-suite bathroom with shower
+Open clothing shelves
+Bedside tables with lamps
+Second floor",,true,7
