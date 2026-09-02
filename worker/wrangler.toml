@@ -19,12 +19,18 @@ crons = ["*/10 * * * *"]
 binding = "CACHE"
 id = "30cfa39d108748cea09db57871431665"
 
-# Envío de correo a un destino ya verificado en Email Routing.
+# Envío de correo. El destino tiene que ser una DIRECCIÓN DE DESTINO verificada
+# en Email Routing, y hola@flordelbosque.cl no lo es: es una regla de reenvío
+# sobre el propio dominio ruteado, que Cloudflare rechaza con "destination
+# address is not a verified address". Va entonces al buzón al que hola@ ya
+# reenvía, así que llega al mismo lugar de siempre.
+# OJO: si algún día se cambia a dónde reenvía hola@, hay que cambiarlo aquí
+# también — este envío ya no pasa por esa regla.
 [[send_email]]
 name = "CORREO"
-destination_address = "hola@flordelbosque.cl"
+destination_address = "javielton@gmail.com"
 
 [vars]
 ORIGEN_PERMITIDO = "https://flordelbosque.cl"
-DESTINATARIO = "hola@flordelbosque.cl"
+DESTINATARIO = "javielton@gmail.com"
 REMITENTE = "reservas@flordelbosque.cl"
