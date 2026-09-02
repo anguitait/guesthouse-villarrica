@@ -735,6 +735,28 @@
   color: var(--text-muted);
 }
 
+/* Placeholder de marca para las fichas que todavia no tienen fotografia.
+   Conserva la proporcion 4:3 del bloque de imagen para que la grilla
+   mantenga su ritmo, sin fingir que hay una foto ni reutilizar la de otra
+   pieza. Es decorativo, asi que va como fondo y no como <img>: no compite
+   con las reglas de object-fit de arriba y no necesita alt. Para retirarlo,
+   reemplazar el div por el <img> de siempre dentro de .card-room__image. */
+.card-room__image--marca {
+  display: grid;
+  place-items: center;
+  background-color: var(--brand-salvia);
+}
+
+.card-room__image--marca::after {
+  content: '';
+  width: 38%;
+  /* La proporcion real del viewBox del isotipo (422.08 x 442.5): con
+     aspect-ratio 1 el contain lo centra pero deja aire desparejo. */
+  aspect-ratio: 422.08 / 442.5;
+  background: url('../images/logo/isotipo-verde.svg') center / contain no-repeat;
+  opacity: 0.32;
+}
+
 /* Experience Card */
 .card-experience {
   position: relative;
