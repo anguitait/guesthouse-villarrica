@@ -8,10 +8,11 @@
    4. Components (UI elements)
    =========================================== */
 
-@import url('tokens.css');
-@import url('base.css');
-@import url('layout.css');
-@import url('components.css');
+/* Las hojas ya no se importan desde aquí: cada HTML las enlaza por separado,
+   en este mismo orden, con su propio ?v=. Con @import el parámetro de versión
+   del <link> sólo refrescaba este archivo y los importados seguían saliendo de
+   la caché del visitante, así que todo cambio de estilos era invisible para
+   quien ya había visitado el sitio. Este archivo queda al final del orden. */
 
 /* ===========================================
    PAGE-SPECIFIC STYLES
