@@ -23,7 +23,9 @@ const TEXTOS = {
     yaNoDisponible: 'Esa habitación se ocupó recién. Vuelve a buscar, por favor.',
     errorEnvio: 'No pudimos enviar la solicitud. Escríbenos a hola@flordelbosque.cl o por WhatsApp.',
     seguirWhatsapp: 'Seguir por WhatsApp',
-    resumen: (h, ll, s, n) => `${h} · ${ll} a ${s} · ${n}`
+    resumen: (h, ll, s, n) => `${h} · ${ll} a ${s} · ${n}`,
+    mesAnterior: 'Mes anterior',
+    mesSiguiente: 'Mes siguiente'
   },
   en: {
     sinConexion: 'We could not load live availability. Send your request anyway and we will confirm by email.',
@@ -37,7 +39,9 @@ const TEXTOS = {
     yaNoDisponible: 'That room was just taken. Please search again.',
     errorEnvio: 'We could not send the request. Email hola@flordelbosque.cl or reach us on WhatsApp.',
     seguirWhatsapp: 'Continue on WhatsApp',
-    resumen: (h, ll, s, n) => `${h} · ${ll} to ${s} · ${n}`
+    resumen: (h, ll, s, n) => `${h} · ${ll} to ${s} · ${n}`,
+    mesAnterior: 'Previous month',
+    mesSiguiente: 'Next month'
   }
 };
 
@@ -47,6 +51,9 @@ const t = () => TEXTOS[idioma()];
 
 let contrato = null;
 let elegida = null;
+
+/** Primer mes de los dos que se muestran. Se mueve con las flechas. */
+let mesVisible = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 
 function hoy() {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Santiago' });
@@ -94,9 +101,61 @@ function dibujarCalendario() {
   const contenedor = el('reservas-calendario');
   contenedor.innerHTML = '';
 
-  const inicio = new Date();
+  contenedor.appendChild(dibujarNavegacion());
+
+  const meses = document.createElement('div');
+  meses.className = 'calendario__meses';
   for (let salto = 0; salto < 2; salto++) {
-    contenedor.appendChild(dibujarMes(inicio.getFullYear(), inicio.getMonth() + salto, sinCupo));
+    meses.appendChild(dibujarMes(mesVisible.getFullYear(), mesVisible.getMonth() + salto, sinCupo));
+  }
+  contenedor.appendChild(meses);
+}
+
+/** No se puede retroceder antes del mes actual: no hay nada que reservar ahí. */
+function esMesActual() {
+  const ahora = new Date();
+  return mesVisible.getFullYear() === ahora.getFullYear()
+    && mesVisible.getMonth() === ahora.getMonth();
+}
+
+function dibujarNavegacion() {
+  const nav = document.createElement('div');
+  nav.className = 'calendario__nav';
+
+  const boton = (texto, etiqueta, salto, deshabilitado) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'calendario__flecha';
+    b.textContent = texto;
+    b.setAttribute('aria-label', etiqueta);
+    b.disabled = deshabilitado;
+    if (!deshabilitado) b.addEventListener('click', () => moverMes(salto));
+    return b;
+  };
+
+  nav.appendChild(boton('‹', t().mesAnterior, -1, esMesActual()));
+  nav.appendChild(boton('›', t().mesSiguiente, 1, false));
+  return nav;
+}
+
+function moverMes(salto) {
+  mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + salto, 1);
+  dibujarCalendario();
+}
+
+/**
+ * Lleva el calendario al mes de una fecha si quedó fuera de los dos visibles.
+ * Sin esto, escribir "2027-03-15" en el input dejaba el calendario en el mes
+ * actual, mostrando unas fechas mientras el formulario decía otras.
+ */
+function mostrarMesDe(fecha) {
+  if (!fecha) return;
+  const [anio, mes] = fecha.split('-').map(Number);
+  const objetivo = new Date(anio, mes - 1, 1);
+  const ultimoVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + 1, 1);
+  if (objetivo < mesVisible || objetivo > ultimoVisible) {
+    mesVisible = objetivo;
+    dibujarCalendario();
   }
 }
 
@@ -317,6 +376,17 @@ function aplicarQuerystring() {
 el('reservas-fechas').addEventListener('submit', e => { e.preventDefault(); buscar(); });
 el('reservas-form').addEventListener('submit', enviar);
 
+// El calendario sigue a lo que se escriba en las fechas: la llegada manda,
+// porque es la que define el tramo que el huésped está mirando.
+el('llegada').addEventListener('change', e => mostrarMesDe(e.target.value));
+el('salida').addEventListener('change', e => {
+  if (!el('llegada').value) mostrarMesDe(e.target.value);
+});
+
 cargar().then(() => {
-  if (aplicarQuerystring()) buscar();
+  // El querystring puede traer fechas de otra página, así que el calendario
+  // tiene que moverse antes de dibujarse por primera vez.
+  const conFechas = aplicarQuerystring();
+  mostrarMesDe(el('llegada').value);
+  if (conFechas) buscar();
 });

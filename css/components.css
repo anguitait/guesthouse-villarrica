@@ -1292,6 +1292,62 @@
   margin-bottom: var(--space-8);
 }
 
+/* El calendario necesita superficie propia: sobre el crema de la seccion,
+   sin fondo ni borde, las cifras flotaban y no se leia como un control. */
+.reservas__calendario {
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  margin-bottom: var(--space-8);
+  /* Sin ancho propio la tarjeta se estiraba a todo el contenedor y los dos
+     meses quedaban perdidos en un mar blanco. */
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Una flecha en cada extremo, flanqueando los dos meses: juntas en una esquina
+   se leian como un control suelto y no como la navegacion del calendario. */
+.calendario__nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+
+.calendario__flecha {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  font-size: var(--text-lg);
+  line-height: 1;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.calendario__flecha:hover:not(:disabled) {
+  background: var(--brand-salvia);
+  border-color: var(--brand-oliva);
+}
+
+.calendario__flecha:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.calendario__meses {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
 .calendario { border-collapse: collapse; }
 .calendario caption {
   text-transform: capitalize;
