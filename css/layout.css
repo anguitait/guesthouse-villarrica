@@ -25,6 +25,12 @@
   background: var(--surface-primary);
 }
 
+/* Para paginas-herramienta: --space-section llega a 10rem en pantallas anchas,
+   que es aire de pagina de venta. Ver .page-header--compacto. */
+.section--compacta {
+  padding: var(--space-10) 0 var(--space-16);
+}
+
 /* Bloque oscuro — verde profundo del manual */
 .section--dark {
   background: var(--brand-profundo);

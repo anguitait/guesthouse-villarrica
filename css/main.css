@@ -443,6 +443,15 @@
   text-align: center;
 }
 
+/* Reservas es una herramienta, no una pagina de venta: el aire que en las
+   paginas de marketing juega a favor aca solo empuja el formulario bajo el
+   fold. Medido antes de tocar: 272px de padding para un titulo de 49px, y el
+   formulario recien empezaba en y=555 de 936 de viewport.
+   Los 80px se conservan porque libran el header fijo, que mide 71px. */
+.page-header--compacto {
+  padding: calc(var(--space-8) + 80px) 0 var(--space-8);
+}
+
 .page-header__title {
   font-size: var(--text-4xl);
   margin-bottom: var(--space-4);
