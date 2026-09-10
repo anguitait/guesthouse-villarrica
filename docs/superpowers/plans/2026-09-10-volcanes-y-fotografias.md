@@ -517,6 +517,7 @@ const leer = (p) => readFileSync(ruta(p), 'utf8');
 
 /** Parser de CSV con comillas y saltos de línea dentro de los campos. */
 function parsearCSV(texto) {
+  texto = texto.replace(/\r\n/g, '\n');
   const filas = [];
   let fila = [], campo = '', comillas = false;
   for (let i = 0; i < texto.length; i++) {
@@ -528,7 +529,7 @@ function parsearCSV(texto) {
     } else if (c === '"') comillas = true;
     else if (c === ',') { fila.push(campo); campo = ''; }
     else if (c === '\n') { fila.push(campo); filas.push(fila); fila = []; campo = ''; }
-    else if (c !== '\r') campo += c;
+    else campo += c;
   }
   if (campo || fila.length) { fila.push(campo); filas.push(fila); }
   const [cabecera, ...resto] = filas.filter(f => f.length > 1);
@@ -540,9 +541,24 @@ const alojamiento = leer('pages/alojamiento.html');
 const portada = leer('index.html');
 const main = leer('js/main.js');
 
-// También en minúscula: los slugs viejos sobreviven en anclas (`#coihue`),
-// en `id="magnolio"` y en las claves de traducción, y ésos no se ven leyendo.
-const NOMBRES_VIEJOS = /Magnolio|Arrayán|Canelo|Laurel|Coihue|Fuinque|Tineo|magnolio|arrayan|canelo|laurel|coihue|fuinque|tineo/;
+/**
+ * El fragmento de una ficha: desde su `id` hasta el `<article>` siguiente.
+ * Buscar con `includes()` sobre el archivo entero no serviría: dos fichas
+ * traspuestas dejarían pasar el test, porque los dos nombres aparecen igual
+ * en alguna parte del documento.
+ */
+function fichaDe(alojamiento, id) {
+  const inicio = alojamiento.indexOf(`id="${id}"`);
+  if (inicio === -1) return null;
+  const fin = alojamiento.indexOf('<article', inicio + 1);
+  return alojamiento.slice(inicio, fin === -1 ? undefined : fin);
+}
+
+// Insensible a mayúsculas y con las dos formas de tilde: quien renombra 210
+// apariciones a mano deja justo esas erratas. Los slugs viejos, además,
+// sobreviven en anclas (`#coihue`), en `id="magnolio"` y en las claves de
+// traducción, y ésos no se ven leyendo.
+const NOMBRES_VIEJOS = /magnolio|arrayan|arrayán|canelo|laurel|coihue|fuinque|tineo/i;
 
 test('el catálogo tiene las siete piezas', () => {
   assert.equal(habitaciones.length, 7);
@@ -566,8 +582,13 @@ test('ningún nombre de árbol sobrevive en el sitio', () => {
 
 test('cada pieza tiene su ficha, con el nombre y el ancla del catálogo', () => {
   for (const h of habitaciones) {
-    assert.ok(alojamiento.includes(`id="${h.id}"`), `falta la ficha de ${h.id}`);
-    assert.ok(alojamiento.includes(h.nombre), `falta el nombre ${h.nombre}`);
+    const ficha = fichaDe(alojamiento, h.id);
+    assert.ok(ficha, `falta la ficha de ${h.id}`);
+    assert.ok(ficha.includes(h.nombre), `la ficha de ${h.id} no muestra ${h.nombre}`);
+    // Una ficha traspuesta arrastra las claves de traducción de la otra.
+    for (const m of ficha.matchAll(/data-i18n="hab\.([a-z-]+)\.[^"]*"/g)) {
+      assert.equal(m[1], h.id, `la ficha de ${h.id} usa las claves de ${m[1]}`);
+    }
   }
 });
 
@@ -575,8 +596,10 @@ test('cada pieza tiene su fotografía en el disco', () => {
   for (const h of habitaciones) {
     assert.ok(h.imagen, `${h.id} no declara imagen`);
     assert.ok(existsSync(ruta(h.imagen)), `no existe ${h.imagen}`);
+    const ficha = fichaDe(alojamiento, h.id);
+    assert.ok(ficha, `falta la ficha de ${h.id}`);
     assert.ok(
-      alojamiento.includes(`../${h.imagen}`),
+      ficha.includes(`../${h.imagen}`),
       `la ficha de ${h.id} no muestra ${h.imagen}`
     );
   }
@@ -629,7 +652,7 @@ Esperado: FALLA, con tres de los ocho pasando. Con los Tasks 1 y 2 hechos:
 | el catálogo tiene las siete piezas | PASA |
 | ningún nombre de árbol sobrevive | falla: `pages/alojamiento.html todavía dice "Magnolio"` |
 | cada pieza tiene su ficha | falla: `falta la ficha de llaima` |
-| cada pieza tiene su fotografía | falla: `la ficha de llaima no muestra images/habitaciones/llaima.jpg` |
+| cada pieza tiene su fotografía | falla: `falta la ficha de llaima` |
 | ninguna ficha con el placeholder | falla |
 | el precio ya incluye desayuno | falla: `alojamiento.html` todavía trae `$5.000` |
 | toda clave data-i18n existe | PASA — las claves viejas siguen completas en los dos idiomas |
