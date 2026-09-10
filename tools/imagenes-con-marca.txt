@@ -16,7 +16,6 @@ cowork/living-principal
 cowork/mesas-trabajo
 experiencias/gallinero-huerta
 experiencias/hamaca-bosque
-habitaciones/habitacion-verde
 hero/vista-aerea-drone
 lugar/casa-exterior
 lugar/piscina-casa
