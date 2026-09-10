@@ -57,6 +57,39 @@ Manda la tabla.
 **Se descartan las fotografías previas a la remodelación.** Las cuatro de la
 carpeta *Fotos Albert* muestran piezas que ya no existen en esta configuración.
 
+**Sollipulli tiene dos literas, no una cama matrimonial.** La propietaria lo
+confirmó: la fotografía estaba bien y la fila de la planilla arrastraba el texto
+de la pieza anterior. Es la única excepción a la regla de arriba, y obliga a
+reescribir la ficha completa:
+
+| Campo | Planilla | Publicado |
+|---|---|---|
+| `categoria` | Habitación Doble Superior | Habitación Cuádruple – Literas |
+| `capacidad` | 2 | 4 |
+| Cama | Cama matrimonial | Dos literas (4 plazas) |
+
+`categoria` es un Single select en Airtable: hay que agregar el valor nuevo antes
+de guardar el registro, o la escritura falla en silencio. El selector de
+huéspedes de `reservas.html` ya llega hasta 5, así que no necesita cambios;
+Sollipulli pasa a ser la primera pieza que aparece al pedir 4.
+
+Texto nuevo, español:
+
+> Habitación amplia del segundo piso con dos literas, pensada para grupos o
+> familias. Tiene baño privado dentro de la habitación, con ducha y tragaluz en
+> el techo que le da mucha luz natural, y un arrimo de clóset para la ropa.
+
+Inglés:
+
+> Spacious second-floor room with two bunk beds, suited to groups or families. It
+> has a private en-suite bathroom with shower and a ceiling skylight that fills
+> it with natural light, plus a wardrobe unit for clothes.
+
+Características: *Dos literas (4 plazas) · Baño privado en la habitación, con
+ducha · Tragaluz en el techo · Arrimo de clóset · Segundo piso*. Se cae
+"veladores con lámparas", que venía del texto anterior y no corresponde a una
+pieza con literas.
+
 ## Trabajo
 
 ### 1. Higiene
@@ -131,11 +164,11 @@ bloqueados.
 
 ## Riesgos y puntos abiertos
 
-**Sollipulli: la planilla dice cama matrimonial y capacidad 2; la fotografía
-muestra dos literas.** Es la contradicción más visible del lote y hay que
-resolverla con la propietaria antes de publicar. Mientras tanto se aplica la
-regla general —manda la planilla— pero la ficha quedaría diciendo "matrimonial"
-sobre una foto de literas.
+**Sollipulli queda a $55.000 con cuatro plazas**, el mismo valor que las dobles
+del segundo piso. Sale de la tabla de tarifas, que fue escrita cuando la pieza
+figuraba como matrimonial para dos. Conviene revisarlo con la propietaria: no
+bloquea nada, pero es la pieza que más rinde por noche y la que quedó más barata
+por huésped.
 
 **El escalonamiento de precios se aplanó.** Antes había tres niveles
 ($35.000 / $40.000 / $45.000); ahora quedan dos, y cinco de las siete piezas
@@ -147,12 +180,10 @@ baja lo hacen; en temporada alta la planilla las dejó con $5.000 de diferencia.
 No afecta al sitio, que sólo publica `precio_noche`, pero es un error a corregir
 en la planilla.
 
-**Cinco fotografías llegaron en 0 bytes** desde Drive: una de Llaima, una de
-Rukapillán y tres de exteriores. Hay que volver a bajarlas. No bloquean, porque
-ninguna era la principal de su pieza.
-
-**Las carpetas *Baño compartido* y *Plan de negocios* llegaron vacías.** Si
-tenían contenido previsto, falta.
+**Quince fotografías llegaron en 0 bytes** desde Drive. Se dan por perdidas: diez
+eran duplicados "(1)" y ninguna de las cinco restantes era la principal de su
+pieza. Las carpetas *Baño compartido* y *Plan de negocios* llegaron vacías a
+propósito.
 
 ## Fuera de alcance
 
