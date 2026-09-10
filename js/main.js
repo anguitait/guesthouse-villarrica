@@ -342,7 +342,7 @@
       'hab.lanin.c2': 'Private en-suite bathroom with shower',
       'hab.lanin.c3': 'Garden and pool views',
       'hab.lanin.c4': '2 bedside tables',
-      'hab.sollipulli.cat': 'Quad Room – Bunk Beds',
+      'hab.sollipulli.cat': 'Quadruple Room – Bunk Beds',
       'hab.sollipulli.desc': 'Spacious second-floor room with two bunk beds, suited to groups or families. It has a private en-suite bathroom with shower and a ceiling skylight that fills it with natural light, plus a wardrobe unit for clothes.',
       'hab.sollipulli.cap': '4 guests',
       'hab.sollipulli.c1': 'Two bunk beds (sleeps 4)',

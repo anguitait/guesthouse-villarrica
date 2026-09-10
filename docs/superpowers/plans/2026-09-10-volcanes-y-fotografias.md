@@ -792,7 +792,7 @@ Las categorías en inglés, que no vienen en el CSV:
 | `sierra-nevada` | Twin Room – External Bathroom |
 | `tolhuaca` | Double Room |
 | `lanin` | Premium Suite |
-| `sollipulli` | Quad Room – Bunk Beds |
+| `sollipulli` | Quadruple Room – Bunk Beds |
 | `lonquimay` | Double Room |
 
 Y `cap` en inglés: `2 guests`, salvo `lanin` (`3 guests`) y `sollipulli` (`4 guests`).
