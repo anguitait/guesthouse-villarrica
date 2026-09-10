@@ -68,14 +68,14 @@ else
   falla "sobreviven otras direcciones: $(echo "$correos_extra" | tr '\n' ' ')"
 fi
 
-# Las tres fotos de interior tienen muros verde lima y rojo, fuera de la
+# Las dos fotos de interior tienen muros verde lima y rojo, fuera de la
 # paleta. No se corrigen de color porque muestran piezas reales y un
 # huesped reserva mirandolas. La regla es que nunca dominen una pantalla:
 # valen dentro de una tarjeta o media columna, nunca como hero.
 echo "Fotos de interior contenidas"
 if python3 - <<'PY'
 import pathlib, re, sys
-saturadas = ("living-principal", "mesas-trabajo", "habitacion-verde")
+saturadas = ("living-principal", "mesas-trabajo")
 patron = re.compile(r'<img[^>]*src="[^"]*(' + "|".join(saturadas) + r')')
 malas = []
 for p in [pathlib.Path("index.html")] + sorted(pathlib.Path("pages").glob("*.html")):
