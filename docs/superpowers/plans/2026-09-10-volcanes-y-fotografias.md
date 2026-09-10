@@ -192,9 +192,12 @@ Para --airtable hacen falta dos variables de entorno:
   AIRTABLE_TOKEN     token con data.records:write sobre la base
   AIRTABLE_BASE_ID   el id que empieza con "app"
 
-OJO con `categoria`: es un Single select. Airtable ignora en silencio un
-valor que no esté en la lista de opciones, así que "Habitación Cuádruple –
-Literas" hay que crearla desde la interfaz antes de correr esto.
+OJO con `categoria`: es un Single select. Este script no manda `typecast`,
+así que un valor que no esté en la lista de opciones NO se ignora en
+silencio: la API responde 422 INVALID_MULTIPLE_CHOICE_OPTIONS, el PATCH
+entero se cae, no se escribe ni un registro y el error sale por pantalla.
+El riesgo, entonces, es quedarse sin hacer nada: hay que crear la opción
+"Habitación Cuádruple – Literas" desde la interfaz antes de correr esto.
 """
 import argparse
 import csv
@@ -213,6 +216,11 @@ CAMPOS = [
     "descripcion_es", "descripcion_en", "caracteristicas_es",
     "caracteristicas_en", "imagen", "activa", "orden",
 ]
+
+# Los campos numéricos de Airtable: un "" en cualquiera de ellos hace fallar
+# el PATCH entero, así que los vacíos se omiten al empujar. Los de texto
+# viajan siempre, incluso vacíos (ver `empujar`).
+NUMERICOS = {"precio_noche", "capacidad", "metros2", "orden"}
 
 # precio_noche es temporada BAJA CON DESAYUNO. Cambió de significado en
 # septiembre de 2026: antes era sin desayuno, y por eso ya no aparece la
@@ -336,6 +344,13 @@ def escribir_csv():
     print(f"{len(HABITACIONES)} habitaciones -> {CSV.relative_to(RAIZ)}")
 
 
+# Sin timeout, una conexión que queda colgada deja el script esperando para
+# siempre y sin señal. En una corrida única contra producción eso es peor que
+# un error: quien la ejecuta no sabe si el intento alcanzó a escribir algo
+# antes de que la matara.
+TIMEOUT = 30
+
+
 def pedir(token, base, ruta, metodo="GET", cuerpo=None):
     req = urllib.request.Request(
         f"https://api.airtable.com/v0/{base}/{ruta}",
@@ -347,10 +362,19 @@ def pedir(token, base, ruta, metodo="GET", cuerpo=None):
         },
     )
     try:
-        with urllib.request.urlopen(req) as r:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
+        # El código y el cuerpo son la parte útil: ahí Airtable dice qué
+        # campo rechazó. Va primero porque HTTPError es subclase de URLError.
         sys.exit(f"Airtable {e.code}: {e.read().decode()}")
+    except urllib.error.URLError as e:
+        # DNS que no resuelve, host inalcanzable, TLS caído: sin esto subía
+        # crudo como traceback.
+        sys.exit(f"No se pudo hablar con Airtable: {e.reason}")
+    except TimeoutError:
+        # Un timeout de lectura no viene envuelto en URLError.
+        sys.exit(f"Airtable no respondió en {TIMEOUT} segundos.")
 
 
 def empujar(dry_run):
@@ -363,17 +387,51 @@ def empujar(dry_run):
     # ningún registro calza por id y hay que emparejar por `orden`, que no
     # cambió. De la segunda en adelante manda el id.
     registros = pedir(token, base, "Habitaciones")["records"]
+
+    # El peligro acá no es no encontrar el registro —eso aborta más abajo, a
+    # la vista— sino encontrar de más. `orden` se escribe a mano en Airtable:
+    # si dos filas comparten el mismo valor, la comprensión de diccionario se
+    # queda callada con la última y descarta la otra. Eso no deja un
+    # record_id vacío, deja uno válido pero de OTRA habitación, y el PATCH
+    # sobrescribe la pieza equivocada en silencio y sin vuelta atrás. Se
+    # corta antes de emparejar nada.
+    por_orden = {}
+    repetidos = {}
+    for r in registros:
+        orden = r["fields"].get("orden")
+        if orden is None:
+            continue
+        if orden in por_orden:
+            repetidos.setdefault(orden, [por_orden[orden]]).append(r["id"])
+        else:
+            por_orden[orden] = r["id"]
+    if repetidos:
+        detalle = "; ".join(
+            f"orden {o} en {', '.join(ids)}"
+            for o, ids in sorted(repetidos.items(), key=lambda kv: str(kv[0]))
+        )
+        sys.exit(
+            "Hay `orden` repetidos en Airtable y emparejar por ese campo "
+            f"escribiría sobre la habitación equivocada: {detalle}"
+        )
+
     por_id = {r["fields"].get("id"): r["id"] for r in registros}
-    por_orden = {r["fields"].get("orden"): r["id"] for r in registros}
 
     cambios = []
     for h in HABITACIONES:
         record_id = por_id.get(h["id"]) or por_orden.get(h["orden"])
         if not record_id:
             sys.exit(f"No encuentro en Airtable el registro de {h['nombre']}.")
-        # Un campo numérico vacío hace fallar el PATCH entero: metros2 no se
-        # midió nunca, así que se omite en vez de mandarse como "".
-        campos = {k: v for k, v in h.items() if k != "activa" and v != ""}
+        # Sólo se omiten los numéricos vacíos —hoy nada más metros2, que no
+        # se midió nunca—, porque un "" ahí rompe el PATCH. Los textos viajan
+        # aunque vengan vacíos: Airtable no borra lo que no aparece en
+        # `fields`, así que omitir un texto vacío dejaría el valor viejo en la
+        # base y el script igual diría "actualizado". Esa desincronización
+        # entre la copia legible y la fuente de verdad no se vería nunca.
+        campos = {
+            k: v for k, v in h.items()
+            if k != "activa" and not (k in NUMERICOS and v == "")
+        }
         campos["activa"] = h["activa"] == "true"
         cambios.append({"id": record_id, "fields": campos})
 
