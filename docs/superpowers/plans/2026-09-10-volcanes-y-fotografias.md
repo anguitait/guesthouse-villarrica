@@ -638,25 +638,70 @@ test('toda clave data-i18n usada existe en español y en inglés', () => {
 });
 
 /**
+ * El bloque de la tarjeta que rodea a un enlace: desde el `<article>` que la
+ * abre hasta que ese artículo cierra. En la portada las tarjetas no tienen
+ * `id`, así que el punto de anclaje es el `<article>` inmediatamente anterior
+ * al enlace. No sirve la clase `stagger-N`, que es de animación y cambia sola
+ * si mañana se reordenan las tarjetas.
+ */
+function tarjetaDe(portada, posicionDelEnlace) {
+  const inicio = portada.lastIndexOf('<article', posicionDelEnlace);
+  if (inicio === -1) return null;
+  const fin = portada.indexOf('</article>', posicionDelEnlace);
+  return portada.slice(inicio, fin === -1 ? undefined : fin);
+}
+
+/**
+ * Tolerante a comillas simples o dobles, a `HREF` en mayúsculas, a espacios
+ * alrededor del `=` y a los prefijos `./` y `/`. No es quisquillosidad: una
+ * variante no reconocida no hace fallar nada, simplemente queda sin revisar,
+ * y el test sigue verde gracias a los enlaces que sí calzan. Es el mismo
+ * silencio que dejó pasar las tres anclas rotas.
+ */
+const ENLACE_A_FICHA = /href\s*=\s*(["'])\s*(?:\.?\/)?pages\/alojamiento\.html#([^"'\s>]+)\s*\1/gi;
+
+/**
  * Un ancla rota no rompe nada visible: el navegador abre igual
  * pages/alojamiento.html y se queda arriba, sin saltar a ninguna ficha.
  * Por eso los tres enlaces de la portada sobrevivieron varios renombres
  * apuntando a fichas que ya no existían, sin que nadie se quejara.
+ *
+ * Revisar sólo el `href` tampoco basta: una tarjeta con el título y las
+ * claves de otra pieza se ve perfecta y manda al huésped a la habitación
+ * equivocada. Por eso el enlace se compara contra el contenido de su propia
+ * tarjeta, igual que cada ficha se compara con la suya.
  */
-test('cada enlace de la portada apunta a una ficha que existe', () => {
-  const anclas = [...portada.matchAll(/href="pages\/alojamiento\.html#([^"]+)"/g)].map(m => m[1]);
-  assert.ok(anclas.length > 0, 'la portada no enlaza ninguna ficha de alojamiento');
+test('cada tarjeta destacada de la portada enlaza la pieza de la que habla', () => {
+  const enlaces = [...portada.matchAll(ENLACE_A_FICHA)];
+  assert.ok(enlaces.length > 0, 'la portada no enlaza ninguna ficha de alojamiento');
 
-  const ids = new Set(habitaciones.map(h => h.id));
-  for (const ancla of anclas) {
+  const porId = new Map(habitaciones.map(h => [h.id, h]));
+  for (const enlace of enlaces) {
+    const ancla = enlace[2];
+    const pieza = porId.get(ancla);
     assert.ok(
-      ids.has(ancla),
+      pieza,
       `la portada enlaza pages/alojamiento.html#${ancla}, que no es ninguna de las siete piezas`
     );
     assert.ok(
       fichaDe(alojamiento, ancla),
       `la portada enlaza pages/alojamiento.html#${ancla}, pero esa ficha no existe en la página`
     );
+
+    const tarjeta = tarjetaDe(portada, enlace.index);
+    assert.ok(tarjeta, `el enlace a #${ancla} no está dentro de ninguna tarjeta`);
+
+    const titulo = tarjeta.match(/<h3[^>]*>([^<]*)<\/h3>/);
+    assert.ok(titulo, `la tarjeta que enlaza #${ancla} no tiene título`);
+    assert.equal(
+      titulo[1].trim(),
+      pieza.nombre,
+      `la tarjeta que enlaza #${ancla} se titula "${titulo[1].trim()}" y no "${pieza.nombre}"`
+    );
+
+    for (const m of tarjeta.matchAll(/data-i18n="hab\.dest\.([a-z-]+)\.[^"]*"/g)) {
+      assert.equal(m[1], ancla, `la tarjeta que enlaza #${ancla} usa las claves de ${m[1]}`);
+    }
   }
 });
 
