@@ -56,7 +56,7 @@ Es hermana de `tools/prep-images.py`, que recorta la marca de agua del lote anti
 
 Tres cosas que no son opcionales:
 
-1. La rotación EXIF. Diecinueve fotos del lote de septiembre de 2026 vienen
+1. La rotación EXIF. Veintitrés fotos del lote de septiembre de 2026 vienen
    con orientación 6 (giradas 90°). El navegador respeta ese campo, pero
    `object-fit: cover` recorta ANTES de rotar y el resultado sale de canto.
    Se rota de verdad y se guarda sin el campo.

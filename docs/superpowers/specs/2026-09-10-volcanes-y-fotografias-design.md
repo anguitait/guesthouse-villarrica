@@ -12,7 +12,7 @@ cambio porque se pisan entre ellas:
    volcanes de la zona. El mapeo es 1:1 y respeta el orden actual.
 2. **Las tarifas suben** y cambian de significado: `precio_noche` pasa de ser
    temporada baja *sin* desayuno a temporada baja *con* desayuno.
-3. **Llegaron 73 fotografías** utilizables: las siete piezas, espacios comunes
+3. **Llegaron 70 fotografías** utilizables: las siete piezas, espacios comunes
    interiores y exteriores. Hasta hoy seis de las siete fichas usan el
    placeholder de marca.
 
@@ -118,7 +118,7 @@ precio mostrado.
 
 `tools/prep-fotos.py`, hermano del `prep-images.py` existente:
 
-- Aplica la orientación EXIF. Diecinueve de las fotos vienen giradas 90° y
+- Aplica la orientación EXIF. Veintitrés de las fotos vienen giradas 90° y
   `object-fit` no las endereza; publicarlas tal cual las deja de canto.
 - Reescala a 1250px de ancho, el formato del resto del sitio.
 - Limpia metadatos y guarda con el slug de la pieza en `images/habitaciones/`.
