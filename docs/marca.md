@@ -82,11 +82,14 @@ Nunca dos fondos oscuros seguidos — se leen como un solo bloque. Lo verifica
 
 ## Fotografía
 
-Las tres fotos de interior (`living-principal`, `mesas-trabajo`,
-`habitacion-verde`) tienen muros verde lima y rojo, fuera de la paleta. **No se
+Las dos fotos de interior que quedan del lote antiguo (`living-principal` y
+`mesas-trabajo`) tienen muros verde lima y rojo, fuera de la paleta. **No se
 corrigen de color**: muestran piezas reales y un huésped reserva mirándolas. La
 regla es que nunca dominen una pantalla — valen dentro de una tarjeta o media
-columna, nunca como hero. Son la primera prioridad de reemplazo.
+columna, nunca como hero. Siguen siendo la primera prioridad de reemplazo.
+
+La tercera, `habitacion-verde`, ya salió: en septiembre de 2026 llegaron las
+fotografías reales de las siete habitaciones y cada ficha muestra la suya.
 
 Al llegar fotos nuevas: reemplaza el original en `images/` y corre
 `python3 tools/prep-images.py`. Es idempotente. Los contenedores tienen
