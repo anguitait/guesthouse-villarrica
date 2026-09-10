@@ -739,8 +739,12 @@
    Conserva la proporcion 4:3 del bloque de imagen para que la grilla
    mantenga su ritmo, sin fingir que hay una foto ni reutilizar la de otra
    pieza. Es decorativo, asi que va como fondo y no como <img>: no compite
-   con las reglas de object-fit de arriba y no necesita alt. Para retirarlo,
-   reemplazar el div por el <img> de siempre dentro de .card-room__image. */
+   con las reglas de object-fit de arriba y no necesita alt.
+
+   Desde septiembre de 2026 no lo usa ninguna pagina: las siete piezas
+   tienen foto propia. Se conserva porque es la respuesta correcta cuando
+   entre una pieza nueva sin fotografiar — se pone la clase en el div y la
+   grilla no se descuadra. */
 .card-room__image--marca {
   display: grid;
   place-items: center;
