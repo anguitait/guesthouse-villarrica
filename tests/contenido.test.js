@@ -136,6 +136,29 @@ test('toda clave data-i18n usada existe en español y en inglés', () => {
   }
 });
 
+/**
+ * Un ancla rota no rompe nada visible: el navegador abre igual
+ * pages/alojamiento.html y se queda arriba, sin saltar a ninguna ficha.
+ * Por eso los tres enlaces de la portada sobrevivieron varios renombres
+ * apuntando a fichas que ya no existían, sin que nadie se quejara.
+ */
+test('cada enlace de la portada apunta a una ficha que existe', () => {
+  const anclas = [...portada.matchAll(/href="pages\/alojamiento\.html#([^"]+)"/g)].map(m => m[1]);
+  assert.ok(anclas.length > 0, 'la portada no enlaza ninguna ficha de alojamiento');
+
+  const ids = new Set(habitaciones.map(h => h.id));
+  for (const ancla of anclas) {
+    assert.ok(
+      ids.has(ancla),
+      `la portada enlaza pages/alojamiento.html#${ancla}, que no es ninguna de las siete piezas`
+    );
+    assert.ok(
+      fichaDe(alojamiento, ancla),
+      `la portada enlaza pages/alojamiento.html#${ancla}, pero esa ficha no existe en la página`
+    );
+  }
+});
+
 test('Sollipulli es cuádruple y con literas', () => {
   const s = habitaciones.find(h => h.id === 'sollipulli');
   assert.equal(s.capacidad, '4');
