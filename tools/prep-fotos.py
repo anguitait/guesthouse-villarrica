@@ -50,9 +50,11 @@ def procesar(origen, destino):
         if im.width > ANCHO:
             alto = round(im.height * ANCHO / im.width)
             im = im.resize((ANCHO, alto), Image.LANCZOS)
-        limpia = Image.new("RGB", im.size)
-        limpia.putdata(list(im.getdata()))
-        limpia.save(destino, "JPEG", quality=CALIDAD, optimize=True)
+        # El GPS y todo el resto del EXIF se pierden solos al guardar: Pillow
+        # escribe ese bloque únicamente si se le pasa `exif=`, y aquí no se le
+        # pasa. No hace falta copiar los píxeles a una imagen nueva para
+        # "limpiarla" — eso costaba CPU y memoria sin limpiar nada.
+        im.save(destino, "JPEG", quality=CALIDAD, optimize=True)
     return destino
 
 
@@ -66,10 +68,18 @@ def main():
     for slug, relativa in FOTOS.items():
         origen = ORIGEN / relativa
         if not origen.is_file() or origen.stat().st_size == 0:
-            faltan.append(f"{slug}: {relativa}")
+            faltan.append(f"{slug}: {relativa} (no está o está vacía)")
             continue
         destino = DESTINO / f"{slug}.jpg"
-        procesar(origen, destino)
+        # Una descarga a medias de Drive deja un JPEG que existe y hasta pesa,
+        # pero no abre. Se anota junto a las que faltan en vez de cortar el
+        # lote a media corrida. UnidentifiedImageError es un OSError, y un
+        # archivo truncado también levanta OSError al leer los píxeles.
+        try:
+            procesar(origen, destino)
+        except OSError as error:
+            faltan.append(f"{slug}: {relativa} ({error})")
+            continue
         kb = destino.stat().st_size // 1024
         print(f"{slug:<14} {destino.relative_to(RAIZ)}  {kb} KB")
 
