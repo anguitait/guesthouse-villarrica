@@ -5,3 +5,10 @@ __pycache__/
 .claude/
 .wrangler/
 node_modules/
+
+# Material de trabajo que llega de la propietaria. docs/ se sirve publico
+# (flordelbosque.cl/docs/... responde 200), y estas carpetas traen cotizaciones
+# con nombre de cliente y la tabla de tarifas internas de temporada alta.
+docs/CambiosFDB/
+docs/*.xlsx
+docs/*.zip
