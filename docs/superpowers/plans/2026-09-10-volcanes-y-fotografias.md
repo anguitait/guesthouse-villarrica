@@ -542,15 +542,21 @@ const portada = leer('index.html');
 const main = leer('js/main.js');
 
 /**
- * El fragmento de una ficha: desde su `id` hasta el `<article>` siguiente.
+ * El fragmento de una ficha: desde su `id` hasta que el artículo cierra.
  * Buscar con `includes()` sobre el archivo entero no serviría: dos fichas
  * traspuestas dejarían pasar el test, porque los dos nombres aparecen igual
  * en alguna parte del documento.
+ *
+ * El corte va en `</article>` y no en el `<article>` siguiente: la última
+ * ficha no tiene ninguno después, y el fragmento se llevaba todo el resto
+ * de la página. Hoy no hay nada de habitaciones ahí abajo, pero un bloque
+ * de "piezas relacionadas" en el pie bastaría para volver verde una ficha
+ * final mal armada.
  */
 function fichaDe(alojamiento, id) {
   const inicio = alojamiento.indexOf(`id="${id}"`);
   if (inicio === -1) return null;
-  const fin = alojamiento.indexOf('<article', inicio + 1);
+  const fin = alojamiento.indexOf('</article>', inicio);
   return alojamiento.slice(inicio, fin === -1 ? undefined : fin);
 }
 
