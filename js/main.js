@@ -364,7 +364,7 @@
       'hab.dest.tolhuaca.cat': 'Double',
       'hab.dest.tolhuaca.desc': 'Private en-suite bathroom, a large closet and a full-height window opening directly onto the garden.',
       'hab.dest.llaima.cat': 'Double',
-      'hab.dest.llaima.desc': 'Double bed, wooden floors and a full-height window opening directly onto the garden. Shared bathroom with Volcán Rukapillán.',
+      'hab.dest.llaima.desc': 'Double bed, wooden floors and a full-height window opening onto the garden. Bathroom shared with Volcán Rukapillán.',
       'room.night': 'night',
       'room.people': 'people'
     }

@@ -866,7 +866,7 @@ con `<a href="pages/alojamiento.html#lanin" ...>`, y lo mismo para `tolhuaca` y 
       'hab.dest.llaima.desc': 'Cama matrimonial, piso de madera y ventanal con salida directa al jardín. Baño compartido con Volcán Rukapillán.',
 ```
 
-En el bloque inglés, la única que cambia de texto es la de Llaima, que menciona la pieza vecina: `Double bed, wooden floors and a full-height window opening directly onto the garden. Shared bathroom with Volcán Rukapillán.`
+En el bloque inglés, la única que cambia de texto es la de Llaima, que menciona la pieza vecina, y cambia **sólo el nombre**: `Double bed, wooden floors and a full-height window opening onto the garden. Bathroom shared with Volcán Rukapillán.`
 
 - [ ] **Step 3: Correr los tests**
 
