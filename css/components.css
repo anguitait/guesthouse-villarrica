@@ -1329,6 +1329,11 @@
 
 .reservas__plegable > summary::marker { content: ''; }
 
+/* Safari no implementa ::marker sobre <summary> y dibuja el suyo aparte: sin
+   esta regla convive el triángulo nativo con la flecha del ::before. Importa
+   más que de costumbre porque buena parte del tráfico llega desde iPhone. */
+.reservas__plegable > summary::-webkit-details-marker { display: none; }
+
 .reservas__plegable > summary::before {
   content: '›';
   display: inline-block;

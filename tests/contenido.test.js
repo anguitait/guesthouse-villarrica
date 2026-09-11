@@ -274,13 +274,32 @@ test('ninguna foto en disco sobra del manifiesto', () => {
   }
 });
 
+// Anclado al elemento de verdad, no al primer <details> del documento: el día
+// que se agregue otro plegable antes (unas preguntas frecuentes, digamos), un
+// test que buscara «el primer <details>» pasaría a inspeccionar ése y el
+// resultado dependería del orden en el archivo.
 test('el calendario arranca plegado', () => {
   const reservas = leer('pages/reservas.html');
-  const abre = reservas.indexOf('<details');
-  const cal = reservas.indexOf('id="reservas-calendario"');
+
+  const marca = reservas.indexOf('id="reservas-plegable"');
+  assert.ok(marca !== -1, 'no existe ningún elemento con id="reservas-plegable"');
+
+  const abre = reservas.lastIndexOf('<details', marca);
   assert.ok(abre !== -1, 'el calendario no está dentro de un <details>');
-  assert.ok(abre < cal, 'el <details> no envuelve al calendario');
-  const etiqueta = reservas.slice(abre, cal);
+
+  const finEtiqueta = reservas.indexOf('>', abre);
+  assert.ok(
+    finEtiqueta > marca,
+    'el id reservas-plegable no está en la etiqueta <details> que lo precede'
+  );
+
+  const etiqueta = reservas.slice(abre, finEtiqueta + 1);
   assert.ok(!/\bopen\b/.test(etiqueta), 'el <details> viene abierto de fábrica');
-  assert.ok(etiqueta.includes('<summary'), 'falta el resumen que se puede pulsar');
+
+  const bloque = reservas.slice(abre, reservas.indexOf('</details>', abre));
+  assert.ok(
+    bloque.includes('id="reservas-calendario"'),
+    'el <details> no envuelve al calendario'
+  );
+  assert.ok(bloque.includes('<summary'), 'falta el resumen que se puede pulsar');
 });

@@ -386,6 +386,8 @@ el('salida').addEventListener('change', e => {
 // Quien usa el mapa de disponibilidad lo usa siempre; quien no, nunca. No tiene
 // sentido que lo abra en cada visita. `try` porque en navegación privada el
 // acceso a localStorage lanza en vez de devolver vacío.
+// El prefijo `fdb-` es el del sitio actual; `gh-lang` arrastra el nombre viejo
+// y se queda como está para no perder la preferencia de quien ya nos visitó.
 const plegable = el('reservas-plegable');
 if (plegable) {
   try {
