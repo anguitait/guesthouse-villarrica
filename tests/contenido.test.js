@@ -119,8 +119,11 @@ test('el precio ya incluye desayuno, así que nadie lo ofrece aparte', () => {
     assert.ok(!h.descripcion_es.includes('5.000'), `${h.id} todavía ofrece el desayuno`);
     assert.ok(!h.descripcion_en.includes('5,000'), `${h.id} still offers breakfast`);
   }
-  assert.ok(!alojamiento.includes('$5.000'));
-  assert.ok(!main.includes('$5.000'));
+  // Las dos formas: la página en inglés escribía "CLP 5,000".
+  for (const cifra of ['$5.000', '5,000']) {
+    assert.ok(!alojamiento.includes(cifra), `alojamiento.html todavía dice ${cifra}`);
+    assert.ok(!main.includes(cifra), `main.js todavía dice ${cifra}`);
+  }
 });
 
 test('toda clave data-i18n usada existe en español y en inglés', () => {

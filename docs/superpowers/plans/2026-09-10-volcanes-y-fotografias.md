@@ -46,7 +46,7 @@
 **Files:**
 - Create: `tools/prep-fotos.py`
 
-- [ ] **Step 1: Escribir la herramienta**
+- [x] **Step 1: Escribir la herramienta**
 
 Es hermana de `tools/prep-images.py`, que recorta la marca de agua del lote antiguo. Ésta hace lo otro: endereza, reescala y limpia. Lee `docs/CambiosFDB/`, que está fuera de git.
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Correrla**
+- [x] **Step 2: Correrla**
 
 ```bash
 python3 tools/prep-fotos.py
@@ -144,7 +144,7 @@ python3 tools/prep-fotos.py
 
 Esperado: siete líneas, una por pieza, cada archivo entre 100 y 400 KB, y `7 fotos listas en images/habitaciones`.
 
-- [ ] **Step 3: Verificar que quedaron derechas y del ancho correcto**
+- [x] **Step 3: Verificar que quedaron derechas y del ancho correcto**
 
 ```bash
 python3 -c "
@@ -158,7 +158,7 @@ for f in sorted(pathlib.Path('images/habitaciones').glob('*.jpg')):
 
 Esperado: los siete slugs nuevos con ancho 1250 y `EXIF orient: None`. `habitacion-verde.jpg` sigue ahí a 1250x776; se borra en el Task 3, cuando ya nadie la referencie.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add tools/prep-fotos.py images/habitaciones/
@@ -173,7 +173,7 @@ git commit -m "Publicar las primeras fotografías de las siete habitaciones"
 - Create: `tools/habitaciones.py`
 - Modify: `docs/habitaciones-airtable.csv` (se reescribe entero)
 
-- [ ] **Step 1: Escribir la herramienta**
+- [x] **Step 1: Escribir la herramienta**
 
 ```python
 #!/usr/bin/env python3
@@ -464,7 +464,7 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Regenerar el CSV**
+- [x] **Step 2: Regenerar el CSV**
 
 ```bash
 python3 tools/habitaciones.py --csv
@@ -472,7 +472,7 @@ python3 tools/habitaciones.py --csv
 
 Esperado: `7 habitaciones -> docs/habitaciones-airtable.csv`.
 
-- [ ] **Step 3: Verificar que no sobrevive ningún nombre de árbol**
+- [x] **Step 3: Verificar que no sobrevive ningún nombre de árbol**
 
 ```bash
 grep -cE "Magnolio|Arrayán|Canelo|Laurel|Coihue|Fuinque|Tineo" docs/habitaciones-airtable.csv
@@ -480,7 +480,7 @@ grep -cE "Magnolio|Arrayán|Canelo|Laurel|Coihue|Fuinque|Tineo" docs/habitacione
 
 Esperado: `0`. Si `grep` devuelve algo distinto de 0, el CSV quedó a medias.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add tools/habitaciones.py docs/habitaciones-airtable.csv
@@ -496,7 +496,7 @@ Este test es la razón por la que el renombre a mano de los tres archivos siguie
 **Files:**
 - Create: `tests/contenido.test.js`
 
-- [ ] **Step 1: Escribir el test que falla**
+- [x] **Step 1: Escribir el test que falla**
 
 ```javascript
 /**
@@ -620,8 +620,11 @@ test('el precio ya incluye desayuno, así que nadie lo ofrece aparte', () => {
     assert.ok(!h.descripcion_es.includes('5.000'), `${h.id} todavía ofrece el desayuno`);
     assert.ok(!h.descripcion_en.includes('5,000'), `${h.id} still offers breakfast`);
   }
-  assert.ok(!alojamiento.includes('$5.000'));
-  assert.ok(!main.includes('$5.000'));
+  // Las dos formas: la página en inglés escribía "CLP 5,000".
+  for (const cifra of ['$5.000', '5,000']) {
+    assert.ok(!alojamiento.includes(cifra), `alojamiento.html todavía dice ${cifra}`);
+    assert.ok(!main.includes(cifra), `main.js todavía dice ${cifra}`);
+  }
 });
 
 test('toda clave data-i18n usada existe en español y en inglés', () => {
@@ -713,7 +716,7 @@ test('Sollipulli es cuádruple y con literas', () => {
 });
 ```
 
-- [ ] **Step 2: Correrlo y confirmar que falla**
+- [x] **Step 2: Correrlo y confirmar que falla**
 
 ```bash
 npm test
@@ -734,7 +737,7 @@ Esperado: FALLA, con tres de los ocho pasando. Con los Tasks 1 y 2 hechos:
 
 Los tres archivos de test que ya existían siguen pasando. Si en cambio falla `no existe images/habitaciones/llaima.jpg`, el Task 1 no se corrió.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add tests/contenido.test.js
@@ -748,7 +751,7 @@ git commit -m "Amarrar el sitio estático al catálogo con un test"
 **Files:**
 - Modify: `pages/alojamiento.html:96-257` (las siete `<article class="card-room">`)
 
-- [ ] **Step 1: Reescribir las siete fichas**
+- [x] **Step 1: Reescribir las siete fichas**
 
 Cada ficha cambia en cinco puntos: el comentario, el `id`, el `<div>` del placeholder por un `<img>`, el `<h2>`, y el prefijo de las claves `data-i18n`. Ésta es la de Llaima, completa; las otras seis siguen el mismo molde con los datos del CSV.
 
@@ -792,7 +795,7 @@ Las `<li>` de `c1` a `c4` son las cuatro primeras características del CSV de ca
 
 Las descripciones son las de `descripcion_es` en el CSV, tal cual.
 
-- [ ] **Step 2: Borrar la foto que ya no referencia nadie**
+- [x] **Step 2: Borrar la foto que ya no referencia nadie**
 
 ```bash
 git rm images/habitaciones/habitacion-verde.jpg
@@ -801,7 +804,7 @@ grep -rn "habitacion-verde" --include=*.html --include=*.js --include=*.css --in
 
 Esperado del `grep`: una sola línea, en `tools/imagenes-con-marca.txt`. Quitar de ahí la línea `habitaciones/habitacion-verde`, porque `tools/verificar-marca.sh` falla si la lista nombra un archivo que no existe.
 
-- [ ] **Step 3: Correr los tests**
+- [x] **Step 3: Correr los tests**
 
 ```bash
 npm test
@@ -809,7 +812,7 @@ npm test
 
 Esperado: pasan los de la ficha, la foto y el placeholder. Quedan tres fallando, todos por `main.js` e `index.html`, que aún no se tocan: `index.html todavía dice "Coihue"`, `'hab.llaima.cat' aparece 0 veces en main.js, se esperaban 2`, y el del desayuno, porque `main.js` conserva las descripciones viejas con `$5.000`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add pages/alojamiento.html images/habitaciones/habitacion-verde.jpg tools/imagenes-con-marca.txt
@@ -823,7 +826,7 @@ git commit -m "Reescribir las siete fichas con los nombres nuevos y sus fotograf
 **Files:**
 - Modify: `js/main.js:195-252` (bloque español) y el bloque inglés equivalente
 
-- [ ] **Step 1: Renombrar las claves y actualizar los textos**
+- [x] **Step 1: Renombrar las claves y actualizar los textos**
 
 Son siete bloques de siete claves en cada idioma. El prefijo cambia (`hab.magnolio.` → `hab.llaima.`) y el texto pasa a ser el del CSV: `categoria` para `.cat`, `descripcion_es`/`descripcion_en` para `.desc`, y las cuatro primeras características para `.c1` a `.c4`. Ejemplo del bloque español de Llaima:
 
@@ -865,7 +868,7 @@ Las categorías en inglés, que no vienen en el CSV:
 
 Y `cap` en inglés: `2 guests`, salvo `lanin` (`3 guests`) y `sollipulli` (`4 guests`).
 
-- [ ] **Step 2: Correr los tests**
+- [x] **Step 2: Correr los tests**
 
 ```bash
 npm test
@@ -873,7 +876,7 @@ npm test
 
 Esperado: queda fallando un solo test, `ningún nombre de árbol sobrevive en el sitio`, con el mensaje `index.html todavía dice "Coihue"`. Las claves `hab.dest.coihue.*` siguen intactas en los dos idiomas, así que el test de i18n pasa: el Task 6 las renombra en `index.html` y en `main.js` a la vez, y por eso van juntas.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add js/main.js
@@ -888,7 +891,7 @@ git commit -m "Traducir las fichas nuevas al inglés y al español"
 - Modify: `index.html:356-390`
 - Modify: `js/main.js` (las seis claves `hab.dest.*`)
 
-- [ ] **Step 1: Reemplazar las tres destacadas**
+- [x] **Step 1: Reemplazar las tres destacadas**
 
 Coihue→Lanín, Laurel→Tolhuaca, Magnolio→Llaima. Cambian el `<h3>`, la clave `data-i18n` y el ancla del enlace:
 
@@ -900,7 +903,7 @@ Coihue→Lanín, Laurel→Tolhuaca, Magnolio→Llaima. Cambian el `<h3>`, la cla
 
 con `<a href="pages/alojamiento.html#lanin" ...>`, y lo mismo para `tolhuaca` y `llaima`.
 
-- [ ] **Step 2: Renombrar las seis claves `hab.dest.*` en los dos idiomas**
+- [x] **Step 2: Renombrar las seis claves `hab.dest.*` en los dos idiomas**
 
 ```javascript
       'hab.dest.lanin.cat': 'Suite',
@@ -913,7 +916,7 @@ con `<a href="pages/alojamiento.html#lanin" ...>`, y lo mismo para `tolhuaca` y 
 
 En el bloque inglés, la única que cambia de texto es la de Llaima, que menciona la pieza vecina, y cambia **sólo el nombre**: `Double bed, wooden floors and a full-height window opening onto the garden. Bathroom shared with Volcán Rukapillán.`
 
-- [ ] **Step 3: Correr los tests**
+- [x] **Step 3: Correr los tests**
 
 ```bash
 npm test
@@ -921,7 +924,7 @@ npm test
 
 Esperado: **todo pasa**, incluidos los tres archivos de test que ya existían.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html js/main.js
@@ -934,11 +937,11 @@ git commit -m "Actualizar las tres habitaciones destacadas de la portada"
 
 Hasta acá el sitio estático dice "Volcán Llaima" pero la página de reservas sigue ofreciendo "Magnolio", porque lee el Worker y el Worker lee Airtable.
 
-- [ ] **Step 1: Crear la opción del Single select**
+- [x] **Step 1: Crear la opción del Single select**
 
 En la interfaz de Airtable, tabla `Habitaciones`, campo `categoria`: agregar la opción **`Habitación Cuádruple – Literas`**. El guión es una raya (`–`), no un guión corto; si no coincide, Airtable la trata como otra opción.
 
-- [ ] **Step 2: Ver qué se va a escribir, sin escribir**
+- [x] **Step 2: Ver qué se va a escribir, sin escribir**
 
 ```bash
 export AIRTABLE_TOKEN='...'      # el token con data.records:write
@@ -948,7 +951,7 @@ python3 tools/habitaciones.py --airtable --dry-run
 
 Esperado: siete líneas `rec...  <-  Volcán Llaima  $50000`, y `7 registros (dry-run, no se escribió nada)`.
 
-- [ ] **Step 3: Escribir**
+- [x] **Step 3: Escribir**
 
 ```bash
 python3 tools/habitaciones.py --airtable
@@ -956,7 +959,7 @@ python3 tools/habitaciones.py --airtable
 
 Esperado: `7 registros actualizados en Airtable`.
 
-- [ ] **Step 4: Confirmar en la interfaz que `categoria` de Sollipulli quedó puesta**
+- [x] **Step 4: Confirmar en la interfaz que `categoria` de Sollipulli quedó puesta**
 
 Es el único campo que Airtable puede ignorar en silencio. Si quedó vacío, el Step 1 no se hizo o la raya no coincide.
 
@@ -964,11 +967,11 @@ Es el único campo que Airtable puede ignorar en silencio. Si quedó vacío, el 
 
 ### Task 8: Bloquear el segundo piso
 
-- [ ] **Step 1: Borrar la reserva de prueba**
+- [x] **Step 1: Borrar la reserva de prueba**
 
 En la tabla `Reservas`, eliminar la fila **`PRUEBA FINAL - borrar`** (2027-03-15 a 2027-03-17, pieza que ahora se llama Volcán Llaima). Mientras exista, esas fechas quedan bloqueadas.
 
-- [ ] **Step 2: Crear las tres filas del bloqueo**
+- [x] **Step 2: Crear las tres filas del bloqueo**
 
 Una por cada pieza del segundo piso, en la tabla `Reservas`:
 
@@ -980,7 +983,7 @@ Una por cada pieza del segundo piso, en la tabla `Reservas`:
 
 Las fechas van **sin hora**: el check-in y el check-out son días. `estado` debe ser exactamente `Confirmada`; `transformar.js` sólo cuenta como ocupados los estados `Solicitud` y `Confirmada`.
 
-- [ ] **Step 3: Forzar la resincronización**
+- [x] **Step 3: Forzar la resincronización**
 
 El Worker cachea la disponibilidad en KV y la refresca por cron cada 10 minutos. Para no esperar:
 
@@ -989,7 +992,7 @@ cd worker && npx wrangler kv key delete "disponibilidad" \
   --namespace-id=30cfa39d108748cea09db57871431665 --remote
 ```
 
-- [ ] **Step 4: Verificar el contrato público**
+- [x] **Step 4: Verificar el contrato público**
 
 ```bash
 curl -s https://reservas.flordelbosque.cl/api/disponibilidad \
@@ -1016,13 +1019,23 @@ Esperado: exactamente tres piezas con un tramo ocupado, y ninguna con el tramo d
 
 Los tests cubren el texto, no el resultado visual. Siete fotos nuevas entrando por primera vez a una grilla que hasta ahora mostraba placeholders es justo el tipo de cambio que se ve mal sin que nada falle.
 
-- [ ] **Step 1: Levantar el sitio**
+- [x] **Step 1: Levantar el sitio**
 
 ```bash
 python3 -m http.server 8000
 ```
 
-- [ ] **Step 2: Revisar la página de alojamiento**
+**El Worker rechaza `localhost`.** Responde
+`access-control-allow-origin: https://flordelbosque.cl`, así que desde el
+servidor local el `fetch` muere por CORS y las siete fichas se quedan en
+"Consultar". La degradación es correcta —un `console.warn` y nada más—, pero
+impide revisar precios y disponibilidad en local. Para eso hay que copiar el
+sitio a un directorio temporal, guardar ahí la respuesta real
+(`curl -s https://reservas.flordelbosque.cl/api/disponibilidad > api/disponibilidad`)
+y apuntar la constante `API` de `js/reservas-ui.js` a esa ruta. Mismo código de
+interfaz, mismos datos, sin CORS.
+
+- [x] **Step 2: Revisar la página de alojamiento**
 
 Abrir `http://localhost:8000/pages/alojamiento.html` y confirmar:
 
@@ -1031,15 +1044,15 @@ Abrir `http://localhost:8000/pages/alojamiento.html` y confirmar:
 - El precio pasa de "Consultar" a `$50.000 / noche` o `$55.000 / noche` cuando responde el Worker.
 - El cambio a inglés no devuelve ningún precio a "Consultar" ni deja una ficha en español.
 
-- [ ] **Step 3: Revisar la página de reservas**
+- [x] **Step 3: Revisar la página de reservas**
 
 Abrir `http://localhost:8000/pages/reservas.html` y confirmar:
 
 - Con 2 huéspedes y fechas de octubre aparecen sólo las cuatro del primer piso.
-- Con 4 huéspedes aparece Sollipulli, con su foto y sus literas — antes ninguna pieza llegaba a 4 y la búsqueda salía vacía.
+- Con 4 huéspedes y fechas **posteriores al 13 de diciembre** aparece Sollipulli, con su foto y sus literas — antes ninguna pieza llegaba a 4 y la búsqueda salía vacía. Con fechas de octubre no aparece nadie, y es correcto: Sollipulli y Lanín son las dos únicas piezas de más de dos plazas y las dos están bloqueadas.
 - Con fechas posteriores al 13 de diciembre vuelven a aparecer las siete.
 
-- [ ] **Step 4: Commit final**
+- [x] **Step 4: Commit final**
 
 ```bash
 git add -A
