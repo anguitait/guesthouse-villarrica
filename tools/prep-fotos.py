@@ -77,11 +77,16 @@ FOTOS = {
         "Habitación Volcán Lanin /FB2027_3.jpg",
         "Habitación Volcán Lanin /20260909_152149.jpg",
     ],
+    # Dos del dormitorio y dos del baño, que es lo que la vende: privado dentro
+    # de la pieza. Entra FB2027_6, profesional y con el baño completo, y sale
+    # 152430, que era el mismo encuadre peor iluminado. Se conserva 152424
+    # —aunque se le vea el azogue saltado al espejo— porque es la única que
+    # muestra el tragaluz, y la ficha lo promete por escrito.
     "sollipulli": [
         "Habitación Volcán Sollipulli/FB2027_4.jpg",
         "Habitación Volcán Sollipulli/FB2027_5.jpg",
-        "Habitación Volcán Sollipulli/20260909_152430.jpg",
         "Habitación Volcán Sollipulli/20260909_152424.jpg",
+        "Habitación Volcán Sollipulli/FB2027_6.jpg",
     ],
     "lonquimay": [
         "Habitación Volcán Lonquimay /FB2027_7.jpg",
