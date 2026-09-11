@@ -1,0 +1,11 @@
+# Flor del Bosque — https://flordelbosque.cl
+#
+# Todo el sitio es público y se quiere rastreado. Lo único que se excluye es
+# docs/, que guarda material de trabajo —specs, planes, capturas— y no aporta
+# nada a quien busca dónde alojar en Villarrica.
+
+User-agent: *
+Allow: /
+Disallow: /docs/
+
+Sitemap: https://flordelbosque.cl/sitemap.xml

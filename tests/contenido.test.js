@@ -314,3 +314,41 @@ test('cada ficha declara su pieza para la galería', () => {
     );
   }
 });
+
+// ── Rastreo ──────────────────────────────────────────────
+//
+// robots.txt y sitemap.xml son lo primero que pide un buscador. El sitemap lo
+// genera tools/sitemap.py: si alguien agrega una página y no lo vuelve a
+// correr, Google no se entera de que existe. Estos tests lo detectan.
+
+const paginas = ['index.html', ...readdirSync(ruta('pages'))
+  .filter(f => f.endsWith('.html'))
+  .map(f => `pages/${f}`)];
+
+test('robots.txt permite el rastreo y señala el sitemap', () => {
+  const robots = leer('robots.txt');
+  assert.ok(/User-agent:\s*\*/i.test(robots), 'falta la regla para todos los rastreadores');
+  assert.ok(!/^\s*Disallow:\s*\/\s*$/im.test(robots), 'el sitio entero está bloqueado');
+  assert.ok(
+    robots.includes('https://flordelbosque.cl/sitemap.xml'),
+    'robots.txt no señala el sitemap'
+  );
+});
+
+test('el sitemap nombra todas las páginas del sitio', () => {
+  const sitemap = leer('sitemap.xml');
+  for (const p of paginas) {
+    const url = p === 'index.html'
+      ? 'https://flordelbosque.cl/'
+      : `https://flordelbosque.cl/${p}`;
+    assert.ok(sitemap.includes(`<loc>${url}</loc>`), `el sitemap no nombra ${p}`);
+  }
+});
+
+test('el sitemap no nombra páginas que no existen', () => {
+  const sitemap = leer('sitemap.xml');
+  for (const [, url] of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const relativa = url.replace('https://flordelbosque.cl/', '') || 'index.html';
+    assert.ok(existsSync(ruta(relativa)), `el sitemap nombra ${relativa}, que no existe`);
+  }
+});
