@@ -106,10 +106,14 @@ superficie por ahí, aunque el contrato venga de un origen propio.
 
 ## Curaduría de las fotografías
 
-Entre 3 y 5 por habitación, la portada primero. Se descartan las casi
+Entre dos y cuatro por habitación, la portada primero. Se descartan las casi
 duplicadas —varias tomas del mismo encuadre con segundos de diferencia—, las que
 están archivadas en la carpeta equivocada y las previas a la remodelación, ya
 descartadas en el spec anterior.
+
+**Tolhuaca se queda en dos**, y es el suelo: de sus tres tomas, una es un plano
+del piso que no muestra la habitación. Si esa pieza importa comercialmente,
+merece dos o tres fotografías más en la próxima sesión.
 
 Los baños entran cuando aportan: el de Sollipulli, con tragaluz y baldosa
 hidráulica, es de lo mejor del lote y sostiene por sí solo el argumento de
@@ -141,9 +145,11 @@ listado y del calendario son pequeños; la galería trae visor, navegación por
 teclado, comportamiento táctil y foco accesible, y se usa desde dos páginas que
 hoy construyen sus tarjetas de forma distinta.
 
-**El peso de la página sube.** Siete piezas × hasta 5 fotos son hasta 35
-imágenes de ~110 KB. Todas menos las portadas se cargan con `loading="lazy"`, y
-el visor pide la fotografía cuando se abre, no antes.
+**El peso de la página no sube al cargar.** Son 25 fotografías de ~110 KB en
+total, pero el carrusel intercambia el `src` de una sola `<img>` por tarjeta en
+vez de dibujarlas todas: al abrir la página se pide exactamente lo mismo que
+hoy, una portada por pieza. Las demás se piden cuando alguien pasa a la
+siguiente, y el visor pide la suya al abrirse.
 
 **Sin JavaScript no hay galería**, y es correcto: queda la portada, que es lo que
 hay hoy.
