@@ -242,7 +242,7 @@ Esperado: siete líneas con el número de fotos por pieza (4, 4, 4, 2, 4, 4, 3) 
 npm test
 ```
 
-Esperado: los cuatro tests nuevos pasan y los 56 anteriores siguen pasando. Total 60.
+Esperado: los cuatro tests nuevos pasan y los 56 anteriores siguen pasando. Total 60. (La revisión de esta tarea sumó un quinto test, el de fotos huérfanas, así que la base para las tareas siguientes es 61.)
 
 - [ ] **Step 6: Verificar que las portadas no cambiaron**
 
@@ -394,7 +394,7 @@ En `css/components.css`, junto a las reglas `.reservas__calendario`:
 npm test
 ```
 
-Esperado: 61 tests, 0 fallos.
+Esperado: 62 tests, 0 fallos.
 
 - [ ] **Step 8: Commit**
 
@@ -987,7 +987,7 @@ npm test
 node --check js/reservas-ui.js && node --check js/alojamiento-datos.js
 ```
 
-Esperado: 62 tests, 0 fallos, y los dos `--check` sin salida.
+Esperado: 63 tests, 0 fallos, y los dos `--check` sin salida.
 
 - [ ] **Step 8: Commit**
 
