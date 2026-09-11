@@ -383,6 +383,22 @@ el('salida').addEventListener('change', e => {
   if (!el('llegada').value) mostrarMesDe(e.target.value);
 });
 
+// Quien usa el mapa de disponibilidad lo usa siempre; quien no, nunca. No tiene
+// sentido que lo abra en cada visita. `try` porque en navegación privada el
+// acceso a localStorage lanza en vez de devolver vacío.
+const plegable = el('reservas-plegable');
+if (plegable) {
+  try {
+    if (localStorage.getItem('fdb-calendario') === 'abierto') plegable.open = true;
+  } catch { /* sin memoria: queda plegado, que es el valor por defecto */ }
+
+  plegable.addEventListener('toggle', () => {
+    try {
+      localStorage.setItem('fdb-calendario', plegable.open ? 'abierto' : 'plegado');
+    } catch { /* no poder recordarlo no es motivo para romper la página */ }
+  });
+}
+
 cargar().then(() => {
   // El querystring puede traer fechas de otra página, así que el calendario
   // tiene que moverse antes de dibujarse por primera vez.

@@ -273,3 +273,14 @@ test('ninguna foto en disco sobra del manifiesto', () => {
     );
   }
 });
+
+test('el calendario arranca plegado', () => {
+  const reservas = leer('pages/reservas.html');
+  const abre = reservas.indexOf('<details');
+  const cal = reservas.indexOf('id="reservas-calendario"');
+  assert.ok(abre !== -1, 'el calendario no está dentro de un <details>');
+  assert.ok(abre < cal, 'el <details> no envuelve al calendario');
+  const etiqueta = reservas.slice(abre, cal);
+  assert.ok(!/\bopen\b/.test(etiqueta), 'el <details> viene abierto de fábrica');
+  assert.ok(etiqueta.includes('<summary'), 'falta el resumen que se puede pulsar');
+});

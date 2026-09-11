@@ -107,7 +107,14 @@
           <button type="submit" class="btn btn-primary" data-i18n="reservas.buscar">Ver disponibilidad</button>
         </form>
 
-        <div class="reservas__calendario" id="reservas-calendario"></div>
+        <!-- Plegado de fábrica: son 318px antes del primer resultado, y no es
+             el selector de fechas —los campos de arriba son <input type="date">
+             con su propio calendario— sino un mapa de disponibilidad para quien
+             tiene fechas flexibles. -->
+        <details class="reservas__plegable" id="reservas-plegable">
+          <summary data-i18n="reservas.verCalendario">Ver disponibilidad del mes</summary>
+          <div class="reservas__calendario" id="reservas-calendario"></div>
+        </details>
 
         <p class="reservas__error" id="reservas-error" hidden></p>
 
