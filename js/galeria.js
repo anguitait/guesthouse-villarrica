@@ -186,7 +186,12 @@ export async function montarGalerias(raiz = document) {
 
   for (const bloque of bloques) {
     const id = bloque.dataset.habitacion;
-    const nombre = bloque.querySelector('img')?.alt || id;
+    // El título de la tarjeta y no el `alt` de la portada: en la ficha de
+    // alojamiento ese alt describe la escena ("Las dos literas bajo el techo
+    // inclinado...") y en el listado es el nombre. Para anunciar "fotografía 2
+    // de 4" hace falta el nombre de la pieza, igual en las dos páginas.
+    const titulo = bloque.closest('article')?.querySelector('.card-room__title');
+    const nombre = titulo?.textContent.trim() || bloque.querySelector('img')?.alt || id;
     montarUna(bloque, fotos[id], nombre);
   }
 }
