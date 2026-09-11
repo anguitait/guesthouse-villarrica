@@ -43,12 +43,16 @@ CALIDAD = 82
 # con segundos de diferencia—, las mal archivadas y las previas a la
 # remodelación. Los baños entran cuando aportan: el de Sollipulli, con tragaluz
 # y baldosa, sostiene por sí solo el argumento de "baño privado en la pieza".
+#
+# En los baños hay que mirar el espejo AMPLIADO antes de elegir la toma: de las
+# cuatro del baño de Lonquimay, 152320 refleja a una persona identificable con
+# el teléfono en la mano y 152330 una mano con el teléfono. Sólo 152336 refleja
+# nada más que el vano de la puerta y pared, y por eso es la que se publica.
 FOTOS = {
     "llaima": [
         "Habitación Volcán Rukapillan  /FB2027_10.jpg",
         "Habitación Volcán Rukapillan  /20260909_151247.jpg",
         "Habitación Volcán Rukapillan  /20260909_151200.jpg",
-        "Habitación Volcán Rukapillan  /20260909_151331.jpg",
     ],
     "rukapillan": [
         "Habitación Volcán Llaima/20260909_151428.jpg",
@@ -81,7 +85,7 @@ FOTOS = {
     "lonquimay": [
         "Habitación Volcán Lonquimay /FB2027_7.jpg",
         "Habitación Volcán Lonquimay /20260909_152246.jpg",
-        "Habitación Volcán Lonquimay /20260909_152320.jpg",
+        "Habitación Volcán Lonquimay /20260909_152336.jpg",
     ],
 }
 
