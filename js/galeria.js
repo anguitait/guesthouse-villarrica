@@ -37,6 +37,11 @@ async function cargarManifiesto() {
 
 let visor = null;
 
+/* El clic con el que el navegador remata un deslizamiento llega con
+   `target === dialogo`, igual que un clic en el fondo. Sin distinguirlos, cada
+   deslizamiento pasaba la foto y acto seguido cerraba el visor. */
+let huboDeslizamiento = false;
+
 function construirVisor() {
   if (visor) return visor;
 
@@ -64,6 +69,7 @@ function construirVisor() {
   // Clic fuera de la figura cierra. El <dialog> ocupa toda la pantalla, así que
   // "fuera" es el propio diálogo y no sus hijos.
   dialogo.addEventListener('click', evento => {
+    if (huboDeslizamiento) { huboDeslizamiento = false; return; }
     if (evento.target === dialogo) dialogo.close();
   });
 
@@ -105,13 +111,25 @@ function abrirVisor(fotos, indiceInicial, nombrePieza) {
   // Deslizamiento táctil. 40px de umbral: por debajo suele ser un toque torcido
   // al intentar cerrar, no un gesto.
   let inicioX = null;
-  v.dialogo.onpointerdown = evento => { inicioX = evento.clientX; };
+  v.dialogo.onpointerdown = evento => {
+    inicioX = evento.clientX;
+    // Se limpia al EMPEZAR el gesto, no al terminarlo: si un deslizamiento no
+    // viene seguido del clic que lo remata, la bandera quedaba encendida y se
+    // tragaba el siguiente toque, que sí era un clic legítimo en el fondo.
+    huboDeslizamiento = false;
+  };
   v.dialogo.onpointerup = evento => {
     if (inicioX === null) return;
     const recorrido = evento.clientX - inicioX;
-    if (Math.abs(recorrido) > 40) mover(recorrido < 0 ? 1 : -1);
+    if (Math.abs(recorrido) > 40) {
+      huboDeslizamiento = true;
+      mover(recorrido < 0 ? 1 : -1);
+    }
     inicioX = null;
   };
+  // El navegador puede quedarse con el gesto (un desplazamiento que él decide
+  // atender): entonces `pointerup` no llega nunca y hay que soltar el estado.
+  v.dialogo.onpointercancel = () => { inicioX = null; };
 
   pintar();
   v.dialogo.showModal();
@@ -126,9 +144,18 @@ function abrirVisor(fotos, indiceInicial, nombrePieza) {
  */
 function montarUna(bloque, fotos, nombrePieza) {
   if (!Array.isArray(fotos) || fotos.length < 2) return;
+  // Montar dos veces sobre el mismo bloque triplicaba flechas y puntos. Hoy no
+  // ocurre porque el listado se vacía antes de repintar, pero eso es una
+  // invariante de quien llama y no tiene por qué saberse desde aquí.
+  if (bloque.classList.contains('galeria')) return;
 
   const imagen = bloque.querySelector('img');
   if (!imagen) return;
+
+  /* En la ficha de alojamiento el alt describe la escena de la portada
+     ("Cama matrimonial junto al ventanal..."). Al pasar a la segunda foto ese
+     texto pasa a ser falso, así que sólo se conserva mientras se ve la portada. */
+  const altPortada = imagen.alt;
 
   const tira = document.createElement('div');
   tira.className = 'galeria__puntos';
@@ -142,6 +169,9 @@ function montarUna(bloque, fotos, nombrePieza) {
   let indice = 0;
   const pintar = () => {
     imagen.src = url(fotos[indice]);
+    imagen.alt = indice === 0
+      ? altPortada
+      : `${nombrePieza} — fotografía ${indice + 1} de ${fotos.length}`;
     puntos.forEach((p, i) => p.classList.toggle('galeria__punto--activo', i === indice));
   };
 

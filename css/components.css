@@ -1566,6 +1566,10 @@
 /* ── Visor ────────────────────────────────────────────── */
 
 .visor {
+  /* Sin esto el navegador reclama el gesto horizontal como desplazamiento y
+     mata el flujo de punteros con pointercancel: el deslizamiento para pasar
+     fotos no llegaba nunca a dispararse en un teléfono. */
+  touch-action: pan-y;
   border: 0;
   padding: 0;
   max-width: 100vw;
@@ -1630,6 +1634,9 @@
 .visor__cerrar:hover { background: rgba(255, 255, 255, 0.28); }
 
 .visor__contador {
+  /* Una franja de lado a lado: sin esto se traga el clic en el fondo y ahí el
+     visor no cerraba. Mismo motivo que en .galeria__puntos. */
+  pointer-events: none;
   position: fixed;
   bottom: var(--space-5);
   left: 0;
