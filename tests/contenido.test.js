@@ -7,7 +7,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const RAIZ = new URL('../', import.meta.url);
@@ -253,5 +253,23 @@ test('la portada de cada galería es la foto del catálogo', () => {
 test('ninguna galería se quedó con una sola foto', () => {
   for (const [id, fotos] of Object.entries(galeria)) {
     assert.ok(fotos.length >= 2, `${id} tiene ${fotos.length} foto(s)`);
+  }
+});
+
+// El test anterior mira del manifiesto al disco. Éste mira al revés, que es por
+// donde se cuela el error real: prep-fotos.py escribe cada foto apenas la
+// procesa, así que al quitar una de la curaduría el archivo sobra en disco y
+// nada lo delata. Pasó con llaima-4.jpg.
+test('ninguna foto en disco sobra del manifiesto', () => {
+  const nombrados = new Set(Object.values(galeria).flat());
+  const enDisco = readdirSync(ruta('images/habitaciones'))
+    .filter(f => f.endsWith('.jpg'))
+    .map(f => `images/habitaciones/${f}`);
+
+  for (const foto of enDisco) {
+    assert.ok(
+      nombrados.has(foto),
+      `${foto} está en disco pero no lo nombra el manifiesto: sobra de una curaduría anterior`
+    );
   }
 });

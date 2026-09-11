@@ -4,7 +4,8 @@
 De cada habitación publica una galería —la portada primero— y escribe el
 manifiesto images/habitaciones/galeria.json, que es lo único que relaciona
 cada pieza con sus fotos: en el navegador nadie comprueba que los archivos
-nombrados existan.
+nombrados existan. Al final avisa de las fotos que quedaron en disco y el
+manifiesto ya no nombra, pero no las borra.
 
 Tres cosas que no son opcionales:
 
@@ -110,6 +111,43 @@ def nombre(slug, posicion):
     return f"{slug}.jpg" if posicion == 0 else f"{slug}-{posicion + 1}.jpg"
 
 
+def avisar_de_sobrantes(manifiesto):
+    """Delata las fotos que quedaron en disco y el manifiesto ya no nombra.
+
+    El script escribe cada foto apenas la procesa, así que el disco se adelanta
+    al manifiesto y nada vuelve atrás a limpiar. Sacar una foto de la curaduría
+    deja su archivo tirado —pasó con llaima-4.jpg al bajar Llaima de cuatro a
+    tres—, y una corrida que aborta a medias deja las que alcanzó a escribir sin
+    manifiesto que las respalde. Por eso esto se informa también cuando la
+    corrida falla: es justo el caso en que nadie se entera.
+
+    No borra: son fotografías, y quien las borre debería mirarlas antes.
+    """
+    nombradas = {foto for fotos in manifiesto.values() for foto in fotos}
+    # Sólo los JPEG: galeria.json vive en la misma carpeta y no es una foto.
+    sobran = [
+        archivo
+        for archivo in sorted(DESTINO.glob("*.jpg"))
+        if str(archivo.relative_to(RAIZ)) not in nombradas
+    ]
+    if not sobran:
+        return
+    # stdout va con buffer cuando la salida no es un terminal: sin esto el aviso
+    # se adelanta a las líneas de arriba y se lee fuera de contexto.
+    sys.stdout.flush()
+    print(
+        f"\nSobran {len(sobran)} foto(s) en {DESTINO.relative_to(RAIZ)} que el "
+        "manifiesto no nombra:",
+        file=sys.stderr,
+    )
+    for archivo in sobran:
+        print(f"  {archivo.relative_to(RAIZ)}", file=sys.stderr)
+    print(
+        "Revísalas y bórralas a mano con `git rm` si de verdad sobran.",
+        file=sys.stderr,
+    )
+
+
 def main():
     if not ORIGEN.is_dir():
         sys.exit(f"No existe {ORIGEN}. Es material sin versionar: hay que pedirlo.")
@@ -138,12 +176,20 @@ def main():
         print(f"{slug:<14} {len(publicadas)} fotos")
 
     if faltan:
+        # La corrida aborta sin escribir el manifiesto, así que el vigente sigue
+        # siendo el de disco: contra ése —y no contra el que quedó a medias en
+        # memoria— hay que mirar para saber qué archivos quedaron tirados.
+        vigente = {}
+        if MANIFIESTO.is_file():
+            vigente = json.loads(MANIFIESTO.read_text(encoding="utf-8"))
+        avisar_de_sobrantes(vigente)
         sys.exit("Faltan fotos de origen:\n  " + "\n  ".join(faltan))
 
     MANIFIESTO.write_text(
         json.dumps(manifiesto, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    avisar_de_sobrantes(manifiesto)
     total = sum(len(v) for v in manifiesto.values())
     print(f"\n{total} fotos y el manifiesto en {DESTINO.relative_to(RAIZ)}")
 
