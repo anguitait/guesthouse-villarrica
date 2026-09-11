@@ -303,3 +303,14 @@ test('el calendario arranca plegado', () => {
   );
   assert.ok(bloque.includes('<summary'), 'falta el resumen que se puede pulsar');
 });
+
+test('cada ficha declara su pieza para la galería', () => {
+  for (const h of habitaciones) {
+    const ficha = fichaDe(alojamiento, h.id);
+    assert.ok(ficha, `falta la ficha de ${h.id}`);
+    assert.ok(
+      ficha.includes(`data-habitacion="${h.id}"`),
+      `la ficha de ${h.id} no marca su bloque de imagen`
+    );
+  }
+});

@@ -7,6 +7,7 @@
  * marketing no puede quedar en blanco por un servicio externo caído.
  */
 import { formatearPrecio } from './reservas-logica.js?v=20260830';
+import { montarGalerias } from './galeria.js?v=20260910';
 
 const API = 'https://reservas.flordelbosque.cl';
 
@@ -56,3 +57,8 @@ async function actualizar() {
 document.addEventListener('idiomacambiado', pintar);
 
 actualizar();
+
+// Las fichas ya están en el HTML con su foto de portada: la galería se monta
+// encima y no depende del Worker. Si el manifiesto falla, la página queda como
+// estaba.
+montarGalerias();

@@ -5,6 +5,7 @@
 import {
   disponibles, noches, total, formatearPrecio, rangoValido, diasSinCupo
 } from './reservas-logica.js?v=20260830';
+import { montarGalerias } from './galeria.js?v=20260910';
 
 const API = 'https://reservas.flordelbosque.cl';
 const WHATSAPP = '56985488233';
@@ -262,7 +263,7 @@ function dibujarResultados(libres, llegada, salida) {
     tarjeta.className = 'card-room';
 
     const imagen = habitacion.imagen
-      ? `<div class="card-room__image"><img src="../${habitacion.imagen}" alt="${habitacion.nombre}"></div>`
+      ? `<div class="card-room__image" data-habitacion="${habitacion.id}"><img src="../${habitacion.imagen}" alt="${habitacion.nombre}"></div>`
       : '';
 
     tarjeta.innerHTML = `
@@ -287,6 +288,10 @@ function dibujarResultados(libres, llegada, salida) {
       .addEventListener('click', () => abrirFormulario(habitacion, llegada, salida));
     contenedor.appendChild(tarjeta);
   }
+
+  // Una sola pasada al terminar de construir las filas: montarGalerias pide el
+  // manifiesto una vez y lo reutiliza para todas.
+  montarGalerias(contenedor);
 }
 
 // ── Envío ────────────────────────────────────────────────
