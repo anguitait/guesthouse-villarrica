@@ -24,7 +24,11 @@ const TEXTOS = {
     yaNoDisponible: 'Esa habitación se ocupó recién. Vuelve a buscar, por favor.',
     errorEnvio: 'No pudimos enviar la solicitud. Escríbenos a hola@flordelbosque.cl o por WhatsApp.',
     seguirWhatsapp: 'Seguir por WhatsApp',
-    resumen: (h, ll, s, n) => `${h} · ${ll} a ${s} · ${n}`,
+    resumenLlegada: 'Llegada',
+    resumenSalida: 'Salida',
+    resumenNoches: 'Noches',
+    resumenTotal: 'Total',
+    resumenConsultar: 'Consultar',
     mesAnterior: 'Mes anterior',
     mesSiguiente: 'Mes siguiente'
   },
@@ -40,7 +44,11 @@ const TEXTOS = {
     yaNoDisponible: 'That room was just taken. Please search again.',
     errorEnvio: 'We could not send the request. Email hola@flordelbosque.cl or reach us on WhatsApp.',
     seguirWhatsapp: 'Continue on WhatsApp',
-    resumen: (h, ll, s, n) => `${h} · ${ll} to ${s} · ${n}`,
+    resumenLlegada: 'Check-in',
+    resumenSalida: 'Check-out',
+    resumenNoches: 'Nights',
+    resumenTotal: 'Total',
+    resumenConsultar: 'On request',
     mesAnterior: 'Previous month',
     mesSiguiente: 'Next month'
   }
@@ -296,14 +304,74 @@ function dibujarResultados(libres, llegada, salida) {
 
 // ── Envío ────────────────────────────────────────────────
 
+/**
+ * El resumen de lo que se está por pedir. Es el dato más importante de la
+ * página —qué pieza, qué días, cuánto— y venía como una línea de texto suelta
+ * bajo el título, sin nada que lo distinguiera de un subtítulo.
+ */
+let fechasElegidas = null;
+
+function fechaLegible(iso) {
+  // El valor de un <input type="date"> es YYYY-MM-DD sin hora, y `new Date(iso)`
+  // lo interpreta como medianoche UTC: en Chile eso cae el día anterior. Con el
+  // constructor por componentes la fecha es la que el visitante escribió.
+  const [anio, mes, dia] = iso.split('-').map(Number);
+  return new Date(anio, mes - 1, dia).toLocaleDateString(
+    idioma() === 'en' ? 'en-GB' : 'es-CL',
+    { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }
+  );
+}
+
+function pintarResumen() {
+  const caja = el('reservas-resumen');
+  if (!caja || !fechasElegidas) return;
+  const { llegada, salida } = fechasElegidas;
+  caja.textContent = '';
+
+  if (elegida) {
+    const categoria = document.createElement('p');
+    categoria.className = 'resumen__categoria';
+    categoria.textContent = elegida.categoria || '';
+    const nombre = document.createElement('p');
+    nombre.className = 'resumen__pieza';
+    nombre.textContent = elegida.nombre;
+    caja.append(categoria, nombre);
+  }
+
+  const cantidad = noches(llegada, salida);
+  const suma = elegida ? total(elegida, cantidad) : null;
+
+  const datos = document.createElement('dl');
+  datos.className = 'resumen__datos';
+  const par = (etiqueta, valor, clase) => {
+    const celda = document.createElement('div');
+    const dt = document.createElement('dt');
+    dt.textContent = etiqueta;
+    const dd = document.createElement('dd');
+    dd.textContent = valor;
+    if (clase) dd.className = clase;
+    celda.append(dt, dd);
+    datos.appendChild(celda);
+  };
+
+  par(t().resumenLlegada, fechaLegible(llegada));
+  par(t().resumenSalida, fechaLegible(salida));
+  par(t().resumenNoches, String(cantidad));
+  if (elegida) {
+    par(t().resumenTotal,
+        suma === null ? t().resumenConsultar : formatearPrecio(suma, idioma()),
+        'resumen__total');
+  }
+  caja.appendChild(datos);
+}
+
 function abrirFormulario(habitacion, llegada, salida) {
   elegida = habitacion;
   const formulario = el('reservas-form');
   formulario.hidden = false;
 
-  el('reservas-resumen').textContent = habitacion
-    ? t().resumen(habitacion.nombre, llegada, salida, t().noches(noches(llegada, salida)))
-    : `${llegada} — ${salida}`;
+  fechasElegidas = { llegada, salida };
+  pintarResumen();
 
   formulario.scrollIntoView({ behavior: 'smooth' });
 }
@@ -433,3 +501,7 @@ cargar().then(() => {
   mostrarMesDe(el('llegada').value);
   if (conFechas) buscar();
 });
+
+// El resumen se construye desde JavaScript, así que el recorrido de data-i18n
+// que hace main.js no lo alcanza: hay que repintarlo a mano.
+document.addEventListener('idiomacambiado', pintarResumen);
