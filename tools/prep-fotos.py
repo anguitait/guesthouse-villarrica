@@ -181,8 +181,19 @@ def main():
         # memoria— hay que mirar para saber qué archivos quedaron tirados.
         vigente = {}
         if MANIFIESTO.is_file():
-            vigente = json.loads(MANIFIESTO.read_text(encoding="utf-8"))
-        avisar_de_sobrantes(vigente)
+            try:
+                vigente = json.loads(MANIFIESTO.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError) as e:
+                # Un manifiesto ilegible —un merge mal resuelto, una escritura
+                # interrumpida— no puede tapar el error que de verdad importa.
+                # Sin él no se sabe qué sobra, y se dice; lo que no se hace es
+                # reventar con un traceback de JSON encima de las fotos que
+                # faltan, que es lo que el operador vino a leer.
+                print(f"No se pudo leer {MANIFIESTO.name} ({e}); "
+                      "no se puede decir qué fotos sobran.", file=sys.stderr)
+                vigente = None
+        if vigente is not None:
+            avisar_de_sobrantes(vigente)
         sys.exit("Faltan fotos de origen:\n  " + "\n  ".join(faltan))
 
     MANIFIESTO.write_text(
