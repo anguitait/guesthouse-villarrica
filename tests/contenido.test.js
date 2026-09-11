@@ -213,3 +213,45 @@ test('Sollipulli es cuádruple y con literas', () => {
   assert.ok(s.caracteristicas_es.includes('literas'));
   assert.ok(!s.descripcion_es.includes('matrimonial'));
 });
+
+// ── La galería ───────────────────────────────────────────
+//
+// El manifiesto lo genera tools/prep-fotos.py y lo leen las dos páginas que
+// muestran habitaciones. Nada en el navegador comprueba que los archivos que
+// nombra existan: si uno falta, la galería se salta una foto sin decir nada.
+
+const galeria = JSON.parse(leer('images/habitaciones/galeria.json'));
+
+test('cada pieza del catálogo tiene galería', () => {
+  for (const h of habitaciones) {
+    assert.ok(galeria[h.id], `falta la galería de ${h.id}`);
+  }
+  assert.deepEqual(
+    Object.keys(galeria).sort(),
+    habitaciones.map(h => h.id).sort(),
+    'el manifiesto y el catálogo no listan las mismas piezas'
+  );
+});
+
+test('todas las fotos del manifiesto existen en disco', () => {
+  for (const [id, fotos] of Object.entries(galeria)) {
+    for (const foto of fotos) {
+      assert.ok(existsSync(ruta(foto)), `${id}: no existe ${foto}`);
+    }
+  }
+});
+
+test('la portada de cada galería es la foto del catálogo', () => {
+  for (const h of habitaciones) {
+    assert.equal(
+      galeria[h.id][0], h.imagen,
+      `la galería de ${h.id} empieza con otra foto que la ficha`
+    );
+  }
+});
+
+test('ninguna galería se quedó con una sola foto', () => {
+  for (const [id, fotos] of Object.entries(galeria)) {
+    assert.ok(fotos.length >= 2, `${id} tiene ${fotos.length} foto(s)`);
+  }
+});

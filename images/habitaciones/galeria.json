@@ -1,0 +1,41 @@
+{
+  "llaima": [
+    "images/habitaciones/llaima.jpg",
+    "images/habitaciones/llaima-2.jpg",
+    "images/habitaciones/llaima-3.jpg",
+    "images/habitaciones/llaima-4.jpg"
+  ],
+  "rukapillan": [
+    "images/habitaciones/rukapillan.jpg",
+    "images/habitaciones/rukapillan-2.jpg",
+    "images/habitaciones/rukapillan-3.jpg",
+    "images/habitaciones/rukapillan-4.jpg"
+  ],
+  "sierra-nevada": [
+    "images/habitaciones/sierra-nevada.jpg",
+    "images/habitaciones/sierra-nevada-2.jpg",
+    "images/habitaciones/sierra-nevada-3.jpg",
+    "images/habitaciones/sierra-nevada-4.jpg"
+  ],
+  "tolhuaca": [
+    "images/habitaciones/tolhuaca.jpg",
+    "images/habitaciones/tolhuaca-2.jpg"
+  ],
+  "lanin": [
+    "images/habitaciones/lanin.jpg",
+    "images/habitaciones/lanin-2.jpg",
+    "images/habitaciones/lanin-3.jpg",
+    "images/habitaciones/lanin-4.jpg"
+  ],
+  "sollipulli": [
+    "images/habitaciones/sollipulli.jpg",
+    "images/habitaciones/sollipulli-2.jpg",
+    "images/habitaciones/sollipulli-3.jpg",
+    "images/habitaciones/sollipulli-4.jpg"
+  ],
+  "lonquimay": [
+    "images/habitaciones/lonquimay.jpg",
+    "images/habitaciones/lonquimay-2.jpg",
+    "images/habitaciones/lonquimay-3.jpg"
+  ]
+}
