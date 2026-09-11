@@ -378,7 +378,11 @@ function aplicarQuerystring() {
   return parametros.has('llegada') && parametros.has('salida');
 }
 
-el('reservas-fechas').addEventListener('submit', e => { e.preventDefault(); buscar(); });
+el('reservas-fechas').addEventListener('submit', e => {
+  e.preventDefault();
+  plegarCalendario();
+  buscar();
+});
 el('reservas-form').addEventListener('submit', enviar);
 
 // El calendario sigue a lo que se escriba en las fechas: la llegada manda,
@@ -394,12 +398,28 @@ el('salida').addEventListener('change', e => {
 // El prefijo `fdb-` es el del sitio actual; `gh-lang` arrastra el nombre viejo
 // y se queda como está para no perder la preferencia de quien ya nos visitó.
 const plegable = el('reservas-plegable');
+
+/* Plegarlo al buscar no es una preferencia del visitante: es que el mapa ya
+   cumplió su función y el espacio le toca a los resultados. Si se guardara,
+   una sola búsqueda borraría el "déjamelo abierto" de quien lo usa siempre. */
+let plegandoTrasBuscar = false;
+
+function plegarCalendario() {
+  // Sólo si está abierto: asignar `open = false` sobre algo ya cerrado no
+  // dispara `toggle`, y la bandera quedaría encendida esperando un evento que
+  // no llega, para tragarse después un plegado hecho a mano.
+  if (!plegable || !plegable.open) return;
+  plegandoTrasBuscar = true;
+  plegable.open = false;
+}
+
 if (plegable) {
   try {
     if (localStorage.getItem('fdb-calendario') === 'abierto') plegable.open = true;
   } catch { /* sin memoria: queda plegado, que es el valor por defecto */ }
 
   plegable.addEventListener('toggle', () => {
+    if (plegandoTrasBuscar) { plegandoTrasBuscar = false; return; }
     try {
       localStorage.setItem('fdb-calendario', plegable.open ? 'abierto' : 'plegado');
     } catch { /* no poder recordarlo no es motivo para romper la página */ }
