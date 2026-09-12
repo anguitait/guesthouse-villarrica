@@ -495,3 +495,16 @@ test('experiencias no anuncia un retiro con fecha', () => {
   assert.ok(!/Próximo retiro/i.test(exp), 'sigue anunciando un próximo retiro');
   assert.ok(!/Mayo 2026/i.test(exp), 'sigue con la fecha vieja');
 });
+
+test('el cowork no ofrece café ni monitores', () => {
+  // Se pidió quitar los dos servicios. Aparecían en tres lugares, no en los
+  // dos que mostraba la captura: el café estaba también en lo que incluye un
+  // día de cowork.
+  const cw = leer('pages/cowork.html');
+  assert.ok(!/Café ilimitado/i.test(cw), 'sigue ofreciendo café ilimitado');
+  assert.ok(!/Monitores/i.test(cw), 'sigue ofreciendo monitores');
+  assert.ok(
+    /alejado de la ciudad/i.test(cw),
+    'falta el recuadro del espacio de trabajo tranquilo'
+  );
+});
