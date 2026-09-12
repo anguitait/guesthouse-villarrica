@@ -18,6 +18,7 @@ import pathlib
 import re
 import subprocess
 import sys
+from xml.sax.saxutils import escape
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "sitemap.xml"
@@ -57,7 +58,10 @@ def main():
     total = 0
     for archivo in paginas():
         lineas.append("  <url>")
-        lineas.append(f"    <loc>{direccion(archivo)}</loc>")
+        # Escapado aunque hoy las once direcciones sean ASCII sin `&`: un
+        # og:url con querystring rompería el XML y Search Console rechaza el
+        # sitemap entero, no la línea.
+        lineas.append(f"    <loc>{escape(direccion(archivo))}</loc>")
         fecha = modificado(archivo)
         if fecha:
             lineas.append(f"    <lastmod>{fecha}</lastmod>")

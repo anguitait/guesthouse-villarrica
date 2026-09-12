@@ -1,11 +1,12 @@
 # Flor del Bosque — https://flordelbosque.cl
 #
-# Todo el sitio es público y se quiere rastreado. Lo único que se excluye es
-# docs/, que guarda material de trabajo —specs, planes, capturas— y no aporta
-# nada a quien busca dónde alojar en Villarrica.
+# Todo lo que se publica es público y se quiere rastreado, así que no hay nada
+# que bloquear. Los documentos de trabajo —specs, planes, manual de marca— ya
+# no se sirven: quedan fuera de la construcción por `exclude` en _config.yml,
+# que es lo que de verdad los retira. Un Disallow acá sólo habría impedido que
+# Google viera el 404 y soltara del índice lo que ya tenía.
 
 User-agent: *
 Allow: /
-Disallow: /docs/
 
 Sitemap: https://flordelbosque.cl/sitemap.xml

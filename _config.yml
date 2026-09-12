@@ -1,0 +1,25 @@
+# Configuración de GitHub Pages.
+#
+# Existe por una sola razón: dejar de publicar docs/. Esa carpeta guarda los
+# specs, los planes y el manual de marca, con tarifas internas, decisiones de
+# negocio y pendientes de la propietaria. Estaban accesibles en
+# flordelbosque.cl/docs/... y respondían 200.
+#
+# Se resuelve acá y no en robots.txt a propósito: robots.txt sólo impide que
+# Google vuelva a rastrear, no retira del índice lo que ya vio, y además le
+# taparía la vista de un `noindex` que pusiéramos después. Si la carpeta deja
+# de servirse, las direcciones responden 404 y Google las suelta solo.
+#
+# Los archivos siguen en el repositorio y se leen ahí como siempre: lo que
+# cambia es que ya no se sirven por el dominio.
+#
+# `exclude` reemplaza la lista por defecto de Jekyll, que nombra Gemfile,
+# node_modules y vendor. Ninguno está versionado en este repo, así que no se
+# pierde nada al no repetirlos.
+exclude:
+  - docs
+  - tools
+  - tests
+  - worker
+  - package.json
+  - README.md
