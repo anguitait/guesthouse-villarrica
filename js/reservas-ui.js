@@ -18,6 +18,7 @@ const TEXTOS = {
     sinResultados: 'No hay habitaciones libres para esas fechas. Prueba con otras.',
     rangoInvalido: 'Revisa las fechas: la salida debe ser posterior a la llegada y no puede ser una fecha pasada.',
     noches: n => n === 1 ? '1 noche' : `${n} noches`,
+    huespedes: 'huéspedes',
     porNoche: 'por noche',
     elegir: 'Elegir',
     exito: 'Recibimos tu solicitud. Te respondemos a la brevedad para confirmar disponibilidad y tarifa.',
@@ -38,6 +39,7 @@ const TEXTOS = {
     sinResultados: 'No rooms available for those dates. Try different ones.',
     rangoInvalido: 'Check the dates: check-out must be after check-in and cannot be in the past.',
     noches: n => n === 1 ? '1 night' : `${n} nights`,
+    huespedes: 'guests',
     porNoche: 'per night',
     elegir: 'Choose',
     exito: 'We received your request. We will reply shortly to confirm availability and rates.',
@@ -274,6 +276,21 @@ function dibujarResultados(libres, llegada, salida) {
       ? `<div class="card-room__image" data-habitacion="${habitacion.id}"><img src="../${habitacion.imagen}" alt="${habitacion.nombre}"></div>`
       : '';
 
+    // El piso es de las últimas características del catálogo y la fila recorta
+    // a cuatro, así que sin esto nunca se ve. Va primero, con la capacidad,
+    // porque decidir entre primer y segundo piso pesa más que la cuarta
+    // característica de la lista.
+    //
+    // El patrón ancla la línea entera: «Piso de madera» —«Wooden floors» en
+    // inglés— también dice «piso» y viene antes en la lista, así que buscar la
+    // palabra suelta devolvía el material del suelo en vez del nivel.
+    const caracteristicas = habitacion.caracteristicas[idioma()] || [];
+    const piso = caracteristicas.find(
+      c => /^(primer|segundo) piso$|^(ground|first|second) floor$/i.test(c.trim())) || '';
+    const capacidad = habitacion.capacidad
+      ? `${habitacion.capacidad} ${t().huespedes}${piso ? ` · ${piso}` : ''}`
+      : piso;
+
     tarjeta.innerHTML = `
       ${imagen}
       <div class="card-room__content">
@@ -281,7 +298,8 @@ function dibujarResultados(libres, llegada, salida) {
         <h3 class="card-room__title">${habitacion.nombre}</h3>
         <p class="card-room__description">${habitacion.descripcion[idioma()] || ''}</p>
         <ul class="card-room__features">
-          ${(habitacion.caracteristicas[idioma()] || []).map(c => `<li>${c}</li>`).join('')}
+          ${capacidad ? `<li>${capacidad}</li>` : ''}
+          ${caracteristicas.map(c => `<li>${c}</li>`).join('')}
         </ul>
         <div class="card-room__footer">
           <div class="card-room__price">

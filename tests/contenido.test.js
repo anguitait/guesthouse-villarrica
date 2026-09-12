@@ -452,3 +452,37 @@ test('el hotel ofrece las siete habitaciones del catálogo', () => {
     'las habitaciones de los datos estructurados no son las del catálogo'
   );
 });
+
+// ── Correcciones de la propietaria (2026-09-12) ──────────
+
+/**
+ * El piso de una habitación es una línea propia de sus características:
+ * «Primer piso» o «Segundo piso». Hay que anclar la línea entera y no buscar
+ * la palabra suelta, porque «Piso de madera» también dice «piso» —y en inglés
+ * «Wooden floors» también dice «floor»— y aparece antes en la lista.
+ */
+const PISO_ES = /^(Primer|Segundo) piso$/;
+const pisoDe = (h) => h.caracteristicas_es
+  .split('\n').map(l => l.trim()).filter(Boolean).find(l => PISO_ES.test(l));
+
+test('el catálogo declara el piso de cada pieza', () => {
+  // La ficha lo muestra junto a la capacidad tomándolo de acá. Si alguien
+  // borra esa línea al editar el catálogo, la ficha se queda muda sin que se
+  // note. No se le exige ser la última: Volcán Lanín cierra con «Apta para 2
+  // adultos y 1 niño» y deja el piso en la penúltima.
+  for (const h of habitaciones) {
+    assert.ok(pisoDe(h), `${h.id}: el catálogo no declara su piso`);
+  }
+});
+
+test('cada ficha muestra el piso de su habitación', () => {
+  for (const h of habitaciones) {
+    const piso = pisoDe(h);
+    const ficha = fichaDe(alojamiento, h.id);
+    assert.ok(ficha, `falta la ficha de ${h.id}`);
+    assert.ok(
+      ficha.includes(piso),
+      `la ficha de ${h.id} no dice "${piso}"`
+    );
+  }
+});
