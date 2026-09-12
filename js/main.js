@@ -251,6 +251,19 @@
       'hab.dest.tolhuaca.desc': 'Baño privado dentro de la habitación, gran clóset y un ventanal con salida directa al jardín.',
       'hab.dest.llaima.cat': 'Doble',
       'hab.dest.llaima.desc': 'Cama matrimonial, piso de madera y ventanal con salida directa al jardín. Baño compartido con Volcán Rukapillán.',
+      // Correcciones de la propietaria (2026-09-12). Los textos viven en cuatro
+      // páginas que hoy sólo traducen la cabecera y el pie, así que todavía no
+      // llevan data-i18n; el inglés se guarda acá para que no haya que volver a
+      // pedirlo cuando esas páginas se conecten al diccionario.
+      'cowork.quiet.title': 'Espacio abierto y tranquilo',
+      'cowork.quiet.text': 'Trabajo sin ruido, cerca de Villarrica y a la vez alejado de la ciudad.',
+      'agenda.possibilities.title': 'Lo que se puede hacer acá',
+      'agenda.possibilities.cta': 'Consultar por una actividad',
+      'coliving.quarterly.title': 'Plan Trimestral',
+      'coliving.house.title': 'La casa completa',
+      'coliving.house.cta': 'Consultar por la casa completa',
+      'weddings.rooms': '7 habitaciones disponibles',
+      'weddings.kitchen': 'Uso de cocina',
       'room.night': 'noche',
       'room.people': 'personas'
     },
@@ -367,6 +380,19 @@
       'hab.dest.tolhuaca.desc': 'Private en-suite bathroom, a large closet and a full-height window opening directly onto the garden.',
       'hab.dest.llaima.cat': 'Double',
       'hab.dest.llaima.desc': 'Double bed, wooden floors and a full-height window opening onto the garden. Bathroom shared with Volcán Rukapillán.',
+      // Correcciones de la propietaria (2026-09-12). Los textos viven en cuatro
+      // páginas que hoy sólo traducen la cabecera y el pie, así que todavía no
+      // llevan data-i18n; el inglés se guarda acá para que no haya que volver a
+      // pedirlo cuando esas páginas se conecten al diccionario.
+      'cowork.quiet.title': 'Open, quiet workspace',
+      'cowork.quiet.text': 'Quiet work, close to Villarrica yet away from town.',
+      'agenda.possibilities.title': 'What you can do here',
+      'agenda.possibilities.cta': 'Ask about an activity',
+      'coliving.quarterly.title': 'Quarterly Plan',
+      'coliving.house.title': 'The whole house',
+      'coliving.house.cta': 'Ask about the whole house',
+      'weddings.rooms': '7 rooms available',
+      'weddings.kitchen': 'Kitchen access',
       'room.night': 'night',
       'room.people': 'people'
     }
