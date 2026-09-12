@@ -486,3 +486,12 @@ test('cada ficha muestra el piso de su habitación', () => {
     );
   }
 });
+
+test('experiencias no anuncia un retiro con fecha', () => {
+  // La fecha estaba quemada en el HTML —«15-17 Mayo 2026»— y para cuando la
+  // propietaria lo pidió ya había pasado hacía cuatro meses. Una fecha fija en
+  // una página estática siempre termina así.
+  const exp = leer('pages/experiencias.html');
+  assert.ok(!/Próximo retiro/i.test(exp), 'sigue anunciando un próximo retiro');
+  assert.ok(!/Mayo 2026/i.test(exp), 'sigue con la fecha vieja');
+});
