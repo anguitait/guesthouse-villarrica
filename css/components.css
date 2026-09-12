@@ -1724,3 +1724,24 @@
     font-size: var(--text-sm);
   }
 }
+
+/* Las actividades que se pueden hacer, sin día ni hora: la propietaria pidió
+   dejar de prometer una agenda que todavía no existe. Se leen de un vistazo,
+   así que van en línea y no apiladas. */
+.lista-posibilidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  margin: var(--space-6) 0;
+  padding: 0;
+}
+
+.lista-posibilidades li {
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}

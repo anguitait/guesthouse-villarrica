@@ -523,3 +523,25 @@ test('los paquetes de matrimonio ofrecen las siete habitaciones y la cocina', ()
     assert.match(bloque, /cocina/i, `${nombre} no menciona el uso de cocina`);
   }
 });
+
+test('la agenda ofrece posibilidades, no horarios que no existen', () => {
+  const ag = leer('pages/agenda.html');
+  // Nada de días fijos: la propietaria dijo que todavía no hay claridad.
+  for (const patron of [/Sábados \d/, /Domingos \d/, /Un sábado al mes/]) {
+    assert.ok(!patron.test(ag), `la agenda todavía anuncia "${patron.source}"`);
+  }
+  // Ni botones de reservar una actividad que no tiene fecha. Se mira sólo el
+  // contenido y no la página entera: el botón «Reservar» de la cabecera lleva
+  // al calendario de alojamiento y está en las once páginas, así que buscarlo
+  // en todo el archivo haría fallar el test para siempre.
+  const contenido = ag.slice(ag.indexOf('<main>'), ag.indexOf('</main>'));
+  assert.ok(
+    !/>\s*Reservar\s*</i.test(contenido),
+    'la agenda todavía tiene botones de reservar'
+  );
+  // Y sí los siete tipos de evento que pidió.
+  for (const tipo of ['cumpleaños', 'empresas', 'Despedidas',
+                      'cocina', 'yoga', 'Congresos']) {
+    assert.match(ag, new RegExp(tipo, 'i'), `la agenda no ofrece ${tipo}`);
+  }
+});
