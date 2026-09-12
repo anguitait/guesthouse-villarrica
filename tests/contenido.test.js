@@ -321,9 +321,32 @@ test('cada ficha declara su pieza para la galería', () => {
 // genera tools/sitemap.py: si alguien agrega una página y no lo vuelve a
 // correr, Google no se entera de que existe. Estos tests lo detectan.
 
-const paginas = ['index.html', ...readdirSync(ruta('pages'))
-  .filter(f => f.endsWith('.html'))
-  .map(f => `pages/${f}`)];
+/**
+ * Todos los HTML publicados, a cualquier profundidad. Recursivo y no sólo la
+ * raíz y pages/: con la lista corta, una página nueva en la raíz o en un
+ * directorio nuevo —la forma que tendrá el sitio en inglés— se quedaba fuera
+ * del sitemap sin que ningún test se quejara.
+ *
+ * Se salta lo que GitHub Pages no publica: lo excluido en _config.yml y lo que
+ * empieza por punto o guion bajo. Ahí entra .claude/worktrees/, que en el
+ * checkout principal guarda copias enteras del sitio.
+ */
+const SIN_PUBLICAR = new Set(['docs', 'tools', 'tests', 'worker', 'node_modules']);
+
+function htmlPublicados(dir = '', acumulado = []) {
+  for (const entrada of readdirSync(ruta(dir || '.'), { withFileTypes: true })) {
+    if (entrada.name.startsWith('.') || entrada.name.startsWith('_')) continue;
+    const rel = dir ? `${dir}/${entrada.name}` : entrada.name;
+    if (entrada.isDirectory()) {
+      if (!SIN_PUBLICAR.has(entrada.name)) htmlPublicados(rel, acumulado);
+    } else if (entrada.name.endsWith('.html')) {
+      acumulado.push(rel);
+    }
+  }
+  return acumulado;
+}
+
+const paginas = htmlPublicados().sort();
 
 test('robots.txt permite el rastreo y señala el sitemap', () => {
   const robots = leer('robots.txt');

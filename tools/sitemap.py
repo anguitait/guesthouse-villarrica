@@ -23,15 +23,27 @@ from xml.sax.saxutils import escape
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "sitemap.xml"
 
-# docs/ se sirve público pero no interesa a nadie que busque alojamiento, y
-# robots.txt lo excluye: nombrarlo aquí sería contradecirse.
-EXCLUIDOS = {"docs"}
+# Lo mismo que `exclude` en _config.yml: son carpetas que GitHub Pages ya no
+# publica, así que una dirección suya en el sitemap sería un 404 anunciado.
+EXCLUIDOS = {"docs", "tools", "tests", "worker"}
 
 
 def paginas():
-    for f in sorted(RAIZ.glob("*.html")) + sorted(RAIZ.glob("pages/*.html")):
-        if f.relative_to(RAIZ).parts[0] not in EXCLUIDOS:
-            yield f
+    """Todos los HTML publicados, a cualquier profundidad.
+
+    Recursivo y no sólo la raíz y pages/: el día que existan las direcciones
+    /en/ tienen que entrar solas. Se salta lo que Jekyll tampoco publica —lo
+    que empieza por punto o guion bajo— y ahí va incluido .claude/worktrees/,
+    que en el checkout principal contiene copias enteras del sitio y llenaría
+    el sitemap de direcciones fantasma.
+    """
+    for f in sorted(RAIZ.rglob("*.html")):
+        partes = f.relative_to(RAIZ).parts
+        if any(p.startswith((".", "_")) for p in partes):
+            continue
+        if partes[0] in EXCLUIDOS:
+            continue
+        yield f
 
 
 def direccion(archivo):

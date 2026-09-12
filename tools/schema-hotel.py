@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Construye los datos estructurados de la portada desde el catálogo.
 
-Google arma la ficha de un alojamiento con estos campos. Escribirlos a mano
-significa que el día que cambie una tarifa o entre una habitación, el sitio
-diga una cosa y Google otra, sin que nada se queje. Las habitaciones salen de
-docs/habitaciones-airtable.csv, el mismo archivo del que vive la página de
-alojamiento.
+Google arma la ficha de un alojamiento con estos campos, y escribirlos a mano
+es garantía de que envejezcan. Las habitaciones salen de
+docs/habitaciones-airtable.csv, el mismo archivo del que se pobló Airtable.
+
+OJO con el alcance de esa garantía: el CSV es una exportación manual, no un
+espejo de Airtable. La tarifa que muestra la página viene del Worker en vivo;
+la que va acá viene del CSV. Si la propietaria sube una tarifa en Airtable y
+nadie reexporta el CSV, la página dirá lo nuevo y esto lo viejo, y el test que
+compara ambos no puede detectarlo porque compara contra el mismo CSV del que
+se generó. Al cambiar tarifas: reexportar el CSV y volver a correr esto.
 
 Los datos del negocio no salen del CSV porque no están ahí: son del sitio
 —teléfono y correo de contacto, coordenadas del mapa— y se declaran acá.
@@ -75,16 +80,30 @@ def habitaciones():
             yield {
                 "@type": "Offer",
                 "itemOffered": {
-                    "@type": "HotelRoom",
+                    # Doble tipo a propósito. HotelRoom desciende de Place, y
+                    # el rango de `itemOffered` admite Product o Service, no
+                    # Place: la propia documentación de hoteles de schema.org
+                    # prescribe declarar ambos para poder ofertar un
+                    # alojamiento.
+                    "@type": ["HotelRoom", "Product"],
                     "name": fila["nombre"],
                     "description": fila["descripcion_es"],
                     "occupancy": {
                         "@type": "QuantitativeValue",
+                        # IE = persona, en el código de unidades UN/CEFACT.
+                        "unitCode": "IE",
                         "maxValue": int(fila["capacidad"]),
                     },
                 },
-                "price": fila["precio_noche"],
-                "priceCurrency": "CLP",
+                # `price` a secas no dice que sea por noche: un consumidor
+                # estricto lo lee como el precio de la estadía entera. La
+                # unidad va explícita.
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": fila["precio_noche"],
+                    "priceCurrency": "CLP",
+                    "unitCode": "DAY",
+                },
             }
 
 
