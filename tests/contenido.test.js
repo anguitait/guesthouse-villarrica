@@ -352,3 +352,16 @@ test('el sitemap no nombra páginas que no existen', () => {
     assert.ok(existsSync(ruta(relativa)), `el sitemap nombra ${relativa}, que no existe`);
   }
 });
+
+test('cada página declara su dirección canónica', () => {
+  for (const p of paginas) {
+    const html = leer(p);
+    const canonica = html.match(/<link rel="canonical" href="([^"]+)"/);
+    assert.ok(canonica, `${p} no declara canónica`);
+    const og = html.match(/property="og:url" content="([^"]+)"/);
+    assert.equal(
+      canonica[1], og[1],
+      `${p}: la canónica y og:url apuntan a direcciones distintas`
+    );
+  }
+});
