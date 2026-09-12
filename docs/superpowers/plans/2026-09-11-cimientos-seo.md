@@ -375,12 +375,12 @@ Cada título va en tres lugares del `<head>`: `<title>`, `og:title` y `twitter:t
 
 | Archivo | Título nuevo |
 |---|---|
-| `index.html` | `Flor del Bosque \| Alojamiento frente al Volcán Villarrica` |
-| `pages/alojamiento.html` | `Habitaciones frente al volcán, Villarrica \| Flor del Bosque` |
+| `index.html` | `Flor del Bosque \| Hostal frente al Volcán Villarrica` |
+| `pages/alojamiento.html` | `Habitaciones a orillas del Río Toltén \| Flor del Bosque` |
 | `pages/coliving.html` | `Coliving para nómadas en Villarrica \| Flor del Bosque` |
-| `pages/cowork.html` | `CoWork y café en Villarrica, La Araucanía \| Flor del Bosque` |
+| `pages/cowork.html` | `CoWork y café en Villarrica \| Flor del Bosque` |
 | `pages/experiencias.html` | `Retiros y talleres en Villarrica \| Flor del Bosque` |
-| `pages/agenda.html` | `Agenda de talleres y eventos en Villarrica \| Flor del Bosque` |
+| `pages/agenda.html` | `Agenda de talleres y eventos, Villarrica \| Flor del Bosque` |
 | `pages/nosotros.html` | `Nuestra historia \| Flor del Bosque, Villarrica` |
 | `pages/contacto.html` | `Cómo llegar y contacto \| Flor del Bosque, Villarrica` |
 | `pages/reservas.html` | `Reservar habitación en Villarrica \| Flor del Bosque` |
