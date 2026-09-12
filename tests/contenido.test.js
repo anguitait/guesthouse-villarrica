@@ -546,6 +546,22 @@ test('la agenda ofrece posibilidades, no horarios que no existen', () => {
   }
 });
 
+test('las experiencias no anuncian fecha ni cupos', () => {
+  // Igual que la agenda y la portada: los talleres se coordinan a pedido, así
+  // que prometer «Sábados 10:00 · 8 cupos» es ofrecer algo que no existe.
+  const ex = leer('pages/experiencias.html');
+  const contenido = ex.slice(ex.indexOf('<main>'), ex.indexOf('</main>'));
+  for (const patron of [/Sábados \d/, /Domingos \d/, /Viernes \d/,
+                        /Un sábado al mes/, /Último viernes del mes/,
+                        /cupos?/i, /Calendario mensual/i]) {
+    assert.ok(!patron.test(contenido), `experiencias todavía anuncia "${patron.source}"`);
+  }
+  assert.ok(
+    !/>\s*(Reservar cupo|Inscribirme)\s*</i.test(contenido),
+    'experiencias todavía ofrece reservar un cupo'
+  );
+});
+
 test('coliving publica las tarifas de estadía larga', () => {
   const co = leer('pages/coliving.html');
   for (const precio of ['$450.000', '$1.200.000', '$350.000', '$400.000']) {
