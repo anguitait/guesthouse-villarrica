@@ -54,24 +54,170 @@
 
   <!-- Schema.org -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Hotel",
-    "name": "Flor del Bosque",
-    "description": "Alojamiento en entorno natural a orillas del Río Toltén con vista al Volcán Villarrica",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Villarrica",
-      "addressRegion": "Araucanía",
-      "addressCountry": "CL"
+{
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "name": "Flor del Bosque",
+  "description": "Alojamiento en entorno natural a orillas del Río Toltén, con vista al Volcán Villarrica.",
+  "url": "https://flordelbosque.cl/",
+  "image": "https://flordelbosque.cl/images/og-image.jpg",
+  "telephone": "+56985488233",
+  "email": "hola@flordelbosque.cl",
+  "priceRange": "CLP 50.000–55.000",
+  "currenciesAccepted": "CLP",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Orillas del Río Toltén",
+    "addressLocality": "Villarrica",
+    "addressRegion": "La Araucanía",
+    "addressCountry": "CL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -39.2614638,
+    "longitude": -72.2383335
+  },
+  "sameAs": [
+    "https://instagram.com/hostalflordelbosque"
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "WiFi",
+      "value": true
     },
-    "amenityFeature": [
-      {"@type": "LocationFeatureSpecification", "name": "WiFi"},
-      {"@type": "LocationFeatureSpecification", "name": "Estacionamiento"},
-      {"@type": "LocationFeatureSpecification", "name": "Piscina"},
-      {"@type": "LocationFeatureSpecification", "name": "CoWork"}
-    ]
-  }
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Estacionamiento",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Piscina",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "CoWork",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Desayuno",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Cocina compartida",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Jardín",
+      "value": true
+    }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Llaima",
+        "description": "Habitación del primer piso con cama matrimonial y piso de madera. Cuenta con un gran clóset, veladores con lámparas y un ventanal con salida directa al jardín. Comparte un baño completo con ducha con la habitación Volcán Rukapillán.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 2
+        }
+      },
+      "price": "50000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Rukapillán",
+        "description": "Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Volcán Llaima.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 2
+        }
+      },
+      "price": "50000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Sierra Nevada",
+        "description": "Habitación del primer piso con dos camas y clóset amplio, piso de madera y ventanal con salida directa al jardín. El baño completo con ducha se encuentra fuera de la habitación y es de uso exclusivo.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 2
+        }
+      },
+      "price": "55000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Tolhuaca",
+        "description": "Habitación del primer piso con baño privado dentro de la habitación y ducha. Gran clóset, piso de madera y ventanal con salida directa al jardín.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 2
+        }
+      },
+      "price": "55000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Lanín",
+        "description": "Habitación amplia del segundo piso con baño privado dentro y ducha. Cuenta con cama matrimonial y una cama chica adicional, dos veladores y una linda vista al jardín y a la piscina. Capacidad para 2 adultos y 1 niño.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 3
+        }
+      },
+      "price": "55000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Sollipulli",
+        "description": "Habitación amplia del segundo piso con dos literas, pensada para grupos o familias. Tiene baño privado dentro de la habitación, con ducha y tragaluz en el techo que le da mucha luz natural, y un arrimo de clóset para la ropa.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 4
+        }
+      },
+      "price": "55000",
+      "priceCurrency": "CLP"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "HotelRoom",
+        "name": "Volcán Lonquimay",
+        "description": "Habitación del segundo piso con cama matrimonial y baño privado dentro de la habitación, con ducha. Cuenta con repisas para guardar y ordenar la ropa.",
+        "occupancy": {
+          "@type": "QuantitativeValue",
+          "maxValue": 2
+        }
+      },
+      "price": "55000",
+      "priceCurrency": "CLP"
+    }
+  ]
+}
   </script>
 </head>
 <body>

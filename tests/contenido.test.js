@@ -390,3 +390,37 @@ test('ningún título genérico se queda sin decir dónde queda esto', () => {
     );
   }
 });
+
+test('los datos estructurados de cada página son JSON válido', () => {
+  for (const p of paginas) {
+    for (const [, bloque] of leer(p).matchAll(
+      /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      assert.doesNotThrow(() => JSON.parse(bloque), `${p}: datos estructurados rotos`);
+    }
+  }
+});
+
+test('la portada describe el hotel con lo que Google necesita', () => {
+  const bloques = [...leer('index.html').matchAll(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  const hotel = bloques.find(b => b['@type'] === 'Hotel');
+  assert.ok(hotel, 'la portada no declara un Hotel');
+
+  for (const campo of ['telephone', 'email', 'url', 'image', 'geo', 'priceRange', 'sameAs']) {
+    assert.ok(hotel[campo], `al Hotel le falta ${campo}`);
+  }
+  assert.equal(hotel.geo.latitude, -39.2614638);
+  assert.equal(hotel.geo.longitude, -72.2383335);
+  assert.ok(hotel.address.streetAddress, 'la dirección no trae calle');
+});
+
+test('el hotel ofrece las siete habitaciones del catálogo', () => {
+  const hotel = [...leer('index.html').matchAll(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(m => JSON.parse(m[1])).find(b => b['@type'] === 'Hotel');
+  const ofrecidas = (hotel.makesOffer || []).map(o => o.itemOffered.name).sort();
+  assert.deepEqual(
+    ofrecidas, habitaciones.map(h => h.nombre).sort(),
+    'las habitaciones de los datos estructurados no son las del catálogo'
+  );
+});
