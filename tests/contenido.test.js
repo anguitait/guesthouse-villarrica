@@ -411,7 +411,12 @@ test('la portada describe el hotel con lo que Google necesita', () => {
   }
   assert.equal(hotel.geo.latitude, -39.2614638);
   assert.equal(hotel.geo.longitude, -72.2383335);
-  assert.ok(hotel.address.streetAddress, 'la dirección no trae calle');
+  // Sin streetAddress a propósito: el único rótulo disponible no es una calle
+  // y discrepa de lo que dicen los directorios. Lo que sí tiene que estar es
+  // la ciudad, la región y el país, más las coordenadas de arriba.
+  for (const campo of ['addressLocality', 'addressRegion', 'addressCountry']) {
+    assert.ok(hotel.address[campo], `a la dirección le falta ${campo}`);
+  }
 });
 
 test('el hotel ofrece las siete habitaciones del catálogo', () => {

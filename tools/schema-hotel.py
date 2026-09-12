@@ -32,11 +32,22 @@ NEGOCIO = {
     "image": "https://flordelbosque.cl/images/og-image.jpg",
     "telephone": "+56985488233",
     "email": "hola@flordelbosque.cl",
-    "priceRange": "CLP 50.000–55.000",
+    # "$$" y no "CLP 50.000–55.000": el punto es separador de miles en Chile
+    # pero decimal en inglés, así que ese texto se lee «CLP 50–55» y
+    # contradice los `price` de más abajo. El precio exacto va en
+    # makesOffer, que es el campo que las máquinas leen; esto es sólo
+    # la banda orientativa.
+    "priceRange": "$$",
     "currenciesAccepted": "CLP",
+    # Sin `streetAddress` a propósito. Ese campo espera calle y número, y lo
+    # único que hay es el rótulo "Orillas Río Toltén", que además aparece
+    # escrito distinto en los directorios ("K2 Villarrica-Freire s/n",
+    # "Camino km 2"). Google castiga que la dirección del sitio no calce con
+    # la del Perfil de Empresa, así que hasta que haya UNA dirección oficial
+    # es mejor no afirmar ninguna: las coordenadas de abajo ubican el lugar
+    # con más precisión que cualquiera de esas frases.
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Orillas del Río Toltén",
         "addressLocality": "Villarrica",
         "addressRegion": "La Araucanía",
         "addressCountry": "CL",
@@ -46,8 +57,12 @@ NEGOCIO = {
     "sameAs": ["https://instagram.com/hostalflordelbosque"],
     "amenityFeature": [
         {"@type": "LocationFeatureSpecification", "name": n, "value": True}
-        for n in ["WiFi", "Estacionamiento", "Piscina", "CoWork",
-                  "Desayuno", "Cocina compartida", "Jardín"]
+        # "Piscina" lleva el matiz porque pages/alojamiento.html dice
+        # "Temporada verano": prometerla los doce meses es una promesa que no
+        # se cumple en julio. El desayuno sí es del año entero: está incluido
+        # en la tarifa desde septiembre de 2026.
+        for n in ["WiFi", "Estacionamiento", "Piscina (temporada de verano)",
+                  "CoWork", "Desayuno", "Cocina compartida", "Jardín"]
     ],
 }
 
