@@ -365,3 +365,28 @@ test('cada página declara su dirección canónica', () => {
     );
   }
 });
+
+test('los títulos y descripciones caben en lo que Google muestra', () => {
+  for (const p of paginas) {
+    const html = leer(p);
+    const titulo = html.match(/<title>([^<]*)<\/title>/)[1];
+    const desc = html.match(/name="description" content="([^"]*)"/)[1];
+    assert.ok(titulo.length <= 60, `${p}: título de ${titulo.length} caracteres`);
+    assert.ok(desc.length <= 160, `${p}: descripción de ${desc.length} caracteres`);
+  }
+});
+
+test('ningún título genérico se queda sin decir dónde queda esto', () => {
+  // Las páginas que venden un servicio tienen que nombrar el lugar: nadie
+  // teclea "alojamiento" a secas, teclea "alojamiento en Villarrica".
+  const conLugar = ['index.html', 'pages/alojamiento.html', 'pages/coliving.html',
+                    'pages/cowork.html', 'pages/experiencias.html',
+                    'pages/matrimonios.html', 'pages/reservas.html'];
+  for (const p of conLugar) {
+    const titulo = leer(p).match(/<title>([^<]*)<\/title>/)[1];
+    assert.ok(
+      /Villarrica|Araucanía|Toltén|Volcán/i.test(titulo),
+      `${p}: el título no nombra el lugar — "${titulo}"`
+    );
+  }
+});
