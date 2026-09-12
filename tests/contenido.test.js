@@ -573,3 +573,43 @@ test('la casa completa dice su capacidad y su mínimo', () => {
   assert.match(bloque, /17\b/, 'no dice la capacidad de 17 personas');
   assert.match(bloque, /2 noches/i, 'no dice el mínimo de dos noches');
 });
+
+test('ninguna página rotula «Agenda» una sección que ya no tiene fechas', () => {
+  // La página dejó de anunciar días y horas, así que llamarla «Agenda» prometía
+  // algo que no entrega. La dirección agenda.html se mantiene a propósito: está
+  // en el sitemap y GitHub Pages no sabe redirigir. Lo que cambia es el rótulo.
+  for (const pagina of paginas) {
+    const texto = leer(pagina);
+    assert.ok(
+      !/>\s*Agenda\s*</.test(texto),
+      `${pagina} todavía muestra «Agenda» como rótulo`
+    );
+    assert.ok(
+      !/\bnav\.agenda\b/.test(texto),
+      `${pagina} todavía usa la clave nav.agenda`
+    );
+  }
+});
+
+test('el menú dice Actividades en los dos idiomas', () => {
+  const main = leer('js/main.js');
+  assert.match(main, /'nav\.activities': 'Actividades'/, 'falta el rótulo en castellano');
+  assert.match(main, /'nav\.activities': 'Activities'/, 'falta el rótulo en inglés');
+});
+
+test('la portada tampoco anuncia talleres con día y hora', () => {
+  // El mismo arreglo que se hizo en agenda.html: la portada prometía «Sábados
+  // 10:00 · 8 cupos» y un botón para reservar un cupo que nadie podía tomar.
+  const seccion = portada.slice(
+    portada.indexOf('<section class="section section--cream section--con-filigrana" id="proximas">'),
+    portada.indexOf('<!-- Matrimonios Banner -->')
+  );
+  assert.ok(seccion.length > 0, 'no se encontró la sección de actividades de la portada');
+  for (const patron of [/Sábados \d/, /Viernes \d/, /Último viernes del mes/, /cupos/i]) {
+    assert.ok(!patron.test(seccion), `la portada todavía anuncia "${patron.source}"`);
+  }
+  assert.ok(
+    !/Reservar cupo/i.test(seccion),
+    'la portada todavía ofrece reservar un cupo'
+  );
+});
