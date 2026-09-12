@@ -1761,6 +1761,19 @@
   gap: var(--space-3);
 }
 
+/* El rótulo dice "por noche" antes de que se vea la cifra. Las tarjetas de
+   arriba cobran por semana y por mes, así que sin esto alguien compara los
+   $450.000 del mes contra los $350.000 de la noche y concluye que la casa
+   entera sale más barata que una habitación. */
+.casa-completa__rotulo {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--brand-terracota);
+  margin: 0;
+}
+
 .casa-completa h3 {
   font-family: var(--font-display);
   font-size: var(--text-xl);

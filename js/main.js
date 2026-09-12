@@ -183,7 +183,7 @@
       'section.reviews.overline': 'Reseñas',
       'section.reviews.title': 'Lo que dicen nuestros huéspedes',
       'newsletter.title': 'Agenda y novedades',
-      'newsletter.text': 'Recibe el calendario mensual de talleres, la Velada del Fuego y la programación de temporada de Flor del Bosque.',
+      'newsletter.text': 'Te contamos cuando armamos un taller, una Velada del Fuego o un encuentro en Flor del Bosque.',
       'newsletter.placeholder': 'Tu email para recibir la agenda mensual',
       'newsletter.button': 'Suscribirse',
       'footer.description': 'Un espacio donde la naturaleza, el arte y la hospitalidad se encuentran.',
@@ -255,15 +255,6 @@
       // páginas que hoy sólo traducen la cabecera y el pie, así que todavía no
       // llevan data-i18n; el inglés se guarda acá para que no haya que volver a
       // pedirlo cuando esas páginas se conecten al diccionario.
-      'cowork.quiet.title': 'Espacio abierto y tranquilo',
-      'cowork.quiet.text': 'Trabajo sin ruido, cerca de Villarrica y a la vez alejado de la ciudad.',
-      'agenda.possibilities.title': 'Lo que se puede hacer acá',
-      'agenda.possibilities.cta': 'Consultar por una actividad',
-      'coliving.quarterly.title': 'Plan Trimestral',
-      'coliving.house.title': 'La casa completa',
-      'coliving.house.cta': 'Consultar por la casa completa',
-      'weddings.rooms': '7 habitaciones disponibles',
-      'weddings.kitchen': 'Uso de cocina',
       'room.night': 'noche',
       'room.people': 'personas'
     },
@@ -312,7 +303,7 @@
       'section.reviews.overline': 'Reviews',
       'section.reviews.title': 'What our guests say',
       'newsletter.title': 'Agenda & news',
-      'newsletter.text': 'Get the monthly calendar of workshops, the Velada del Fuego gathering and Flor del Bosque\'s seasonal program.',
+      'newsletter.text': 'We let you know when we put together a workshop, a Velada del Fuego or a gathering at Flor del Bosque.',
       'newsletter.placeholder': 'Your email to receive the monthly agenda',
       'newsletter.button': 'Subscribe',
       'footer.description': 'A space where nature, art and hospitality meet.',
@@ -384,15 +375,6 @@
       // páginas que hoy sólo traducen la cabecera y el pie, así que todavía no
       // llevan data-i18n; el inglés se guarda acá para que no haya que volver a
       // pedirlo cuando esas páginas se conecten al diccionario.
-      'cowork.quiet.title': 'Open, quiet workspace',
-      'cowork.quiet.text': 'Quiet work, close to Villarrica yet away from town.',
-      'agenda.possibilities.title': 'What you can do here',
-      'agenda.possibilities.cta': 'Ask about an activity',
-      'coliving.quarterly.title': 'Quarterly Plan',
-      'coliving.house.title': 'The whole house',
-      'coliving.house.cta': 'Ask about the whole house',
-      'weddings.rooms': '7 rooms available',
-      'weddings.kitchen': 'Kitchen access',
       'room.night': 'night',
       'room.people': 'people'
     }
