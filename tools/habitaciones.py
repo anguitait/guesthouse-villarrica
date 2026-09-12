@@ -65,6 +65,10 @@ HABITACIONES = [
         "orden": 1,
     },
     {
+        # El orden importa: la fila del listado de reservas sólo muestra tres
+        # características, y con el escritorio en segundo lugar la salida al
+        # jardín caía fuera. Es el gancho de esta pieza —estar a nivel del
+        # jardín con puerta propia— y pesa más que el escritorio.
         "id": "rukapillan",
         "nombre": "Volcán Rukapillán",
         "categoria": "Habitación Twin – Baño Compartido",
@@ -73,8 +77,8 @@ HABITACIONES = [
         "metros2": "",
         "descripcion_es": "Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Volcán Llaima.",
         "descripcion_en": "Ground-floor room with two beds and a work desk, wooden floors and a large closet. Full-height window with direct garden access and bedside tables with lamps. Shares a full bathroom with shower with the Volcán Llaima room.",
-        "caracteristicas_es": "2 camas\nEscritorio\nBaño compartido con ducha (con Volcán Llaima)\nSalida directa al jardín\nVentanal al jardín\nClóset amplio\nPiso de madera\nVeladores con lámparas\nPrimer piso",
-        "caracteristicas_en": "2 beds\nDesk\nShared bathroom with shower (with Volcán Llaima)\nDirect garden access\nGarden-facing picture window\nLarge closet\nWooden floors\nBedside tables with lamps\nGround floor",
+        "caracteristicas_es": "2 camas\nSalida directa al jardín\nBaño compartido con ducha (con Volcán Llaima)\nEscritorio\nVentanal al jardín\nClóset amplio\nPiso de madera\nVeladores con lámparas\nPrimer piso",
+        "caracteristicas_en": "2 beds\nDirect garden access\nShared bathroom with shower (with Volcán Llaima)\nDesk\nGarden-facing picture window\nLarge closet\nWooden floors\nBedside tables with lamps\nGround floor",
         "imagen": "images/habitaciones/rukapillan.jpg",
         "activa": "true",
         "orden": 2,
