@@ -545,3 +545,31 @@ test('la agenda ofrece posibilidades, no horarios que no existen', () => {
     assert.match(ag, new RegExp(tipo, 'i'), `la agenda no ofrece ${tipo}`);
   }
 });
+
+test('coliving publica las tarifas de estadía larga', () => {
+  const co = leer('pages/coliving.html');
+  for (const precio of ['$450.000', '$1.200.000', '$350.000', '$400.000']) {
+    assert.ok(co.includes(precio), `falta la tarifa ${precio}`);
+  }
+});
+
+test('ninguna tarifa quedó escrita sin los miles', () => {
+  // El documento de la propietaria decía «350 diario» sin unidad. Publicar
+  // "$350" en vez de "$350.000" sería cobrar mil veces menos, y es el tipo de
+  // error que nadie nota hasta que alguien reserva.
+  const co = leer('pages/coliving.html');
+  const sospechosas = [...co.matchAll(/\$\s?(\d{1,3})(?![\d.])/g)].map(m => m[0]);
+  assert.deepEqual(sospechosas, [], `cifras sin separador de miles: ${sospechosas}`);
+});
+
+test('la casa completa dice su capacidad y su mínimo', () => {
+  const co = leer('pages/coliving.html');
+  // Anclado a la clase del bloque y no a la frase «casa completa»: la
+  // descripción de la página también la dice, y está antes en el archivo, así
+  // que buscar el texto dejaba el recorte dentro del <head>.
+  const i = co.indexOf('class="casa-completa"');
+  assert.ok(i !== -1, 'no existe el bloque de casa completa');
+  const bloque = co.slice(i, co.indexOf('</div>', i));
+  assert.match(bloque, /17\b/, 'no dice la capacidad de 17 personas');
+  assert.match(bloque, /2 noches/i, 'no dice el mínimo de dos noches');
+});
