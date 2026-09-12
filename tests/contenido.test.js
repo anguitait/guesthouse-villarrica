@@ -508,3 +508,18 @@ test('el cowork no ofrece café ni monitores', () => {
     'falta el recuadro del espacio de trabajo tranquilo'
   );
 });
+
+test('los paquetes de matrimonio ofrecen las siete habitaciones y la cocina', () => {
+  const m = leer('pages/matrimonios.html');
+  const paquete = nombre => {
+    const i = m.indexOf(`package-card__title">${nombre}<`);
+    assert.ok(i !== -1, `no existe el paquete ${nombre}`);
+    const fin = m.indexOf('</ul>', i);
+    return m.slice(i, fin);
+  };
+  for (const nombre of ['Clásico', 'Premium']) {
+    const bloque = paquete(nombre);
+    assert.match(bloque, /7\b/, `${nombre} no menciona las 7 habitaciones`);
+    assert.match(bloque, /cocina/i, `${nombre} no menciona el uso de cocina`);
+  }
+});
