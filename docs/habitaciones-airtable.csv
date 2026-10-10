@@ -1,22 +1,22 @@
 id,nombre,categoria,precio_noche,capacidad,metros2,descripcion_es,descripcion_en,caracteristicas_es,caracteristicas_en,imagen,activa,orden
-llaima,Volcán Llaima,Habitación Doble – Baño Compartido,50000,2,,"Habitación del primer piso con cama matrimonial y piso de madera. Cuenta con un gran clóset, veladores con lámparas y un ventanal con salida directa al jardín. Comparte un baño completo con ducha con la habitación Volcán Rukapillán.","Ground-floor room with a double bed and wooden floors. It features a large closet, bedside tables with lamps and a full-height window opening directly onto the garden. Shares a full bathroom with shower with the Volcán Rukapillán room.","Cama matrimonial
-Baño compartido con ducha (con Volcán Rukapillán)
+rukapillan,Volcán Rukapillán,Habitación Doble – Baño Compartido,50000,2,,"Habitación del primer piso con cama matrimonial y piso de madera. Cuenta con un gran clóset, veladores con lámparas y un ventanal con salida directa al jardín. Comparte un baño completo con ducha con la habitación Volcán Llaima.","Ground-floor room with a double bed and wooden floors. It features a large closet, bedside tables with lamps and a full-height window opening directly onto the garden. Shares a full bathroom with shower with the Volcán Llaima room.","Cama matrimonial
+Baño compartido con ducha (con Volcán Llaima)
 Salida directa al jardín
 Ventanal al jardín
 Clóset amplio
 Piso de madera
 Veladores con lámparas
 Primer piso","Double bed
-Shared bathroom with shower (with Volcán Rukapillán)
+Shared bathroom with shower (with Volcán Llaima)
 Direct garden access
 Garden-facing picture window
 Large closet
 Wooden floors
 Bedside tables with lamps
-Ground floor",images/habitaciones/llaima.jpg,true,1
-rukapillan,Volcán Rukapillán,Habitación Twin – Baño Compartido,50000,2,,"Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Volcán Llaima.","Ground-floor room with two beds and a work desk, wooden floors and a large closet. Full-height window with direct garden access and bedside tables with lamps. Shares a full bathroom with shower with the Volcán Llaima room.","2 camas
+Ground floor",images/habitaciones/rukapillan.jpg,true,1
+llaima,Volcán Llaima,Habitación Twin – Baño Compartido,50000,2,,"Habitación del primer piso con dos camas y escritorio de trabajo, piso de madera y gran clóset. Ventanal con salida directa al jardín y veladores con lámparas. Comparte un baño completo con ducha con la habitación Volcán Rukapillán.","Ground-floor room with two beds and a work desk, wooden floors and a large closet. Full-height window with direct garden access and bedside tables with lamps. Shares a full bathroom with shower with the Volcán Rukapillán room.","2 camas
 Salida directa al jardín
-Baño compartido con ducha (con Volcán Llaima)
+Baño compartido con ducha (con Volcán Rukapillán)
 Escritorio
 Ventanal al jardín
 Clóset amplio
@@ -24,13 +24,13 @@ Piso de madera
 Veladores con lámparas
 Primer piso","2 beds
 Direct garden access
-Shared bathroom with shower (with Volcán Llaima)
+Shared bathroom with shower (with Volcán Rukapillán)
 Desk
 Garden-facing picture window
 Large closet
 Wooden floors
 Bedside tables with lamps
-Ground floor",images/habitaciones/rukapillan.jpg,true,2
+Ground floor",images/habitaciones/llaima.jpg,true,2
 sierra-nevada,Volcán Sierra Nevada,Habitación Twin – Baño Exterior,55000,2,,"Habitación del primer piso con dos camas y clóset amplio, piso de madera y ventanal con salida directa al jardín. El baño completo con ducha se encuentra fuera de la habitación y es de uso exclusivo.","Ground-floor room with two beds and a spacious closet, wooden floors and a full-height window opening onto the garden. The full bathroom with shower is for the exclusive use of this room and is located just outside it.","2 camas
 Baño con ducha fuera de la habitación, de uso exclusivo
 Salida directa al jardín

@@ -36,9 +36,10 @@ DESTINO = RAIZ / "images" / "habitaciones"
 ANCHO = 1250
 CALIDAD = 82
 
-# Las fotos de cada pieza, la portada primero. Ojo: las carpetas de Llaima y
-# Rukapillán vienen cruzadas respecto de la planilla, y la planilla es la que
-# manda. Ver docs/superpowers/specs/2026-09-10-volcanes-y-fotografias-design.md
+# Las fotos de cada pieza, la portada primero. Las carpetas de Llaima y
+# Rukapillán traen bien el nombre: lo que venía cruzado era la planilla, y en
+# octubre de 2026 la propietaria confirmó que Llaima es la twin amarilla con
+# escritorio y Rukapillán la matrimonial blanca.
 #
 # La curaduría deja fuera las casi duplicadas —varias tomas del mismo encuadre
 # con segundos de diferencia—, las mal archivadas y las previas a la
@@ -50,12 +51,12 @@ CALIDAD = 82
 # el teléfono en la mano y 152330 una mano con el teléfono. Sólo 152336 refleja
 # nada más que el vano de la puerta y pared, y por eso es la que se publica.
 FOTOS = {
-    "llaima": [
+    "rukapillan": [
         "Habitación Volcán Rukapillan  /FB2027_10.jpg",
         "Habitación Volcán Rukapillan  /20260909_151247.jpg",
         "Habitación Volcán Rukapillan  /20260909_151200.jpg",
     ],
-    "rukapillan": [
+    "llaima": [
         "Habitación Volcán Llaima/20260909_151428.jpg",
         "Habitación Volcán Llaima/20260909_151454.jpg",
         "Habitación Volcán Llaima/FB2027_9.jpg",
