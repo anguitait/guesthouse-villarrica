@@ -64,7 +64,13 @@ NEGOCIO = {
     },
     # Del mapa incrustado en pages/contacto.html.
     "geo": {"@type": "GeoCoordinates", "latitude": -39.2614638, "longitude": -72.2383335},
+    # La ficha de Google Maps, por su CID: es el enlace que no cambia aunque
+    # se edite el nombre o la dirección de la ficha. Va también en sameAs
+    # porque es lo que le dice a Google que el sitio y la ficha son el mismo
+    # negocio.
+    "hasMap": "https://maps.google.com/?cid=10436415304186130931",
     "sameAs": [
+        "https://maps.google.com/?cid=10436415304186130931",
         "https://instagram.com/hostalflordelbosque",
         "https://www.facebook.com/hostalflordelbosque/",
         "https://www.tripadvisor.com/Hotel_Review-g294303-d8460011-Reviews-Hostal_Flor_del_Bosque-Villarrica_Araucania_Region.html",
