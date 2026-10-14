@@ -1014,6 +1014,20 @@
   margin-bottom: var(--space-4);
 }
 
+/* La dirección enlaza a la ficha de Google Maps y la estrella a dejar una
+   reseña: se ven como el resto del texto del pie, con el subrayado como
+   única señal de que se pueden tocar. */
+.footer__contact-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer__contact-item a:hover {
+  opacity: 1;
+  text-decoration-thickness: 2px;
+}
+
 .footer__bottom {
   padding-top: var(--space-8);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
