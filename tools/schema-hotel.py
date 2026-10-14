@@ -30,7 +30,12 @@ PORTADA = RAIZ / "index.html"
 NEGOCIO = {
     "@context": "https://schema.org",
     "@type": "Hotel",
-    "name": "Flor del Bosque",
+    # El mismo nombre de la ficha de Google: Google cruza nombre, dirección y
+    # teléfono del sitio con los del Perfil de Empresa, y "Flor del Bosque" a
+    # secas no calzaba con "Hostal Flor Del Bosque". La marca corta queda
+    # como nombre alternativo.
+    "name": "Hostal Flor del Bosque",
+    "alternateName": "Flor del Bosque",
     "description": "Alojamiento en entorno natural a orillas del Río Toltén, "
                    "con vista al Volcán Villarrica.",
     "url": "https://flordelbosque.cl/",
@@ -59,7 +64,11 @@ NEGOCIO = {
     },
     # Del mapa incrustado en pages/contacto.html.
     "geo": {"@type": "GeoCoordinates", "latitude": -39.2614638, "longitude": -72.2383335},
-    "sameAs": ["https://instagram.com/hostalflordelbosque"],
+    "sameAs": [
+        "https://instagram.com/hostalflordelbosque",
+        "https://www.facebook.com/hostalflordelbosque/",
+        "https://www.tripadvisor.com/Hotel_Review-g294303-d8460011-Reviews-Hostal_Flor_del_Bosque-Villarrica_Araucania_Region.html",
+    ],
     "amenityFeature": [
         {"@type": "LocationFeatureSpecification", "name": n, "value": True}
         # "Piscina" lleva el matiz porque pages/alojamiento.html dice
@@ -82,10 +91,13 @@ def habitaciones():
                 "itemOffered": {
                     # Doble tipo a propósito. HotelRoom desciende de Place, y
                     # el rango de `itemOffered` admite Product o Service, no
-                    # Place: la propia documentación de hoteles de schema.org
-                    # prescribe declarar ambos para poder ofertar un
-                    # alojamiento.
-                    "@type": ["HotelRoom", "Product"],
+                    # Place, así que hace falta un segundo tipo. Service y no
+                    # Product: Google lee cualquier Product como ficha de
+                    # tienda y le exige `offers`, `review` o
+                    # `aggregateRating`. Con Product, Search Console marcaba
+                    # las siete piezas como "Fragmentos de productos no
+                    # válidos" (octubre de 2026).
+                    "@type": ["HotelRoom", "Service"],
                     "name": fila["nombre"],
                     "description": fila["descripcion_es"],
                     "occupancy": {
