@@ -69,7 +69,10 @@ test('el catálogo tiene las siete piezas', () => {
   assert.equal(habitaciones.length, 7);
   assert.deepEqual(
     habitaciones.map(h => h.id),
-    ['llaima', 'rukapillan', 'sierra-nevada', 'tolhuaca', 'lanin', 'sollipulli', 'lonquimay']
+    // Rukapillán va primera: al corregir en octubre de 2026 los nombres
+    // cruzados de las dos piezas del primer piso, cada registro conservó su
+    // `orden`, y el 1 es el de la matrimonial, que es Rukapillán.
+    ['rukapillan', 'llaima', 'sierra-nevada', 'tolhuaca', 'lanin', 'sollipulli', 'lonquimay']
   );
 });
 
