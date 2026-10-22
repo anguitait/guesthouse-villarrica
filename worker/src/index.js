@@ -154,6 +154,12 @@ export default {
       return solicitud(peticion, env);
     }
 
+    // La raíz del subdominio no tiene nada que servir. Google la encontró y la
+    // reportaba como 404; quien llegue escribiéndola a mano busca reservar.
+    if (url.pathname === '/' && peticion.method === 'GET') {
+      return Response.redirect(`${env.ORIGEN_PERMITIDO}/pages/reservas.html`, 301);
+    }
+
     return json({ error: 'No encontrado' }, env, 404);
   }
 };
