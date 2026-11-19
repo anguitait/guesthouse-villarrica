@@ -453,6 +453,21 @@
   object-fit: cover;
 }
 
+/* El video se monta encima de la foto y solo aparece cuando js/main.js le
+   asigna la fuente (desde 768px y sin movimiento reducido) y ya puede
+   reproducirse. En celular el hero es tan alto que el 16:9 se recorta a una
+   franja borrosa, asi que ahi queda la foto. */
+.hero__background .hero__video {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero__background .hero__video.is-playing {
+  opacity: 1;
+}
+
 /* El velo tiene que sostener texto marfil sobre lo mas claro de la foto
    —pasto a pleno sol—, no solo sobre el bosque. Con alpha 0.4 el
    subtitulo caia por debajo de 4.5:1; desde 0.6 se sostiene. Por eso la

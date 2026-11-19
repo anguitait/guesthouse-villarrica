@@ -19,6 +19,23 @@
   const accordionItems = document.querySelectorAll('.accordion__item');
 
   // ─────────────────────────────────────────
+  // Hero video (solo escritorio/tablet)
+  // ─────────────────────────────────────────
+  // La fuente se asigna desde aca para que el celular no descargue los ~4 MB:
+  // ahi el hero queda con la foto. Si el video no carga, la foto sigue debajo.
+
+  const heroVideo = document.querySelector('.hero__video[data-src]');
+  const puedeVerVideo = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+
+  if (heroVideo && puedeVerVideo.matches) {
+    heroVideo.addEventListener('playing', () => heroVideo.classList.add('is-playing'), { once: true });
+    heroVideo.src = heroVideo.dataset.src;
+    heroVideo.preload = 'auto';
+    const intento = heroVideo.play();
+    if (intento && intento.catch) intento.catch(() => {});
+  }
+
+  // ─────────────────────────────────────────
   // Header Scroll Effect
   // ─────────────────────────────────────────
 
