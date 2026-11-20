@@ -457,6 +457,12 @@
   z-index: 0;
 }
 
+.hero__background picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .hero__background img,
 .hero__background video {
   width: 100%;
@@ -513,10 +519,12 @@
   }
 }
 
-/* Con el video corriendo el velo se aclara para que se vean el lago y el
+/* En el hero con video el velo es mas claro para que se vean el lago y el
    volcan, que en el plano final caen arriba a la izquierda, detras del
-   titulo. La legibilidad la sostiene la sombra del texto en vez del velo.
-   Solo aplica desde 768px: es donde main.js monta el video. */
+   titulo. Solo desde 768px: es donde main.js monta el video. La clase va
+   fija en el HTML (no la pone el JS al arrancar el video) y la imagen de
+   base en escritorio es el primer cuadro del video: asi la carga no
+   muestra otra foto ni un cambio de velo antes de que entre el video. */
 @media (min-width: 768px) {
   .hero--video .hero__overlay {
     background:
@@ -541,6 +549,7 @@
 
   /* Un punto menos de saturacion calma el verde del pasto al sol y lo
      acerca a la paleta del sitio. */
+  .hero--video .hero__background img,
   .hero--video .hero__video {
     filter: saturate(0.9) contrast(1.03);
   }

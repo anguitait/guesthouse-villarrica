@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="css/tokens.css?v=20260902b">
   <link rel="stylesheet" href="css/base.css?v=20260902b">
   <link rel="stylesheet" href="css/layout.css?v=20260902b">
-  <link rel="stylesheet" href="css/components.css?v=20261120">
+  <link rel="stylesheet" href="css/components.css?v=20261120b">
   <link rel="stylesheet" href="css/main.css?v=20260902b">
 
   <!-- Sin alternativas de idioma todavía. pages/en.html no es la traducción
@@ -331,9 +331,12 @@
   <main>
 
     <!-- Hero Section -->
-    <section class="hero" id="inicio">
+    <section class="hero hero--video" id="inicio">
       <div class="hero__background">
-        <img src="images/hero/vista-aerea-drone.jpg" alt="Vista aérea Flor del Bosque con volcán de fondo">
+        <picture>
+          <source media="(min-width: 768px)" srcset="images/hero/hero-drone-inicio.jpg">
+          <img src="images/hero/vista-aerea-drone.jpg" alt="Vista aérea Flor del Bosque con volcán de fondo" fetchpriority="high">
+        </picture>
         <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true"
                data-src="videos/hero-drone.mp4"></video>
       </div>
@@ -1113,7 +1116,7 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=20261120"></script>
+  <script src="js/main.js?v=20261120b"></script>
 
 </body>
 </html>

@@ -28,10 +28,7 @@
   const puedeVerVideo = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
 
   if (heroVideo && puedeVerVideo.matches) {
-    heroVideo.addEventListener('playing', () => {
-      heroVideo.classList.add('is-playing');
-      heroVideo.closest('.hero').classList.add('hero--video');
-    }, { once: true });
+    heroVideo.addEventListener('playing', () => heroVideo.classList.add('is-playing'), { once: true });
     heroVideo.src = heroVideo.dataset.src;
     heroVideo.preload = 'auto';
     const intento = heroVideo.play();
