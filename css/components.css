@@ -502,6 +502,37 @@
   }
 }
 
+/* Con el video corriendo el velo se aclara para que se vean el lago y el
+   volcan, que en el plano final caen arriba a la izquierda, detras del
+   titulo. La legibilidad la sostiene la sombra del texto en vez del velo.
+   Solo aplica desde 768px: es donde main.js monta el video. */
+@media (min-width: 768px) {
+  .hero--video .hero__overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(29, 42, 34, 0.62) 0%,
+        rgba(29, 42, 34, 0.48) 45%,
+        rgba(29, 42, 34, 0.18) 75%,
+        rgba(29, 42, 34, 0.05) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(29, 42, 34, 0.35) 0%,
+        rgba(29, 42, 34, 0) 20%
+      );
+  }
+
+  .hero--video .hero__video {
+    filter: brightness(1.08) saturate(1.08);
+  }
+
+  .hero--video .hero__title,
+  .hero--video .hero__subtitle {
+    text-shadow: 0 1px 2px rgba(15, 22, 18, 0.55), 0 2px 18px rgba(15, 22, 18, 0.45);
+  }
+}
+
 .hero__content {
   position: relative;
   z-index: 1;
@@ -511,6 +542,15 @@
 @media (min-width: 768px) {
   .hero__content {
     max-width: 650px;
+  }
+}
+
+/* El inicio no lleva etiqueta sobre el titulo: ese espacio queda libre para
+   que en el plano final del video el volcan asome por encima del titulo.
+   Va siempre (no solo con video) para que el texto no salte al empezar. */
+@media (min-width: 768px) {
+  .hero__content > .hero__title:first-child {
+    margin-top: 3.5rem;
   }
 }
 
